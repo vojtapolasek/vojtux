@@ -5,7 +5,7 @@
 SUPER+Home  Otevřít domovskou složku
 CTRL+ALT+D  Přejít na pracovní plochu
 ALT+TAB přepínání mezi okny
-SUPER+Tab   přepínání mezi panely a pracovní plochou
+CTRL+Tab   přepínání mezi panely a pracovní plochou
 ALT+F1  Zobrazit hlavní nabídku
 ALT+F2  Otevřít dialog "Spustit"
 

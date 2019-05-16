@@ -1,0 +1,3 @@
+snippets.cdn.mozilla.net:HSTS	0	18032	1589567294569,1,0,2
+tiles.services.mozilla.com:HSTS	0	18032	1589567294807,1,0,2
+mail.gnome.org:HSTS	0	18032	1558636053588,1,0,2
