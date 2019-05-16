@@ -1,0 +1,44 @@
+#Klávesové zkratky
+
+
+##obecné zkratky
+SUPER+Home  Otevřít domovskou složku
+CTRL+ALT+D  Přejít na pracovní plochu
+ALT+TAB přepínání mezi okny
+SUPER+Tab   přepínání mezi panely a pracovní plochou
+ALT+F1  Zobrazit hlavní nabídku
+ALT+F2  Otevřít dialog "Spustit"
+
+##Práce s okny
+ALT+Mezerník    Otevřít nabídku aktuálního okna
+ALT+F4  Zavřít okno
+SHIFT+CTRL+ALT+šipky    přesouvání okna mezi virtuálními plochami
+CTRL+ALT+šipky  přepínání mezi virtuálními plochami
+
+##Zvuk
+SUPER+ALT+šipka nahoru  Zvýšit celkovou hlasitost zvuku
+SUPER+ALT+šipka dolů    Snížit celkovou hlasitost zvuku
+SUPER+ALT+šipka vlevo Ztlumit zvuk
+
+##Technologie usnadnění
+SUPER+ALT+sZapne / vypne odečítač obrazovky
+SUPER+ALT+o Restartuje odečítač obrazovky
+SUPER+ALT+I	Vypnout Ibus-sharada-braille
+orca+šipka nahoru   Zvýšit rychlost řeči
+orca+šipka dolů Snížit rychlost řeči
+orca+šipka vlevo    zvýšit výšku řeči
+orca+šipka vpravo   Snížit výšku řeči
+orca+Home   Zvýšit hlasitost řeči
+orca+End    Snížit hlasitost řeči
+
+##Systém
+SUPER+Mezerník  Změnit rozložení klávesnice
+CTRL+ALT+T  Otevřít terminál
+CTRL+ALT+l  Zamknout obrazovku
+ALT+Ctrl+Delete Vypnout nebo restartovat systém
+ALT+Ctrl+F1, pak ALT+Ctrl+Delete    Restartovat systém za všech okolností
+
+##Zkratky pro aplikace
+ALT+SUPER+L Linux-Intelligent-OCR-Solution
+ALT+SUPER+F Webový prohlížeč Firefox
+

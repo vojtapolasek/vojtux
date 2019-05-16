@@ -10,7 +10,15 @@ The main technical idea is to build an ISO image which will perform automatic pa
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Clone this repository and modify the ks.cfg file as needed. then run
+Clone this repository and modify the ks.cfg file as needed.
+
+Warning! You need to configure the root password and the user password before you can proceed with the installation. The password is not provided in the default kickstart file for security reasons, make up your own! Modify two first lines of the kickstart file, an example follows configuring the "root" as the root password and "user" as the default user password:
+
+rootpw root
+
+user --groups=wheel --name=agora --password=user --plaintext --gecos="Agora participant"
+
+ Then run
 
 sudo ./prepare_iso.sh
 
@@ -26,5 +34,62 @@ Now launch the machine and connect to the serial console if needed. The installa
 
 ## What is actually done?
 
-As mentioned, the aim of this project is to automatically create images which can be later transfered to USB drives and handed to participants of Linux workshops at Agora. The installation is based on Fedora 29 Mate Spin. The image can be composed of multiple partitions, basically one boot partition, one root partition and one data partition. Boot and root partitions are formatted as EXT4, data partition as FAT32. The purpose of FAT32 partition is to maximize usage of provided space on USB drive and exchange of data with non-Linux world.
+As mentioned, the aim of this project is to automatically create images which can be later transfered to USB drives and handed to participants of Linux workshops at Agora. The installation is based on Fedora 29 Mate Spin. The image is composed of three partitions, one BIOS boot partition taking 1 MB, one root partition taking cca 17 GB and one data partition taking rest of the provided disk. Boot and root partitions are formatted as EXT4, data partition as FAT32. The purpose of FAT32 partition is to maximize usage of provided space on USB drive and exchange of data with non-Linux world.
 
+Following additional changes are applied:
+
+- added RPM Fusion free and nonfree package repositories
+
+- system locale is set to Czech, keyboard to Czech qwertz, Czech and Slovak language packs are downloaded
+
+- the time zone is set to Europe/Prague
+
+- Orca screenreader starts at login screen and also after login for current and also newly created users
+
+- Orca configuration is slightly modified, see below
+
+- QT accessibility is enabled
+
+- accessibility of applications ran with sudo is enabled
+
+- Grub tune is added
+
+- LIOS OCR software is installed, so far not as a package
+
+- problematic widgets from Mate panel are removed
+
+- extra packages are preinstalled
+
+    - gimagereader QT version
+
+    - pidgin with support for Facebook and Skype Web
+
+    - Xsane
+
+    - various firmware and software for broader hardware support including wireless cards, printers, scanners, graphic cards
+
+    - Exfat support through Fuse
+
+    - Audacity
+
+    - Soundconverter
+
+    - Tesseract OCR enging with English, Czech and Slovak data
+
+    - Ifuse for support of Apple storage
+
+    - Git, Curl, Wget, Sed
+
+    - VLC player
+
+    - Java-atk-wrapper, Qt-at-spi
+
+- Following packages were removed:
+
+    - Exaile
+
+    - Hexchat
+
+    - Filezilla
+
+    - Gnote

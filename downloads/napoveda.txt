@@ -1,0 +1,20 @@
+Fedora Mate
+
+Co je to Fedora?
+
+Fedora je komunitou vyvíjený linuxový operační systém, sponzorovaný společností Red Hat. Obsahuje celou řadu užitečného software a mnoho desktopových rozhraní.
+
+Co je to Mate spin?
+
+Mate spin je Fedora s desktopovým prostředím Mate. To je jednoduché a intuitivní na ovládání a zvládne jej tak opravdu každý.
+
+Navigace systémem
+
+Pro navigaci v prostředí Mate se nejčastěji používají následující klávesové kombinace:
+alt plus f1, hlavní nabídka, obsahuje všechny aplikace rozdělené do kategorií (grafika, hry, internet...)
+alt plus f2, spustit aplikaci, tento příkaz znáte z operačního systému Windows, funguje naprosto totožně
+klávesa Windows, v Linuxu známá pod názvem Super, mate-dash, podobné nabídce start ze systému Win 7, lze rychle vyhledat a otevřít aplikace
+ctrl plus alt plus šipka vpravo, o plochu vpřed
+ctrl plus alt plus šipka vlevo, o plochu zpět
+ctrl plus alt plus d, přejít na ikony na ploše
+

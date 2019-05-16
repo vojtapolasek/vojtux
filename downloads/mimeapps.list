@@ -1,0 +1,5 @@
+[Default Applications]
+audio/flac=vlc.desktop
+
+[Added Associations]
+audio/flac=vlc.desktop;
