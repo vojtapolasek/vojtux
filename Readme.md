@@ -40,6 +40,8 @@ Following additional changes are applied:
 
 - added RPM Fusion free and nonfree package repositories
 
+- added custom repository with Festival Czech voices and one specific for this distro so that we can push updates
+
 - system locale is set to Czech, keyboard to Czech qwertz, Czech and Slovak language packs are downloaded
 
 - the time zone is set to Europe/Prague
@@ -56,7 +58,23 @@ Following additional changes are applied:
 
 - LIOS OCR software is installed, so far not as a package
 
-- problematic widgets from Mate panel are removed
+- Mate is downgraded because of problems with Mate Panel, Mate packages are also excluded to prevent upgrades
+
+- A short help is placed into home directory (napoveda.txt)
+
+- some keyboard shortcuts are added, see below
+
+- default Firefox profile is used with custom home page and bookmarks
+
+- Caja audio previews are disabled
+
+- file associations are modified so that audio files open in VLC
+
+- Festival is enabled with Czech voice, however, behaves strangely on physical hardware
+
+- /etc/systemd/system.conf is modified to speed up shutdown
+
+
 
 - extra packages are preinstalled
 
@@ -93,3 +111,29 @@ Following additional changes are applied:
     - Filezilla
 
     - Gnote
+
+## Orca modifications
+
+- added keyboard shortcuts for modifying speech speed (Orca+up/down)
+
+- added keyboard shortcut for modifying of speech pitch (Orca+left/right)
+
+- added keyboard shortcut for modifying speech volume (Orca+home/end)
+
+- added keyboard shortcuts for copying parts of flat review to clipboard (Orca+c, Orca+shift+c)
+
+- added shortcuts for reading of last seen notifications (Orca+n...)
+
+- disabled showing end-of-line characters on the braille display
+
+## Added shortcuts
+
+- Alt-Super-o - restart orca
+
+- Alt-Super-up/down - change system volume
+
+- Alt-Super-left - mute/unmute system volume
+
+- Alt-Super-f - Firefox
+
+- Alt-Super-s toggle screenreader through Mate
