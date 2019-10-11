@@ -25,6 +25,6 @@ echo "modifying EFI grub.cfg..."
 sed -i "s/^set default=\"1\"$/set default=\"0\"/" $fedoradir/EFI/BOOT/grub.cfg
 sed -i "/\#\#\# BEGIN \/etc\/grub\.d\/10\_linux \#\#\#/a menuentry \'Install accessible Fedora 30\' --class fedora --class gnu-linux --class gnu --class os \{\n\tlinuxefi \/images\/pxeboot\/vmlinuz inst\.ks=hd:LABEL=fedora console=ttyS0,9600\n\tinitrdefi \/images\/pxeboot\/initrd\.img\n\}\n" $fedoradir/EFI/BOOT/grub.cfg
 echo "repacking iso..."
-mkisofs -o fegora.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -J -R -V fedora -eltorito-alt-boot -e images/efiboot.img -no-emul-boot $fedoradir
+mkisofs -o fegora.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -J -R -V fedora -eltorito-alt-boot -b images/efiboot.img -no-emul-boot $fedoradir
 echo "cleaning up..."
 rm -rf $fedoradir
