@@ -28,15 +28,21 @@ and the new file fegora.iso will be created in the same directory. The script wi
 
 Warning! The installation ISO will try to install to the first detected hard drive! Therefore using VM is highly recommended, I am not responsible for any loss of your data if you use real machine!
 
-After reading the warning above, read it again and get ready some VM Connect the USB drive which you want to use as a destination for installation and also mount the ISO created in the previous step. Make sure that the virtual machine will boot from the ISO image. I recommend you to attach a serial console to the VM and find out how to connect to it. For example, the consoles for Virtmanager can be found in the /dev/pts/ directory.
+After reading the warning above, read it again and let's prepare the VM. Our aim is to make the process of booting of the resulting USB drive as easy as possible. Therefore we decided to support booting through UEFI as well as BIOS. The installation expects to be run in machine with EFI enabled. If you don't have such a VM, we can't guarantee the results. Following are rough instructions for Virtmanager.
 
-Our aim is to make the booting as easy as possible. Therefore we decided to use EFI for booting if possible. The installation expects to be run in machine with EFI enabled. If you don't have such a VM, we can't guarantee the results. Following are rough instructions for Virtmanager.
+Firstly download the OVMF files for your Linux distribution. The OVMF is an EFI firmware for the virtual machine. For example, on Fedora the package is called edk2-ovmf.
 
-Firstly download the OVMF files for your Linux distribution. The OVMF is an EFI firmware for the virtual machine. For example, on FEdora the package is called edk2-ovmf, on Arch Linux it is called ovmf.
+Then check your configuration file in /etc/libvirt/qemu.conf. The important variable is called nvram. It contains array of paths which should point to the needed files. There is usually some default commented value, make sure that the variable is uncommented and points to existing files. This may be different for every distro. For example the line looks like
 
-Then check your configuration file in /etc/libvirt/qemu.conf. The important variable is called nvram. It contains array of paths which should point to the needed files. There is usually some default commented value, make sure that the variable is uncommented and points to existing files. This may be different for every distro.
+``
+nvram = ["/usr/share/OVMF/OVMF_CODE.fd:/usr/share/OVMF/OVMF_VARS.fd", "/usr/share/OVMF/OVMF_CODE.secboot.fd:/usr/share/OVMF/OVMF_VARS.fd"]
+```
 
-Now launch the machine and connect to the serial console if needed. The installation should be fully automatic, you can monitor its progress. If you want to see logs of Anaconda or access the shell, you will have to do it through the virtual  machine. Switch to the second console for shell, third console for logs and fourth console for storage logs.
+Create a new virtual machine. Select option for installation from the ISO image and select the modified ISO image as the installation source. Before starting actual installation check the box which allows you to do detailed modifications. Make sure that on the General tab the machine is configured to use UEFI, not BIOS. Attach the USB drive as a new USB host device. Make sure that no other drives or storage devices are attached to the VM.
+
+Make sure that the virtual machine will boot from the ISO image. I recommend you to attach a serial console to the VM and find out how to connect to it. For example, the consoles for Virtmanager can be found in the /dev/pts/ directory.
+
+Now launch the machine and connect to the serial console if needed. The installation should be fully automatic, you can monitor its progress. If you want to see logs of Anaconda or access the shell, you will have to do it through the virtual  machine. Switch to the second console for shell, third console for logs and fourth console for storage logs. Refer to the Tmux documentation for info about moving between consoles.
 
 ## What is actually done?
 
