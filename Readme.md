@@ -1,22 +1,18 @@
 # What is it about?
 
-This repository contains resources related to presentation of modified version of Fedora 29 on the Agora Spring event 2019 in Brno. During this events there will be two runs of two workshops focused on introducing Linux and its accessibility features to blind and visually impaired people.
+This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Fegora, because it is based on Fedora and it was presented at Agora event. Agora is an event in Czech Republic, where workshops about information technology for visually impaired are presented.
 
-During both workshops it is planed to give a USB drive to participants. This drive will contain working installation of Fedora 29 with various accessibility tweaks to suit the target audience.
+Currently the repo and described workflow is aimed at creating USB drives with preinstalled Fegora. We chose this approach instead of live images because users can not only test the distribution, but also use the USB drive as normal medium for transfering data. Their configuration in Fegora is also persistently saved.
 
 ## Building installation ISO
 
-The main technical idea is to build an ISO image which will perform automatic partitioning of the USB drive and installation of Fedora. Everything powered by Kickstart. So far it is based on Fedora Everything net install image located at <https://mirror.karneval.cz/pub/linux/fedora/linux/releases/30/Everything/x86_64/iso/>.
+The main technical idea is to build an ISO image which will perform automatic partitioning of the USB drive and installation of Fegora. Everything powered by Kickstart. So far it is based on Fedora Everything net install image located at <https://mirror.karneval.cz/pub/linux/fedora/linux/releases/30/Everything/x86_64/iso/>.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
 Clone this repository and modify the ks.cfg file as needed.
 
-Warning! You need to configure the root password and the user password before you can proceed with the installation. The password is not provided in the default kickstart file for security reasons, make up your own! Modify two first lines of the kickstart file, an example follows configuring the "root" as the root password and "user" as the default user password:
-
-rootpw root
-
-user --groups=wheel --name=agora --password=user --plaintext --gecos="Agora participant"
+WARNING! Currently the kickstart contains default passwords for root user and regular user. We strongly recommend to change these passwords to something unique before creating the installation ISO image.
 
  Then run
 
@@ -42,13 +38,23 @@ Create a new virtual machine. Select option for installation from the ISO image 
 
 Make sure that the virtual machine will boot from the ISO image. I recommend you to attach a serial console to the VM and find out how to connect to it. For example, the consoles for Virtmanager can be found in the /dev/pts/ directory.
 
-Now launch the machine and connect to the serial console if needed. The installation should be fully automatic, you can monitor its progress. If you want to see logs of Anaconda or access the shell, you will have to do it through the virtual  machine. Switch to the second console for shell, third console for logs and fourth console for storage logs. Refer to the Tmux documentation for info about moving between consoles.
+To list the consoles:
+
+```
+ls -l /dev/pts
+```
+
+Some consoles will be owned by your user, some by the user "nobody" or "qemu", based on your distro. Try connecting to consoles NOT owned by your user.
+
+Now launch the machine and connect to the serial console if needed. The installation should be fully automatic, you can monitor its progress. If you want to see logs of Anaconda or access the shell, you will have to do it through the virtual  machine. Switch to the second console for shell, third console for logs and fourth console for storage logs. Use C-B n to move to the next console, C-b p to the previous one. Refer to the Tmux documentation for further info about moving between consoles.
 
 ## What is actually done?
 
-As mentioned, the aim of this project is to automatically create images which can be later transfered to USB drives and handed to participants of Linux workshops at Agora. The installation is based on Fedora 29 Mate Spin. The image is composed of three partitions, one BIOS boot partition taking 1 MB, one root partition taking cca 17 GB and one data partition taking rest of the provided disk. Boot and root partitions are formatted as EXT4, data partition as FAT32. The purpose of FAT32 partition is to maximize usage of provided space on USB drive and exchange of data with non-Linux world.
+As mentioned, the aim of this project is to automatically create images which can be later transfered to USB drives and handed to actual users. The installation is based on Fedora Mate Spin. The image is composed of three partitions, one EFI partition taking 512 MiB, one root partition taking cca 16 GiB and one data partition taking rest of the provided disk. The data partition is formatted as FAT32. The purpose of FAT32 partition is to maximize usage of provided space on USB drive and exchange of data with non-Linux world.
 
 Following additional changes are applied:
+
+- Grub is configured so that it can boot on both BIOS and UEFI, even with SEcure boot enabled
 
 - added RPM Fusion free and nonfree package repositories
 
@@ -66,13 +72,11 @@ Following additional changes are applied:
 
 - accessibility of applications ran with sudo is enabled
 
-- Grub tune is added
+- Grub tune is added, although it does not work in every case
 
 - LIOS OCR software is installed, so far not as a package
 
-- Mate is downgraded because of problems with Mate Panel, Mate packages are also excluded to prevent upgrades
-
-- A short help is placed into home directory (napoveda.txt)
+- A short help in Czech is placed into home directory (handout.html), list of keyboard shortcuts (klavesove_zkratky.txt)
 
 - some keyboard shortcuts are added, see below
 
@@ -86,7 +90,13 @@ Following additional changes are applied:
 
 - /etc/systemd/system.conf is modified to speed up shutdown
 
+- Selinux policiy is set to permissive
 
+- Slick greeter is replaced with Lightdm GTK greeter because of problems with Orca not starting after login
+
+- Ocrdesktop software is instaled, not as a package
+
+- Tmux is configured with special keyboard shortcuts inspired by the Byobu project
 
 - extra packages are preinstalled
 
@@ -104,15 +114,19 @@ Following additional changes are applied:
 
     - Soundconverter
 
-    - Tesseract OCR enging with English, Czech and Slovak data
+    - Tesseract OCR engine with English, Czech and Slovak data
 
     - Ifuse for support of Apple storage
+
+    - jmtpfs for support of MTP
 
     - Git, Curl, Wget, Sed
 
     - VLC player
 
     - Java-atk-wrapper, Qt-at-spi
+
+    - Tmux for better working with consoles
 
 - Following packages were removed:
 
@@ -149,3 +163,10 @@ Following additional changes are applied:
 - Alt-Super-f - Firefox
 
 - Alt-Super-s toggle screenreader through Mate
+
+- Alt-Super-l start the LIOS software
+
+- Super-o recognize current window with Ocrdesktop using Czech language
+
+- CTRL-Super-o recognize current window with Ocrdesktop using English language
+
