@@ -34,7 +34,7 @@ Firstly download the OVMF files for your Linux distribution. The OVMF is an EFI 
 
 Then check your configuration file in /etc/libvirt/qemu.conf. The important variable is called nvram. It contains array of paths which should point to the needed files. There is usually some default commented value, make sure that the variable is uncommented and points to existing files. This may be different for every distro. For example the line looks like
 
-``
+```
 nvram = ["/usr/share/OVMF/OVMF_CODE.fd:/usr/share/OVMF/OVMF_VARS.fd", "/usr/share/OVMF/OVMF_CODE.secboot.fd:/usr/share/OVMF/OVMF_VARS.fd"]
 ```
 
