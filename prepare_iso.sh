@@ -7,7 +7,7 @@ if [ ! -e 'Fedora-Everything-netinst-x86_64-31-1.9.iso' ]
 then echo "downloading ISO and checksums..."
 wget 'https://mirror.karneval.cz/pub/linux/fedora/linux/releases/31/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-31-1.9.iso'
 wget 'https://mirror.karneval.cz/pub/linux/fedora/linux/releases/31/Everything/x86_64/iso/Fedora-Everything-31-1.9-x86_64-CHECKSUM'
-sha256sum -c 'Fedora-Everything-30-1.2-x86_64-CHECKSUM' || exit 1
+sha256sum -c 'Fedora-Everything-31-1.9-x86_64-CHECKSUM' || exit 1
 fi
 echo "mounting ISO..."
 fuseiso 'Fedora-Everything-netinst-x86_64-31-1.9.iso' $mountdir
