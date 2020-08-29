@@ -6,13 +6,13 @@ Currently the repo and described workflow is aimed at creating USB drives with p
 
 ## Building installation ISO
 
-The main technical idea is to build an ISO image which will perform automatic partitioning of the USB drive and installation of Fegora. Everything powered by Kickstart. So far it is based on Fedora Everything net install image located at <https://mirror.karneval.cz/pub/linux/fedora/linux/releases/30/Everything/x86_64/iso/>.
+The main technical idea is to build an ISO image which will perform automatic partitioning of the USB drive and installation of Fegora. Everything powered by Kickstart. So far it is based on Fedora Everything net install image located at <https://mirror.karneval.cz/pub/linux/fedora/linux/releases/32/Everything/x86_64/iso/>.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
 Clone this repository and modify the ks.cfg file as needed.
 
-WARNING! Currently the kickstart contains default passwords for root user and regular user. We strongly recommend to change these passwords to something unique before creating the installation ISO image.
+WARNING! Currently the kickstart contains default passwords for root user and regular user. We strongly recommend to change these passwords to something unique before creating the installation ISO image. Also see the last part of the kickstart. There are two partition schemes - one for 16 GiB disks, and another for 32 GiB disk. Comment / uncomment the appropriate one.
 
  Then run
 
@@ -54,7 +54,7 @@ As mentioned, the aim of this project is to automatically create images which ca
 
 Following additional changes are applied:
 
-- Grub is configured so that it can boot on both BIOS and UEFI, even with SEcure boot enabled
+- Grub is configured so that it can boot on both BIOS and UEFI, even with Secure boot enabled
 
 - added RPM Fusion free and nonfree package repositories
 
@@ -70,7 +70,7 @@ Following additional changes are applied:
 
 - QT accessibility is enabled
 
-- accessibility of applications ran with sudo is enabled
+- accessibility of applications run with sudo is enabled
 
 - Grub tune is added, although it does not work in every case
 
@@ -128,6 +128,8 @@ Following additional changes are applied:
 
     - Tmux for better working with consoles
 
+    - Chromium
+
 - Following packages were removed:
 
     - Exaile
@@ -137,6 +139,13 @@ Following additional changes are applied:
     - Filezilla
 
     - Gnote
+
+- there is a special script which ensures that the sound is not muted and is at 50% of volume on login screen
+
+- a script for turning off physical monitor is added, functionality not tested
+
+- a sound theme is added, [source](https://github.com/coffeeking/Linux-a11y-sound-theme)
+
 
 ## Orca modifications
 
@@ -169,4 +178,6 @@ Following additional changes are applied:
 - Super-o recognize current window with Ocrdesktop using Czech language
 
 - CTRL-Super-o recognize current window with Ocrdesktop using English language
+
+- ALT-Super-m - vypnutí / zapnutí monitoru
 
