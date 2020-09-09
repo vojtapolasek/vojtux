@@ -8,9 +8,9 @@
 
 
 # Keyboard layouts
-keyboard --vckeymap=cz --xlayouts='cz'
+keyboard --xlayouts=cz
 # System language
-lang cs_CZ.UTF-8
+lang --addsupport=en_US.UTF-8 cs_CZ.UTF-8
 # System services
 services --enabled="chronyd,brltty,festival"
 # System timezone
@@ -123,7 +123,7 @@ nano
 speech-dispatcher-utils
 soundconverter
 tmux
-#unrar
+unrar
 timidity++
 #lios dependencies
 python3-sane
@@ -153,7 +153,6 @@ lightdm-gtk-greeter-settings
 g++
 python3-devel
 tesseract-devel
-libspotify
 %end
 
 %post
