@@ -7,9 +7,9 @@
 # Does includes "default" language configuration (kickstarts including
 # this template can override these settings)
 
-lang en_US.UTF-8
-keyboard us
-timezone US/Eastern
+#lang en_US.UTF-8
+#keyboard us
+#timezone US/Eastern
 auth --useshadow --passalgo=sha512
 selinux --enforcing
 firewall --enabled --service=mdns

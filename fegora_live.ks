@@ -4,8 +4,8 @@
 # mailto:desktop@lists.fedoraproject.org
 
 %include fedora-live-base.ks
-%include fedora-mate-common.ks
-%include fedora-live-minimization.ks
+
+
 
 # Keyboard layouts
 keyboard --vckeymap=cz --xlayouts='cz'
@@ -17,7 +17,7 @@ services --enabled="chronyd,brltty,festival"
 timezone Europe/Prague --isUtc
 
 
-part / --size 7168
+part / --size 8500
 
 %packages
 @mate
@@ -68,16 +68,11 @@ nss-mdns
 -gnome-user-docs
 -evolution-help
 
-# Legacy cmdline things we don't want
--telnet
-
 #customizations for Agora
 #removing inaccessible packages
 -filezilla
 -exaile
--gnote
--hexchat
--parole
+
 #additional software for Agora
 gimagereader-qt
 pidgin
@@ -95,7 +90,6 @@ cups-filters
 foomatic-db
 foomatic-db-ppds
 splix
-xorg-x11-drv-nvidia
 foo2qpdl
 xorg-x11-drv-nouveau
 foo2slx
@@ -115,8 +109,6 @@ audacity
 soundconverter
 tesseract-langpack-ces
 tesseract-langpack-slk
-langpacks-cs
-langpacks-sk
 ifuse
 git
 curl
@@ -131,7 +123,7 @@ nano
 speech-dispatcher-utils
 soundconverter
 tmux
-unrar
+#unrar
 timidity++
 #lios dependencies
 python3-sane
@@ -161,6 +153,7 @@ lightdm-gtk-greeter-settings
 g++
 python3-devel
 tesseract-devel
+libspotify
 %end
 
 %post
@@ -202,6 +195,12 @@ chown -R liveuser:liveuser /home/liveuser/
 restorecon -R /home/liveuser/
 EOF
 
+# configure temporary dns
+cat >> /etc/resolv.conf << EOM
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+EOM
+
 #rpm fusion keys
 echo "== RPM Fusion Free: Base section =="
 echo "Importing RPM Fusion keys"
@@ -210,16 +209,17 @@ echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
 #installing lios
-cd /tmp/
+cd /opt/
 git clone https://gitlab.com/Nalin-x-Linux/lios-3.git
 cd lios-3
 python3 setup.py install --install-data=/usr
 cd ..
 rm -rf lios-3
 #installing ocrdesktop
-pip3 install tesserwrap
-git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
-chmod -R 755 /opt/ocrdesktop
+#pip3 install tesserwrap
+#git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
+#chmod -R 755 /opt/ocrdesktop
+#ln -s /usr/local/bin/ocrdesktop /opt/ocrdesktop/ocrdesktop
 # create script to toggle monitor
 mkdir -p /usr/local/bin
 cat > /usr/local/bin/monitor-toggle <<EOM
@@ -428,7 +428,7 @@ theme-name='linux-a11y'
 
 EOM
 echo "Updating dconf databases..."
-dconf update 2>&1 > /root/dconf.log
+dconf update
 # enabling accessibility
 cat > /etc/profile.d/qtaccessibility.sh <<EOM
 #enable general accessibility according to https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/
@@ -440,60 +440,37 @@ export QT_ACCESSIBILITY=1
 export QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
 EOM
 
-#making graphical applications ran with sudo accessible
-sed -i '/Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"/aDefaults    env_keep += "GTK_MODULES QT_ACCESSIBILITY"\n' /etc/sudoers
 # install linux-a11y sound theme
 git clone https://github.com/coffeeking/linux-a11y-sound-theme.git
 cp -r linux-a11y-sound-theme/linux-a11y /usr/share/sounds/
-#download and apply default orca config, firefox config etc
-mkdir /tmp/fegora
-cd /tmp/fegora
-wget https://github.com/vojtapolasek/Fegora/raw/master/downloads.zip
-unzip downloads.zip
-mkdir -p /home/liveuser/.local/share/orca
-cp -r orca/* /home/liveuser/.local/share/orca/
+
+#apply Fegora customizations
+git clone https://github.com/vojtapolasek/Fegora.git
+cd Fegora/downloads
+#mkdir -p /home/liveuser/.local/share/orca
+#cp -r orca/* /home/liveuser/.local/share/orca/
 mkdir -p /etc/skel/.local/share/orca
 cp -r orca/* /etc/skel/.local/share/orca/
-cp mimeapps.list /home/liveuser/.config/
+#cp mimeapps.list /home/liveuser/.config/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
-mkdir -p /home/liveuser/Plocha
-cp klavesove_zkratky.txt /home/liveuser/Plocha/
+#mkdir -p /home/liveuser/Plocha
+#cp klavesove_zkratky.txt /home/liveuser/Plocha/
 cp klavesove_zkratky.txt /etc/skel/
-cp handout.html /home/liveuser/Plocha/
+#cp handout.html /home/liveuser/Plocha/
 cp handout.html /etc/skel/
-cp .tmux.conf /home/liveuser/
+#cp .tmux.conf /home/liveuser/
 cp .tmux.conf /etc/skel/
-mkdir -p /home/liveuser/.mozilla/firefox
-cp -r firefox/* /home/liveuser/.mozilla/firefox/
+#mkdir -p /home/liveuser/.mozilla/firefox
+#cp -r firefox/* /home/liveuser/.mozilla/firefox/
 mkdir -p /etc/skel/.mozilla/firefox
 cp -r firefox/* /etc/skel/.mozilla/firefox/
-#configure tmux
-#cat >> /etc/skel/.bashrc <<EOM
-#tmux
-#if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-#    test -z "$TMUX" && (tmux attach || tmux new-session)
-#fi
-#
-#EOM
-
-#cat >> /home/agora/.bashrc <<EOM
-#tmux
-#if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-#    test -z "$TMUX" && (tmux attach || tmux new-session)
-#fi
-#
-#EOM
-#chown -R agora:agora /home/agora/
-cd /tmp
-rm -rf /tmp/fegora
+#cd /opt/
+#rm -rf Fegora
 #configure festival
-sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
+#sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
 echo "(set! voice_default 'voice_czech_dita)" > /etc/skel/.festivalrc
-echo "(set! voice_default 'voice_czech_dita)" > /home/liveuser/.festivalrc
-#chown agora:agora /home/agora/.festivalrc
+
 mkdir /etc/systemd/system/festival.service.d
 cat > /etc/systemd/system/festival.service.d/override.conf <<EOM
 [Service]
@@ -515,14 +492,14 @@ amixer -c 0 set Master playback 50% unmute
 
 EOM
 chmod 755 /usr/local/bin/orca-login-wrapper
-cat > /etc/lightdm/lightdm-gtk-greeter.conf <<EOM
+cat >> /etc/lightdm/lightdm-gtk-greeter.conf <<EOM
 [greeter]
 background = /usr/share/backgrounds/default.png
 reader = /usr/local/bin/orca-login-wrapper
 a11y-states = +reader
 
 EOM
-# remove the data partition entry from /etc/fstab, let udisks handle this better
-#sed -i '/\/mnt\/data/d' /etc/fstab
 
+#clear temporary dns settings
+echo "" > /etc/resolv.conf
 %end
