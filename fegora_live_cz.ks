@@ -7,10 +7,10 @@
 
 
 
-# Keyboard layouts
-keyboard --xlayouts=cz
+
 # System language
-lang --addsupport=en_US.UTF-8 cs_CZ.UTF-8
+lang cs_CZ.UTF-8
+keyboard --xlayouts='cz'
 # System services
 services --enabled="chronyd,brltty,festival"
 # System timezone
@@ -192,6 +192,10 @@ rm -f /etc/xdg/autostart/org.mageia.dnfdragora-updater.desktop
 # make sure to set the right permissions and selinux contexts
 chown -R liveuser:liveuser /home/liveuser/
 restorecon -R /home/liveuser/
+
+# set x11 keymap manually, for some reason the keyboard kickstart command does not work
+localectl set-x11-keymap cz
+
 EOF
 
 # configure temporary dns
@@ -424,6 +428,11 @@ screenreader='<Alt><Mod4>s'
 event-sounds=true
 input-feedback-sounds=true
 theme-name='linux-a11y'
+
+# configure Czech keyboard
+[org/mate/desktop/peripherals/keyboard/kbd]
+layouts=['cz']
+options=['grp\tgrp:win_space_toggle', 'grp\tgrp:alts_toggle']
 
 EOM
 echo "Updating dconf databases..."
