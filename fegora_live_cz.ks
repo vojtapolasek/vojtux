@@ -455,28 +455,19 @@ cp -r linux-a11y-sound-theme/linux-a11y /usr/share/sounds/
 #apply Fegora customizations
 git clone https://github.com/vojtapolasek/Fegora.git
 cd Fegora/downloads
-#mkdir -p /home/liveuser/.local/share/orca
-#cp -r orca/* /home/liveuser/.local/share/orca/
 mkdir -p /etc/skel/.local/share/orca
 cp -r orca/* /etc/skel/.local/share/orca/
-#cp mimeapps.list /home/liveuser/.config/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
-#mkdir -p /home/liveuser/Plocha
-#cp klavesove_zkratky.txt /home/liveuser/Plocha/
 cp klavesove_zkratky.txt /etc/skel/
-#cp handout.html /home/liveuser/Plocha/
 cp handout.html /etc/skel/
-#cp .tmux.conf /home/liveuser/
 cp .tmux.conf /etc/skel/
-#mkdir -p /home/liveuser/.mozilla/firefox
-#cp -r firefox/* /home/liveuser/.mozilla/firefox/
 mkdir -p /etc/skel/.mozilla/firefox
 cp -r firefox/* /etc/skel/.mozilla/firefox/
-#cd /opt/
-#rm -rf Fegora
+cd /opt/
+rm -rf Fegora
 #configure festival
-#sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
+sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
 echo "(set! voice_default 'voice_czech_dita)" > /etc/skel/.festivalrc
 
 mkdir /etc/systemd/system/festival.service.d
