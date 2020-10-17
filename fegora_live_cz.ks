@@ -219,10 +219,10 @@ python3 setup.py install --install-data=/usr
 cd ..
 rm -rf lios-3
 #installing ocrdesktop
-#pip3 install tesserwrap
-#git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
-#chmod -R 755 /opt/ocrdesktop
-#ln -s /usr/local/bin/ocrdesktop /opt/ocrdesktop/ocrdesktop
+
+git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
+chmod -R 755 /opt/ocrdesktop
+ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
 # create script to toggle monitor
 mkdir -p /usr/local/bin
 cat > /usr/local/bin/monitor-toggle <<EOM
