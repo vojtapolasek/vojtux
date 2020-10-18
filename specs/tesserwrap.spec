@@ -10,10 +10,12 @@ License:        Apache License 2.0
 URL:            https://github.com/gregjurman/tesserwrap
 Source0:        %{pypi_source}
 
+Requires:  tesseract
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(nose)
 BuildRequires:  python3dist(pillow)
 BuildRequires:  python3dist(setuptools)
+BuildRequires:  tesseract-devel
 
 %description
 Tesserwrap - Basic Tesseract API Wrapper for PythonTesserwrap is a project that
