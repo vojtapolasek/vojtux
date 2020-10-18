@@ -16,6 +16,7 @@ BuildRequires:  python3dist(nose)
 BuildRequires:  python3dist(pillow)
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  tesseract-devel
+BuildRequires:  gcc-g++
 
 %description
 Tesserwrap - Basic Tesseract API Wrapper for PythonTesserwrap is a project that
