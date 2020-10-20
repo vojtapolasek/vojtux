@@ -130,6 +130,7 @@ python3-sane
 cuneiform
 python3-enchant
 aspell-en
+aspell-cs
 #festival
 festival-freebsoft-utils
 speech-dispatcher-festival
@@ -153,6 +154,7 @@ lightdm-gtk-greeter-settings
 g++
 python3-devel
 tesseract-devel
+python3-tesserwrap
 %end
 
 %post

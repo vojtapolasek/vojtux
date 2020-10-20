@@ -8,6 +8,6 @@ repo --name=rpmfusion-free-updates --mirrorlist=https://mirrors.rpmfusion.org/mi
 repo --name=rpmfusion-nonfree --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-32&arch=$basearch
 repo --name=rpmfusion-nonfree-updates --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-32&arch=$basearch
 #festival repo
-repo --install --name=Copr-repo-for-festival-reborn-owned-by-tyrylu --baseurl=https://copr-be.cloud.fedoraproject.org/results/tyrylu/festival-reborn/fedora-30-x86_64/
+repo --install --name=Copr-repo-for-festival-reborn-owned-by-tyrylu --baseurl=https://copr-be.cloud.fedoraproject.org/results/tyrylu/festival-reborn/fedora-32-x86_64/
 #fegora repo
-repo --install --name=Copr-repo-for-fegora-apps-owned-by-tyrylu --baseurl=https://copr-be.cloud.fedoraproject.org/results/tyrylu/fegora-apps/fedora-30-x86_64/
+repo --install --name=Copr-repo-for-fegora-apps-owned-by-tyrylu --baseurl=https://copr-be.cloud.fedoraproject.org/results/tyrylu/fegora-apps/fedora-32-x86_64/
