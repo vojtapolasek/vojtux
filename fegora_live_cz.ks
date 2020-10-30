@@ -207,13 +207,13 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
 #installing lios
 cd /opt/
-git clone https://gitlab.com/Nalin-x-Linux/lios-3.git
+git clone https://github.com/Nalin-x-Linux/Lios.git
 cd lios-3
 python3 setup.py install --install-data=/usr
 cd ..
 rm -rf lios-3
-#installing ocrdesktop
 
+#installing ocrdesktop
 git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
 chmod -R 755 /opt/ocrdesktop
 ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
