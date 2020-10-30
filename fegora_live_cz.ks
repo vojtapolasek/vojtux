@@ -90,17 +90,9 @@ cups-filters
 foomatic-db
 foomatic-db-ppds
 splix
-foo2qpdl
+hplip
 xorg-x11-drv-nouveau
-foo2slx
-foo2hiperc
 libsane-hpaio
-foo2oak
-foo2ddst
-foo2xqx
-foo2zjs
-foo2hp
-foo2hbpl
 xorg-x11-server-Xvfb
 xorg-x11-drv-dummy
 #more software
@@ -127,7 +119,7 @@ unrar
 timidity++
 #lios dependencies
 python3-sane
-cuneiform
+#cuneiform
 python3-enchant
 aspell-en
 aspell-cs
