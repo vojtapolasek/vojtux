@@ -150,6 +150,12 @@ python3-tesserwrap
 %end
 
 %post
+# configure temporary dns
+cat >> /etc/resolv.conf << EOM
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+EOM
+
 cat >> /etc/rc.d/init.d/livesys << EOF
 
 
@@ -192,12 +198,6 @@ localectl set-x11-keymap cz
 
 EOF
 
-# configure temporary dns
-cat >> /etc/resolv.conf << EOM
-nameserver 8.8.8.8
-nameserver 8.8.4.4
-EOM
-
 #rpm fusion keys
 echo "== RPM Fusion Free: Base section =="
 echo "Importing RPM Fusion keys"
@@ -208,8 +208,8 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 #installing lios
 cd /opt/
 git clone https://github.com/Nalin-x-Linux/Lios.git
-cd lios-3
-python3 setup.py install --install-data=/usr
+cd Lios
+python3 setup.py install
 cd ..
 rm -rf lios-3
 
@@ -493,6 +493,7 @@ a11y-states = +reader
 
 EOM
 
-#clear temporary dns settings
+# disable temporary dns
 echo "" > /etc/resolv.conf
+
 %end
