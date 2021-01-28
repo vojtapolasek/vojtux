@@ -22,7 +22,7 @@ License:        GPL-3.0+
 Summary:        Linux-Intelligent-Ocr-Solution
 Url:            http://sourceforge.net/projects/lios/
 Group:          Graphics
-Source0:        lios-2.8.tar.gz
+Source0:        https://downloads.sourceforge.net/project/lios/lios-2.8.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flios%2Ffiles%2Flios-2.8.tar.gz%2Fdownload&ts=1611841993
 BuildArch:      noarch
 Requires:       espeak 
 Requires:       python3-gobject
