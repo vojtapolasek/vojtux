@@ -24,6 +24,7 @@ Url:            http://sourceforge.net/projects/lios/
 Group:          Graphics
 Source0:        lios-2.8.tar.gz
 BuildArch:      noarch
+BuildRequires:       python3
 Requires:       espeak 
 Requires:       python3-gobject
 Requires:       python3-enchant
@@ -52,8 +53,8 @@ python3 setup.py install -O1 --skip-build --prefix=%{_prefix} --root=%{buildroot
 %files
 %defattr(-,root,root)
 %doc COPYING NEWS
-#%{python3_sitelib}/*
-/usr/lib/python3.6/site-packages/*
+%{python3_sitelib}/*
+#/usr/lib/python3.6/site-packages/*
 
 %{_datadir}/lios/*
 %{_datadir}/lios/icons/*
