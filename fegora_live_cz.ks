@@ -147,6 +147,8 @@ g++
 python3-devel
 tesseract-devel
 python3-tesserwrap
+ # remote support
+tmate
 %end
 
 %post
@@ -209,9 +211,9 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 cd /opt/
 git clone https://github.com/Nalin-x-Linux/Lios.git
 cd Lios
-python3 setup.py install
+./install.sh
 cd ..
-rm -rf lios-3
+rm -rf Lios
 
 #installing ocrdesktop
 git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
