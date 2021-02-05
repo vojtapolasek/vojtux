@@ -17,7 +17,7 @@
 
 Name:           lios
 Version:        2.8
-Release:        0
+Release:        1
 License:        GPL-3.0+
 Summary:        Linux-Intelligent-Ocr-Solution
 Url:            http://sourceforge.net/projects/lios/
