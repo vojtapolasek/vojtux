@@ -34,7 +34,7 @@ Requires:       python3-sane
 # Requires:       python3-pillow-sane for fedora 20
 Requires:	PackageKit-gtk3-module
 Requires:       aspell-en 
-Requires:       cuneiform 
+#Requires:       cuneiform 
 Requires:       tesseract
 Requires:       poppler-utils
 Requires:       ImageMagick
