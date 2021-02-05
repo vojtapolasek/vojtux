@@ -117,12 +117,6 @@ soundconverter
 tmux
 unrar
 timidity++
-#lios dependencies
-python3-sane
-#cuneiform
-python3-enchant
-aspell-en
-aspell-cs
 #festival
 festival-freebsoft-utils
 speech-dispatcher-festival
@@ -142,11 +136,12 @@ shim-x64
 -slick-greeter-mate
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
-#ocrdesktop dependencies
+#ocr
 g++
 python3-devel
 tesseract-devel
 python3-tesserwrap
+lios
  # remote support
 tmate
 %end
@@ -206,14 +201,6 @@ echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-*-primary
 echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
-
-#installing lios
-cd /opt/
-git clone https://gitlab.com/Nalin-x-Linux/lios-3.git
-cd lios-3
-python3 setup.py install
-cd ..
-rm -rf lios-3
 
 #installing ocrdesktop
 git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
