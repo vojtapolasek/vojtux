@@ -25,6 +25,7 @@ Group:          Graphics
 Source0:        lios-2.8.tar.gz
 BuildArch:      noarch
 BuildRequires:       python3
+BuildRequires:       python3-rpm-macros
 Requires:       espeak 
 Requires:       python3-gobject
 Requires:       python3-enchant
