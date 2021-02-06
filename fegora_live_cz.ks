@@ -142,7 +142,7 @@ python3-devel
 tesseract-devel
 python3-tesserwrap
 lios
-aspell-cs
+hunspell-cs
  # remote support
 tmate
 %end
