@@ -125,12 +125,6 @@ festvox-czech-machac
 festvox-czech-krb
 festvox-czech-ph 
 pulseaudio-utils
-#boot
-grub2-pc
-grub2-pc-modules
-grub2-efi-x64
-grub2-efi-x64-modules
-shim-x64
 #display manager
 -slick-greeter
 -slick-greeter-mate
