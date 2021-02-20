@@ -96,7 +96,7 @@ libsane-hpaio
 xorg-x11-server-Xvfb
 xorg-x11-drv-dummy
 #more software
-fuse-exfat
+exfat-utils
 audacity
 soundconverter
 tesseract-langpack-ces
