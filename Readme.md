@@ -2,51 +2,30 @@
 
 This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Fegora, because it is based on Fedora and it was presented at Agora event. Agora is an event in Czech Republic, where workshops about information technology for visually impaired are presented.
 
-Currently the repo and described workflow is aimed at creating USB drives with preinstalled Fegora. We chose this approach instead of live images because users can not only test the distribution, but also use the USB drive as normal medium for transfering data. Their configuration in Fegora is also persistently saved.
+The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device.
 
-## Building installation ISO
+## Building live media ISO
 
-The main technical idea is to build an ISO image which will perform automatic partitioning of the USB drive and installation of Fegora. Everything powered by Kickstart. So far it is based on Fedora Everything net install image located at <https://mirror.karneval.cz/pub/linux/fedora/linux/releases/32/Everything/x86_64/iso/>.
+The kicstart file is inspired by the FFedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Clone this repository and modify the ks.cfg file as needed.
+Building of this image requires Fedora. So how to build it?
 
-WARNING! Currently the kickstart contains default passwords for root user and regular user. We strongly recommend to change these passwords to something unique before creating the installation ISO image. Also see the last part of the kickstart. There are two partition schemes - one for 16 GiB disks, and another for 32 GiB disk. Comment / uncomment the appropriate one.
+1. sudo dnf install livecd-tools
 
- Then run
+2. clone this repo
 
-sudo ./prepare_iso.sh
+3. create a directory structure to store cache and tmp files (optional)
 
-and the new file fegora.iso will be created in the same directory. The script will download the ISO and perform file verification. The script needs fuseiso and mkisofs utilities to be present.
+    1. mkdir -p live/tmp
 
-## Installing from the ISO
+    2. mkdir live/cache
 
-Warning! The installation ISO will try to install to the first detected hard drive! Therefore using VM is highly recommended, I am not responsible for any loss of your data if you use real machine!
+4. sudo livecd-creator -c fegora_live_cz.ks -p -d -t <absolute_path_to_tmp_dir> --cache <absolute_path_to_cache_dir> -f fegora_33_cz
 
-After reading the warning above, read it again and let's prepare the VM. Our aim is to make the process of booting of the resulting USB drive as easy as possible. Therefore we decided to support booting through UEFI as well as BIOS. The installation expects to be run in machine with EFI enabled. If you don't have such a VM, we can't guarantee the results. Following are rough instructions for Virtmanager.
+    - if you did not create your own cache and tmp dir, you can leave out the -t and --cache arguments
 
-Firstly download the OVMF files for your Linux distribution. The OVMF is an EFI firmware for the virtual machine. For example, on Fedora the package is called edk2-ovmf.
-
-Then check your configuration file in /etc/libvirt/qemu.conf. The important variable is called nvram. It contains array of paths which should point to the needed files. There is usually some default commented value, make sure that the variable is uncommented and points to existing files. This may be different for every distro. For example the line looks like
-
-```
-nvram = ["/usr/share/OVMF/OVMF_CODE.fd:/usr/share/OVMF/OVMF_VARS.fd", "/usr/share/OVMF/OVMF_CODE.secboot.fd:/usr/share/OVMF/OVMF_VARS.fd"]
-```
-
-Create a new virtual machine. Select option for installation from the ISO image and select the modified ISO image as the installation source. Before starting actual installation check the box which allows you to do detailed modifications. Make sure that on the General tab the machine is configured to use UEFI, not BIOS. Attach the USB drive as a new USB host device. Make sure that no other drives or storage devices are attached to the VM.
-
-Make sure that the virtual machine will boot from the ISO image. I recommend you to attach a serial console to the VM and find out how to connect to it. For example, the consoles for Virtmanager can be found in the /dev/pts/ directory.
-
-To list the consoles:
-
-```
-ls -l /dev/pts
-```
-
-Some consoles will be owned by your user, some by the user "nobody" or "qemu", based on your distro. Try connecting to consoles NOT owned by your user.
-
-Now launch the machine and connect to the serial console if needed. The installation should be fully automatic, you can monitor its progress. If you want to see logs of Anaconda or access the shell, you will have to do it through the virtual  machine. Switch to the second console for shell, third console for logs and fourth console for storage logs. Use C-B n to move to the next console, C-b p to the previous one. Refer to the Tmux documentation for further info about moving between consoles.
 
 ## What is actually done?
 
