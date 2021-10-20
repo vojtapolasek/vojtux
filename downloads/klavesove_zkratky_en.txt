@@ -1,0 +1,41 @@
+##Obecné zkratky
+SUPER+Home      Otevřít domovskou složku
+CTRL+ALT+D      Přejít na pracovní plochu
+ALT+TAB         Přepínání mezi okny
+CTRL+ALT+Tab    Přepínání mezi panely a pracovní plochou
+ALT+F1    Zobrazit hlavní nabídku
+ALT+F2    Otevřít dialog "Spustit"
+
+##Práce s okny
+ALT+Mezerník    Otevřít nabídku aktuálního okna
+ALT+F4     Zavřít okno
+ALT+F10    Maximalizovat / odmaximalizovat okno
+SHIFT+CTRL+ALT+šipky    Přesouvání okna mezi virtuálními plochami
+CTRL+ALT+šipky    Přepínání mezi virtuálními plochami
+
+##Zvuk
+SUPER+ALT+šipka nahoru    Zvýšit celkovou hlasitost zvuku
+SUPER+ALT+šipka dolů      Snížit celkovou hlasitost zvuku
+SUPER+ALT+šipka vlevo     Ztlumit zvuk
+
+##Technologie usnadnění
+SUPER+ALT+s    Zapne / vypne odečítač obrazovky
+SUPER+ALT+o    Restartuje odečítač obrazovky
+orca+šipka nahoru    Zvýšit rychlost řeči
+orca+šipka dolů      Snížit rychlost řeči
+orca+šipka vlevo     Zvýšit výšku řeči
+orca+šipka vpravo    Snížit výšku řeči
+orca+Home      Zvýšit hlasitost řeči
+orca+End       Snížit hlasitost řeči
+
+##Systém
+CTRL+ALT+T    Otevřít terminál
+CTRL+ALT+l    Zamknout obrazovku
+ALT+Ctrl+Delete    Vypnout nebo restartovat systém
+ALT+Ctrl+F2, pak ALT+Ctrl+Delete    Restartovat systém za všech okolností
+
+##Zkratky pro aplikace
+ALT+SUPER+F     Webový prohlížeč Firefox
+ALT+SUPER+L     Linux-Intelligent-OCR-Solution
+SUPER+O         Provede rozpoznání OCR aktuálního okna a použije český jazyk
+CTRL+SUPER+O    Provede rozpoznání OCR aktuálního okna a použije anglický jazyk
