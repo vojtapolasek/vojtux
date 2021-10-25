@@ -1,41 +1,41 @@
-##Obecné zkratky
-SUPER+Home      Otevřít domovskou složku
-CTRL+ALT+D      Přejít na pracovní plochu
-ALT+TAB         Přepínání mezi okny
-CTRL+ALT+Tab    Přepínání mezi panely a pracovní plochou
-ALT+F1    Zobrazit hlavní nabídku
-ALT+F2    Otevřít dialog "Spustit"
+##Basic shortcuts
+SUPER+Home      Open home folder
+CTRL+ALT+D      Go to desktop
+ALT+TAB         Switch between windows
+CTRL+ALT+Tab    Switch between panels and desktop
+ALT+F1    Display main menu
+ALT+F2    Launch the "Run" dialog
 
-##Práce s okny
-ALT+Mezerník    Otevřít nabídku aktuálního okna
-ALT+F4     Zavřít okno
-ALT+F10    Maximalizovat / odmaximalizovat okno
-SHIFT+CTRL+ALT+šipky    Přesouvání okna mezi virtuálními plochami
-CTRL+ALT+šipky    Přepínání mezi virtuálními plochami
+##Working with windows
+ALT+Space    Open the menu of a current window
+ALT+F4     Close a window
+ALT+F10    Maximize / demaximize a window
+SHIFT+CTRL+ALT+arrows    Move a window between virtual workspaces
+CTRL+ALT+arrows    Switch between virtual workspaces
 
-##Zvuk
-SUPER+ALT+šipka nahoru    Zvýšit celkovou hlasitost zvuku
-SUPER+ALT+šipka dolů      Snížit celkovou hlasitost zvuku
-SUPER+ALT+šipka vlevo     Ztlumit zvuk
+##Sound
+SUPER+ALT+up arrow    Increase the overall volume
+SUPER+ALT+down arrow      Decrease the overall volume
+SUPER+ALT+left arrow     Mute volume
 
-##Technologie usnadnění
-SUPER+ALT+s    Zapne / vypne odečítač obrazovky
-SUPER+ALT+o    Restartuje odečítač obrazovky
-orca+šipka nahoru    Zvýšit rychlost řeči
-orca+šipka dolů      Snížit rychlost řeči
-orca+šipka vlevo     Zvýšit výšku řeči
-orca+šipka vpravo    Snížit výšku řeči
-orca+Home      Zvýšit hlasitost řeči
-orca+End       Snížit hlasitost řeči
+##Assistive technology
+SUPER+ALT+s    Turn on / turn off screen reader
+SUPER+ALT+o    Restart screen reader
+orca+up arrow    Increase speaking rate
+orca+down arrow      Decrease speaking rate
+orca+left arrow     Increase pitch
+orca+right arrow    Decrease pitch
+orca+Home      Increase speaking volume
+orca+End       Decrease speaking volume
 
-##Systém
-CTRL+ALT+T    Otevřít terminál
-CTRL+ALT+l    Zamknout obrazovku
-ALT+Ctrl+Delete    Vypnout nebo restartovat systém
-ALT+Ctrl+F2, pak ALT+Ctrl+Delete    Restartovat systém za všech okolností
+##System
+CTRL+ALT+T    Open terminal
+CTRL+ALT+l    Lock screen
+ALT+Ctrl+Delete    Shut down or reboot the system
+ALT+Ctrl+F2, then ALT+Ctrl+Delete    Reboot the system no matter what
 
-##Zkratky pro aplikace
-ALT+SUPER+F     Webový prohlížeč Firefox
+##Shortcuts for apps
+ALT+SUPER+F     Web browser Firefox
 ALT+SUPER+L     Linux-Intelligent-OCR-Solution
-SUPER+O         Provede rozpoznání OCR aktuálního okna a použije český jazyk
-CTRL+SUPER+O    Provede rozpoznání OCR aktuálního okna a použije anglický jazyk
+SUPER+O         Performs an OCR recognition of the current window and uses the Czech language
+CTRL+SUPER+O    Performs an OCR recognition of the current window and uses the English language
