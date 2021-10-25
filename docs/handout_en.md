@@ -1,7 +1,7 @@
 # Pocket Linux
 
-This document was created as a part of a workshop within Podzimní Agora
-2019. It was updated in October 2021.
+This document was created as a part of the Podzimní Agora workshop 
+in 2019. It was updated in October 2021.
 
 Created by Vojtěch Polášek <vojtech.polasek@gmail.com>.
 
