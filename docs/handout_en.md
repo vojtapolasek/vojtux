@@ -261,19 +261,19 @@ použijte zkratku Orca+A. Pokud ji stisknete dvakrát rychle za sebou,
 uzamkne se režim zaměřování a zůstane aktivní i v případě, kdy opustíte
 formulář. Může se to hodit na některých složitějších stránkách.
 
-## Virtuální plochy
+## Virtual workspaces
 
-Součástí grafického prostředí jsou tzv. virtuální plochy. Představte si,
-že před sebou máte čtyři monitory a na každém máte otevřená jiná okna.
-Přesně tak virtuální plochy fungují. Nemusíte tak dlouze procházet
-seznam všech oken a hledat to správné. Na jedné ploše můžete mít třeba
-okna prohlížeče, na jiné rozpracovaný dokument atd.
+Included in the graphical interface are so called virtual workspaces. 
+Imagine there are four monitors in front of you with different windows 
+opened on every one of them. That's exactly how workspaces work. 
+You don't have to spend time browsing all your windows whilst searching 
+for the one you need. You can have one workspace dedicated just for the internet 
+browser, another workspace with a draft document, and so on.
 
-Ve výchozím nastavení máte připraveny čtyři virtuální plochy vedle sebe,
-při čemž po přihlášení se nacházíte na té nejvíce vlevo. Mezi plochami
-se přesouváte pomocí zkratky CTRL+ALT+šipky. Pokud otevřete okno na
-nějaké ploše, tak už tam zůstane. Můžete jej ale přesunout. Stačí se do
-okna přepnout a použít kombinaci CTRL+ALT+SHIFT+šipky.
+By default there are four virtual workspaces adjacent to one another, and when 
+you log in, you go into the far left one. You can switch between the workspaces 
+using CTRL+ALT+arrows. When you open a window on the workspace, it stays there. 
+But it's possible to move it; just go to that window and press CTRL+ALT+SHIFT+arrows.
 
 ## Kde seženu další informace?
 
