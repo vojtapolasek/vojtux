@@ -190,28 +190,29 @@ hlasovou syntézu. Toho docílíte na kartě"Hlas". Měňte pouze seznamy
 označené"Hlasový výstup\" a "osoba", v seznamu "Řečový systém" nechte
 původní hodnotu.
 
-## Klávesové zkratky
+## Keyboard shortcuts
 
-Stačí, když si zapamatujete jen několik důležitých klávesových zkratek.
-Klávesovou zkratkou Orca+H aktivujete výukový režim. V tomto režimu si
-můžete zkoušet různé klávesové zkratky a Orca vám řekne, co dělají.
-Klávesou F2 si můžete zobrazit jejich seznam. Klávesou F3 si zobrazíte
-seznam zkratek specifických pro právě spuštěnou aplikaci, hodí se to
-třeba v prohlížeči Firefox. Výukový režim opustíte stisknutím klávesy
-Escape.
+It will suffice to remember just a couple of important keyboard shortcuts.
+You can activate the _tutorial mode_ by pressing the **Orca+H** combination. 
+In this mode, you can try using various keyboard shortcuts and Orca will tell 
+you what they stand for. Use the **F2** key to list them all. The **F3** key 
+shows the list of shortcuts available in the currently running application. 
+This might help when in the Firefox browser, for example. The **Escape** 
+key terminates the tutorial mode.
 
-Další důležitou zkratkou je kombinace ALT+Super+O. Klávesou Super se zde
-myslí klávesa s logem Windows, která je většinou umístěna mezi levým
-CTRL a ALT. Tato kombinace restartuje čtečku obrazovky. Občas se stane,
-že Orca přestane reagovat, pro tento případ je tu právě tato zkratka.
+Another important shortcut is the **Alt-Super-O** combination. The **Super** 
+key is represented by the key with the Windows logo that is usually placed between 
+the left **Ctrl** and **Alt** keys. This combination restarts the screen reader. 
+When it happens that Orca stops responding, you can make it work again by using 
+this combination.
 
-Do nabídky nainstalovaných aplikací se dostanete stiskem kombinace
-ALT+F1. Aplikace jsou roztříděny podle kategorií. Nabídky procházejte
-šipkami nahoru a dolů, rozbalte kategorii šipkou vpravo.
+To reach the list of installed applications, you can use the **Alt-F1**
+combination. The applications are sorted in categories. Use **up** and 
+**down** arrows to browse the menu, unfold the categories using the right arrow.
 
-Na pracovní plochu se přesunete již zmíněnou zkratkou CTRL+ALT+D. Další
-klávesové zkratky naleznete v souboru klavesove_zkratky.txt, který je
-umístěn v domovské složce.
+To reach the desktop, use the above mentioned **Ctrl-Alt-D** shortcut. 
+Consult the `keyboard_shortcuts.txt` file in the project's directory to
+get a full list of keyboard shortcuts.
 
 ## Panely
 
