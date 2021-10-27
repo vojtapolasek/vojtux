@@ -292,9 +292,9 @@ Another conference we recommend is the Orca screen reader conference. It's in
 English language and very active. You can find it
 [here](https://mail.gnome.org/mailman/listinfo/orca-list).
 
-As we mentioned above, Fegora is based on Fedora distribution. Czech
-website dedicated to this distribution is
-[here](https://www.mojefedora.cz), official website in english is
+As we mentioned above, Fegora is based on the Fedora distribution. You can find 
+a Czech website dedicated to the Fedora distribution
+[here](https://www.mojefedora.cz), and the official English website
 [here](https://getfedora.org).
 
 You can also contact us via e-mail adresses mentioned at the beginning
