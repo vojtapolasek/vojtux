@@ -282,7 +282,7 @@ Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/).(CZ)
 It contains the newest information about this distribution and links
 to download the image of the latest version as well as other useful files. 
 
-We also strongly suggest to join [e-mail
+We also recommend you join the [e-mail
 conference](https://a-fs.cz/emailova-konference/), which was established
 together with the a-fs.cz website. We will send the latest news 
 about Fegora there, and most importantly, it's a place where we will answer
