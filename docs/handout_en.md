@@ -263,7 +263,7 @@ formulář. Může se to hodit na některých složitějších stránkách.
 
 ## Virtual workspaces
 
-Included in the graphical interface are so called virtual workspaces. 
+The graphical interface includes so called virtual workspaces.
 Imagine there are four monitors in front of you with different windows 
 opened on every one of them. That's exactly how workspaces work. 
 You don't have to spend time browsing all your windows whilst searching 
