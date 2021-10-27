@@ -265,7 +265,7 @@ formulář. Může se to hodit na některých složitějších stránkách.
 
 The graphical interface includes so called virtual workspaces.
 Imagine there are four monitors in front of you with different windows 
-opened on every one of them. That's exactly how workspaces work. 
+opened on each of them. That's exactly how workspaces work. 
 You don't have to spend time browsing all your windows whilst searching 
 for the one you need. You can have one workspace dedicated just for the internet 
 browser, another workspace with a draft document, and so on.
