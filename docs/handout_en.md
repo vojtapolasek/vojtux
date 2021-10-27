@@ -285,7 +285,7 @@ to download the image of the latest version as well as other useful files.
 We also recommend you join the [e-mail
 conference](https://a-fs.cz/emailova-konference/), which was established
 together with the a-fs.cz website. We send the latest news 
-about Fegora there, and most importantly, it's a place where we will answer
+about Fegora there, and most importantly, it's a place where we answer
 your questions and suggestions.
 
 Another conference we recommend is the Orca screen reader conference. It's in 
