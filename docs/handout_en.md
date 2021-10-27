@@ -278,7 +278,7 @@ okna přepnout a použít kombinaci CTRL+ALT+SHIFT+šipky.
 ## Where can I get more information? 
 
 You can find the main page with the information about the modified distribution
-Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/)o.(CZ)
+Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/).(CZ)
 It contains the newest information about this distribution and links
 to download the image of the latest version as well as other useful files. 
 
