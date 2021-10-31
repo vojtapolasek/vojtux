@@ -7,7 +7,7 @@ ALT+F1    Display main menu
 ALT+F2    Launch the "Run" dialog
 
 ##Working with windows
-ALT+Space    Open the menu of a current window
+ALT+Space    Open the context menu of the current window
 ALT+F4     Close a window
 ALT+F10    Maximize / demaximize a window
 SHIFT+CTRL+ALT+arrows    Move a window between virtual workspaces
@@ -19,8 +19,8 @@ SUPER+ALT+down arrow      Decrease the overall volume
 SUPER+ALT+left arrow     Mute volume
 
 ##Assistive technology
-SUPER+ALT+s    Turn on / turn off screen reader
-SUPER+ALT+o    Restart screen reader
+SUPER+ALT+s    Turn on / turn off the screen reader
+SUPER+ALT+o    Restart the screen reader
 orca+up arrow    Increase speaking rate
 orca+down arrow      Decrease speaking rate
 orca+left arrow     Increase pitch
@@ -34,8 +34,8 @@ CTRL+ALT+l    Lock screen
 ALT+Ctrl+Delete    Shut down or reboot the system
 ALT+Ctrl+F2, then ALT+Ctrl+Delete    Reboot the system no matter what
 
-##Shortcuts for apps
-ALT+SUPER+F     Web browser Firefox
+##Application Shortcuts
+ALT+SUPER+F     The Firefox web browser
 ALT+SUPER+L     Linux-Intelligent-OCR-Solution
 SUPER+O         Performs an OCR recognition of the current window and uses the Czech language
 CTRL+SUPER+O    Performs an OCR recognition of the current window and uses the English language
