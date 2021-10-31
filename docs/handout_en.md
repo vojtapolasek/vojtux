@@ -1,13 +1,13 @@
-# Linux v kapse
+# Pocket Linux
 
-Tento dokument vznikl jako součást workshopu v rámci Podzimní Agory
-2019. Byl aktualizován v říjnu 2021.
+This document was created as a part of the Podzimní Agora workshop 
+in 2019. It was updated in October 2021.
 
-Vytvořil Vojtěch Polášek <vojtech.polasek@gmail.com>.
+Created by Vojtěch Polášek <vojtech.polasek@gmail.com>.
 
-Na projektu dále spolupracovali Bohdan Milar <bmilar@redhat.com>, Lukáš
-Tyrychtr <ltyrychtr@redhat.com> a Pavel Vlček <pvlcek@redhat.com>.
-Flashdisky pro účastníky workshopu Linux v kapse poskytla firma [Red
+Other contributors to this project include Bohdan Milar <bmilar@redhat.com>, Lukáš
+Tyrychtr <ltyrychtr@redhat.com> and Pavel Vlček <pvlcek@redhat.com>.
+Flashdisks for participants of the 'Pocket Linux' workshop were provided by  [Red
 Hat](https://www.redhat.com/).
 
 ## Co je to Linux?
