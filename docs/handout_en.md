@@ -275,27 +275,27 @@ you log in, you go into the far left one. You can switch between the workspaces
 using CTRL+ALT+arrows. When you open a window on the workspace, it stays there. 
 But it's possible to move it; just go to that window and press CTRL+ALT+SHIFT+arrows.
 
-## Kde seženu další informace?
+## Where can I get more information? 
 
-Hlavní stránka, ze které můžete získat informace o upravené distribuci
-Fegora se nachází [zde](https://a-fs.cz/fedora-29-mate-pro-nevidome/).
-Na této stránce budou nejnovější informace o distribuci a bude zde i
-odkaz ke stažení obrazu aktuální verze či dalších užitečných souborů.
+You can find the main page with the information about the modified distribution
+Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/).(CZ)
+It contains the newest information about this distribution and links
+to download the image of the latest version as well as other useful files. 
 
-Zároveň vám velmi doporučujeme přihlásit se do [emailové
-konference](https://a-fs.cz/emailova-konference/), která je zřízena
-společně se stránkou a-fs.cz. V této konferenci budeme také posílat
-aktuální novinky ohledně Fegory a hlavně je to místo, kde budeme
-odpovídat na vaše dotazy a podněty.
+We also recommend you join the [e-mail
+conference](https://a-fs.cz/emailova-konference/), which was established
+together with the a-fs.cz website. We send the latest news 
+about Fegora there, and most importantly, it's a place where we answer
+your questions and suggestions.
 
-Druhou konferencí, kterou doporučím, je konference odečítače Orca. Je v
-angličtině, ale je velmi aktivní. Nachází se
-[zde](https://mail.gnome.org/mailman/listinfo/orca-list).
+Another conference we recommend is the Orca screen reader conference. It's in 
+English language and very active. You can find it
+[here](https://mail.gnome.org/mailman/listinfo/orca-list).
 
-Jak jsme psali výše, Fegora je založena na distribuci Fedora. České
-stránky věnující se této distribuci jsou
-[zde](https://www.mojefedora.cz), oficiální anglické pak
-[zde](https://getfedora.org).
+As we mentioned above, Fegora is based on the Fedora distribution. You can find 
+a Czech website dedicated to the Fedora distribution
+[here](https://www.mojefedora.cz), and the official English website
+[here](https://getfedora.org).
 
-Můžete nás také kontaktovat na emailových adresách uvedených na začátku
-tohoto dokumentu.
+You can also contact us via e-mail adresses mentioned at the beginning
+of this document. 
