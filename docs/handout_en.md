@@ -1,6 +1,6 @@
 # Pocket Linux
 
-This document was created as a part of the Podzimní Agora workshop 
+This document was created as a part of the Podzimní Agora workshop
 in 2019. It was updated in October 2021.
 
 Created by Vojtěch Polášek <vojtech.polasek@gmail.com>.
@@ -24,30 +24,30 @@ myslíme tím, že používáme linuxovou distribuci. Linuxová distribuce je
 kombinace linuxového jádra, grafického rozhraní a předinstalovaných
 aplikací. Dost teorie, pojďme na to.
 
-## Linux a nevidomí uživatelé
+## Linux and visually impaired users
 
-Protože tento workshop byl vytvořen pro začátečníky, předpokládám, že
-budete Linux používat skrze jeho grafické rozhraní. Jen pro úplnost
-dodávám, že jej lze ovládat i skrze čistě textové rozhraní.
+This workshop is aimed at beginner users, so I expect most of you
+will use Linux with the graphical user interface. However, note
+that you can fully control Linux by only using a text interface as well.
 
-Pro Linux existuje pouze jeden odečítač obrazovky, který se jmenuje
-[Orca](https://help.gnome.org/users/orca/stable/). Pro úplnost,
-odečítačů existuje více, ale jen tento lze použít s grafickým rozhraním.
-Ostatní odečítače se dají použít jen v příkazové řádce a tou se zde
-zabývat nebudeme.
+[Orca](https://help.gnome.org/users/orca/stable/) is the only
+screen reader that works completely on Linux. You can use other
+screen readers on Linux, but only Orca works with the graphical interface.
+Other screen readers work only in the command line interface, which
+is not in scope of this workshop.
 
-Budeme používat distribuci Fegora. Název Fegora vznikl spojením slov
-Fedora a Agora. [Fedora](https://mojefedora.cz/) je Linuxová distribuce
-podporovaná firmou [Red Hat](https://redhat.com/) a
+The subject of this workshop is Fegora. The name Fegora a contraction
+of the words Fedora and Agora. [Fedora](https://getfedora.org/) is a
+Linux distribution supported by [Red Hat](https://redhat.com/).
 [Agora](https://www3.teiresias.muni.cz/cz/vzdelavani-sport-a-volny-cas/agora)
-je cyklus workshopů o informačních technologiích pro zrakově postižené.
-Konkrétně jsme vycházeli z odnože [Fedora Mate
-Compiz](https://spins.fedoraproject.org/mate-compiz/). Tato
-verze sama o sobě byla relativně dobře přístupná pro nevidomé uživatele,
-ale provedli jsme různá vylepšení, aby se používala ještě lépe.
-Především jsme zajistili, aby odečítač mluvil už na přihlašovací
-obrazovce a nainstalovali některé zajímavé programy, například pro
-rozpoznávání textu pomocí technologie OCR.
+is a Czech series of workshop about information technologies aimed at visually
+impaired users. We based Fegora on
+[Fedora Mate Compiz](https://spins.fedoraproject.org/mate-compiz/). Fedora
+Mate Compiz provides a good accessibility base for visually impaired users.
+However, we have added a number of improvements to ensure better experience.
+For example, the screen reader now works in the login screen, and Fegora comes
+pre-installed with a number of useful programs, such as OCR-based
+text-recognition software.
 
 ## Jak si můžu Linux vyzkoušet?
 
@@ -138,7 +138,7 @@ virtuální počítač a Linux by měl automaticky naběhnout.
 Ještě jednou vám gratuluji, právě jste prošli tím nejtěžším, co
 začátečníky s Linuxem čeká a občas také odradí. Teď už půjde všechno
 relativně hladce. Jak jsem psal výše, po úspěšném startu systému
-uslyšíte hlášku "Čtečka obrazovky zapnuta". 
+uslyšíte hlášku "Čtečka obrazovky zapnuta".
 
 Stiskněte kombinaci kláves CTRL+ALT+d a ocitnete se na
 pracovní ploše. Je to nutné po spuštění udělat, jinak od vás systém
@@ -264,38 +264,38 @@ formulář. Může se to hodit na některých složitějších stránkách.
 ## Virtual workspaces
 
 The graphical interface includes so called virtual workspaces.
-Imagine there are four monitors in front of you with different windows 
-opened on each of them. That's exactly how workspaces work. 
-You don't have to spend time browsing all your windows whilst searching 
-for the one you need. You can have one workspace dedicated just for the internet 
+Imagine there are four monitors in front of you with different windows
+opened on each of them. That's exactly how workspaces work.
+You don't have to spend time browsing all your windows whilst searching
+for the one you need. You can have one workspace dedicated just for the internet
 browser, another workspace with a draft document, and so on.
 
-By default there are four virtual workspaces adjacent to one another, and when 
-you log in, you go into the far left one. You can switch between the workspaces 
-using CTRL+ALT+arrows. When you open a window on the workspace, it stays there. 
+By default there are four virtual workspaces adjacent to one another, and when
+you log in, you go into the far left one. You can switch between the workspaces
+using CTRL+ALT+arrows. When you open a window on the workspace, it stays there.
 But it's possible to move it; just go to that window and press CTRL+ALT+SHIFT+arrows.
 
-## Where can I get more information? 
+## Where can I get more information?
 
 You can find the main page with the information about the modified distribution
 Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/).(CZ)
 It contains the newest information about this distribution and links
-to download the image of the latest version as well as other useful files. 
+to download the image of the latest version as well as other useful files.
 
 We also recommend you join the [e-mail
 conference](https://a-fs.cz/emailova-konference/), which was established
-together with the a-fs.cz website. We send the latest news 
+together with the a-fs.cz website. We send the latest news
 about Fegora there, and most importantly, it's a place where we answer
 your questions and suggestions.
 
-Another conference we recommend is the Orca screen reader conference. It's in 
+Another conference we recommend is the Orca screen reader conference. It's in
 English language and very active. You can find it
 [here](https://mail.gnome.org/mailman/listinfo/orca-list).
 
-As we mentioned above, Fegora is based on the Fedora distribution. You can find 
+As we mentioned above, Fegora is based on the Fedora distribution. You can find
 a Czech website dedicated to the Fedora distribution
 [here](https://www.mojefedora.cz), and the official English website
 [here](https://getfedora.org).
 
 You can also contact us via e-mail adresses mentioned at the beginning
-of this document. 
+of this document.
