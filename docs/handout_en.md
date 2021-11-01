@@ -211,7 +211,7 @@ combination. The applications are sorted in categories. Use **up** and
 **down** arrows to browse the menu, unfold the categories using the right arrow.
 
 To reach the desktop, use the above mentioned **Ctrl-Alt-D** shortcut. 
-Consult the `keyboard_shortcuts.txt` file in the project's directory to
+Consult the `keyboard_shortcuts.txt` file in the home directory to
 get a full list of keyboard shortcuts.
 
 ## Panely
