@@ -162,33 +162,31 @@ Na ploše se též nachází soubor handout,html, který nejspíš právě čtet
 Po vybrání souboru a stisknutí klávesy Enter se otevře Prohlížeč Mozilla
 Firefox a zobrazí se obsah souboru.
 
-## Rychlý úvod do odečítače Orca
+## Quick introduction to the Orca reader
 
-Orca umí většinu funkcí, které očekáváte od moderního odečítače
-obrazovky. Stejně jako například NVDA má Orca svou speciální klávesu,
-kterou zde budu označovat jako Orca. Ve výchozím nastavení je to klávesa
-Capslock.
+Orca has most of the functions that you might expect from a modern
+screen reader. Similary to NVDA, for example, Orca has its **special key**
+that we will refer to as the **Orca**. By default, it corresponds with
+the **CapsLock** key.
 
-Orca samozřejmě disponuje slušnou řádkou nastavení. Okno s předvolbami
-aktivujete stisknutím zkratky Orca+Mezerník. Kurzor se bude nacházet na
-řadě karet, mezi kterými se přepínáte šipkami vlevo a vpravo. Po
-ovládacích prvcích se klasicky pohybujete klávesou TAB, v opačném směru
-klávesou Shift+TAB. Tlačítka a zaškrtávací pole aktivujete stiskem
-klávesy Mezerník. Položku ze seznamu vyberete pomocí šipek nahoru a
-dolů, stejně tak přepínáte přepínače a posouváte posuvníky. Pokud chcete
-uložit změny, nezapomeňte aktivovat tlačítko "Budiž". Mimochodem s tímto
-tlačítkem se budete setkávat skoro všude. Nebojte se, je to to samé jako
-OK.
+As a matter of course, Orca offers a solid number of settings. The **Preferences**
+dialogue can be activated using **Orca+Space**. The cursor can be found on
+a row of tabs which can be switched using the **right and left arrows**. 
+The **Tab** key iterates over the control items (**Shift+Tab** in the reversed 
+order). The buttons, check-buttons and radio-buttons can be activated using the 
+**Space** key. Any list item is selected using the **up and down arrows**. 
+The same way you toggle switches and move sliders. If you want to save the
+changes, mind to activate the **OK** button.
 
-Zajímavým nastavením pro vás nejspíš bude výběr rozložení klávesnice.
-Tento přepínač se nachází na kartě "Obecné" a dostanete se na něj
-stisknutím TAB hned po otevření nastavení. Pokud změníte rozložení na
-Stolní počítač", klávesa Orca bude mapována na klávesu Insert a dojde i
-k jiným změnám tak, aby se Orca příjemně používala na plnohodnotné
-klávesnici s numerickým blokem. Někteří by si možná rádi změnili
-hlasovou syntézu. Toho docílíte na kartě"Hlas". Měňte pouze seznamy
-označené"Hlasový výstup\" a "osoba", v seznamu "Řečový systém" nechte
-původní hodnotu.
+An interesting setting for you will probably be the keyboard layout.
+This switch is located on the **General** tab and you can reach it by 
+pressing **Tab** immediately after the Settings dialogue opens. If you
+change the layout to **Desktop**, the Orca key will be moved to the **Insert**
+key and some other changes will be made as well to enable better 
+ergonomics on a fullsize keyboard with a numerical block. Some of you
+might want to change the voice synthesis. You can do so on the **Voice** tab.
+Change only the **Voice input** and **Person** values and leave the **Speech
+system** as is.
 
 ## Klávesové zkratky
 
