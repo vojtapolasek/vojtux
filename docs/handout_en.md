@@ -1,6 +1,6 @@
 # Pocket Linux
 
-This document was created as a part of the Podzimní Agora workshop 
+This document was created as a part of the Podzimní Agora workshop
 in 2019. It was updated in October 2021.
 
 Created by Vojtěch Polášek <vojtech.polasek@gmail.com>.
@@ -10,19 +10,21 @@ Tyrychtr <ltyrychtr@redhat.com> and Pavel Vlček <pvlcek@redhat.com>.
 Flashdisks for participants of the 'Pocket Linux' workshop were provided by  [Red
 Hat](https://www.redhat.com/).
 
-## Co je to Linux?
+## What is Linux?
 
-Linux je svobodný operační systém. Spolu se systémy Windows a macOS
-patří mezi nejpoužívanější systémy na stolních a přenosných počítačích.
-Mimo jiné se také často používá na serverech, chytrých telefonech,
-průmyslových zařízeních, routerech, superpočítačích atd.
+Linux is a free operating system. Linux, together with Windows and
+macOS, is one of the most popular operating systems on desktop
+and portable computers. Linux is also commonly used on servers,
+smartphones, industrial devices, routers, supercomputers, and other
+computers.
 
-Jen abychom si na začátku ujasnili pojmy, slovo Linux se používá pro
-označení operačního systému, ale především je to označení jeho jádra.
-Když říkáme, že používáme Linux, jako třeba v tomto případě Fegoru,
-myslíme tím, že používáme linuxovou distribuci. Linuxová distribuce je
-kombinace linuxového jádra, grafického rozhraní a předinstalovaných
-aplikací. Dost teorie, pojďme na to.
+To make the terminology clear, we use the word _Linux_ to mean the
+operating system, but also the kernel of the operating system.
+When we say we use Linux, such as Fegora, what we mean is that we
+use a Linux distribution. A Linux distribution is a combination of
+a Linux kernel, graphical user interface, and pre-installed
+applications. Armed with the knowledge of Linux terminology,
+let us move on.
 
 ## Linux a nevidomí uživatelé
 
@@ -138,7 +140,7 @@ virtuální počítač a Linux by měl automaticky naběhnout.
 Ještě jednou vám gratuluji, právě jste prošli tím nejtěžším, co
 začátečníky s Linuxem čeká a občas také odradí. Teď už půjde všechno
 relativně hladce. Jak jsem psal výše, po úspěšném startu systému
-uslyšíte hlášku "Čtečka obrazovky zapnuta". 
+uslyšíte hlášku "Čtečka obrazovky zapnuta".
 
 Stiskněte kombinaci kláves CTRL+ALT+d a ocitnete se na
 pracovní ploše. Je to nutné po spuštění udělat, jinak od vás systém
@@ -264,38 +266,38 @@ formulář. Může se to hodit na některých složitějších stránkách.
 ## Virtual workspaces
 
 The graphical interface includes so called virtual workspaces.
-Imagine there are four monitors in front of you with different windows 
-opened on each of them. That's exactly how workspaces work. 
-You don't have to spend time browsing all your windows whilst searching 
-for the one you need. You can have one workspace dedicated just for the internet 
+Imagine there are four monitors in front of you with different windows
+opened on each of them. That's exactly how workspaces work.
+You don't have to spend time browsing all your windows whilst searching
+for the one you need. You can have one workspace dedicated just for the internet
 browser, another workspace with a draft document, and so on.
 
-By default there are four virtual workspaces adjacent to one another, and when 
-you log in, you go into the far left one. You can switch between the workspaces 
-using CTRL+ALT+arrows. When you open a window on the workspace, it stays there. 
+By default there are four virtual workspaces adjacent to one another, and when
+you log in, you go into the far left one. You can switch between the workspaces
+using CTRL+ALT+arrows. When you open a window on the workspace, it stays there.
 But it's possible to move it; just go to that window and press CTRL+ALT+SHIFT+arrows.
 
-## Where can I get more information? 
+## Where can I get more information?
 
 You can find the main page with the information about the modified distribution
 Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/).(CZ)
 It contains the newest information about this distribution and links
-to download the image of the latest version as well as other useful files. 
+to download the image of the latest version as well as other useful files.
 
 We also recommend you join the [e-mail
 conference](https://a-fs.cz/emailova-konference/), which was established
-together with the a-fs.cz website. We send the latest news 
+together with the a-fs.cz website. We send the latest news
 about Fegora there, and most importantly, it's a place where we answer
 your questions and suggestions.
 
-Another conference we recommend is the Orca screen reader conference. It's in 
+Another conference we recommend is the Orca screen reader conference. It's in
 English language and very active. You can find it
 [here](https://mail.gnome.org/mailman/listinfo/orca-list).
 
-As we mentioned above, Fegora is based on the Fedora distribution. You can find 
+As we mentioned above, Fegora is based on the Fedora distribution. You can find
 a Czech website dedicated to the Fedora distribution
 [here](https://www.mojefedora.cz), and the official English website
 [here](https://getfedora.org).
 
 You can also contact us via e-mail adresses mentioned at the beginning
-of this document. 
+of this document.
