@@ -28,7 +28,7 @@ aplikací. Dost teorie, pojďme na to.
 
 This workshop is aimed at beginner users, so I expect most of you
 will use Linux with the graphical user interface. However, note
-that you can fully control Linux by only using a text interface as well.
+that you can fully control Linux by using only a text interface as well.
 
 [Orca](https://help.gnome.org/users/orca/stable/) is the only
 screen reader that works completely on Linux. You can use other
@@ -36,11 +36,11 @@ screen readers on Linux, but only Orca works with the graphical interface.
 Other screen readers work only in the command line interface, which
 is not in scope of this workshop.
 
-The subject of this workshop is Fegora. The name Fegora a contraction
+The subject of this workshop is Fegora. The name Fegora a blend
 of the words Fedora and Agora. [Fedora](https://getfedora.org/) is a
 Linux distribution supported by [Red Hat](https://redhat.com/).
 [Agora](https://www3.teiresias.muni.cz/cz/vzdelavani-sport-a-volny-cas/agora)
-is a Czech series of workshop about information technologies aimed at visually
+is a Czech series of workshops about information technologies aimed at visually
 impaired users. We based Fegora on
 [Fedora Mate Compiz](https://spins.fedoraproject.org/mate-compiz/). Fedora
 Mate Compiz provides a good accessibility base for visually impaired users.
