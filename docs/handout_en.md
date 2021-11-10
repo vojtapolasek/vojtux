@@ -18,7 +18,7 @@ and portable computers. Linux is also commonly used on servers,
 smartphones, industrial devices, routers, supercomputers, and other
 computers.
 
-To make the terminology clear, we use the word _Linux_ to mean the
+To make the terminology clear, we use the word _Linux_ to denote the
 operating system, but also the kernel of the operating system.
 When we say we use Linux, such as Fegora, what we mean is that we
 use a Linux distribution. A Linux distribution is a combination of
