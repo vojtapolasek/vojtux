@@ -135,34 +135,36 @@ budete spouštět, zvolte Linux. Nastavte počítač tak, aby měl k dispozici
 alespoň 4 Gb paměti RAM. přidejte počítači CD mechaniku tak, aby její obsah odkazoval na stažený live obraz Fegory. Pokud si chcete Linux opravdu jen vyzkoušet, nemusíte přidávat žádný virtuální pevný disk. Pokud si chcete vyzkoušet i instalaci, přidejte dostatečně velký pevný disk (20 GiB by mělo stačit. Pak už jen stačí spustit
 virtuální počítač a Linux by měl automaticky naběhnout.
 
-## Podařilo se mi spustit Linux, a co teď?
+## I have managed to run Linux. What now?
 
-Ještě jednou vám gratuluji, právě jste prošli tím nejtěžším, co
-začátečníky s Linuxem čeká a občas také odradí. Teď už půjde všechno
-relativně hladce. Jak jsem psal výše, po úspěšném startu systému
-uslyšíte hlášku "Čtečka obrazovky zapnuta".
+Congratulations. You have now overcome the most difficult problem
+that beginners have with Linux and that may scare them off eventually.
+Now, things will go relatively easy. As mentioned before, after
+the system has started successfully you will hear the "The screen 
+reader is switched on." message.
 
-Stiskněte kombinaci kláves CTRL+ALT+d a ocitnete se na
-pracovní ploše. Je to nutné po spuštění udělat, jinak od vás systém
-nebude přijímat klávesové zkratky. Je možné, že systém na vás bude
-mluvit příliš nahlas. Můžete změnit hlasitost systémového zvuku pomocí
-hardwarových tlačítek k tomu určených a nebo pomocí kláves ALT+WIN+šipky
-nahoru a dolů.
+Press the **Ctrl+Alt+D** keyboard shortcuts which takes you to the 
+workplace. You need to do it after the system starts, otherwise it will 
+not accept the keyboard shortcuts. The speech volume might be too loud 
+for you. You can change the volume of the system sound using the dedicated 
+hardware buttons or the **Alt+Win** combination with the **up** and **down** 
+arrow keys.
 
-Nacházíte se na pracovní ploše. Pomocí šipek si můžete projít několik
-ikon. Ikony aktivujete stiskem klávesy Enter. Pokud tak učiníte na ikoně
-"Domov liveuser", otevře se správce souborů s vaší domovskou složkou. Zde
-už je vytvořeno několik složek a ukládá se sem veškeré vaše nastavení.
+Now you are on the workplace. Using the arrows, you can browse through several 
+icons. You can activate the icons with the **Enter** key. If you activate 
+the *Home liveuser* icon, the file manager opens your home folder. The system 
+has already created several folders in this location and will store all your 
+settings here.
 
-Na ploše bude nejspíš zajímavý soubor klavesove_zkratky.txt, který
-obsahuje seznam užitečných klávesových zkratek. Pokud se šipkami
-přesunete na tento soubor a stisknete Enter, otevře se soubor v textovém
-editoru. Nejspíš zjistíte, že práce s textem zde funguje jako v
-systémech Windows. Editor můžete zavřít známou zkratkou Alt+F4.
+On the workplace, there will be a very interesting file called `keyboard_shortcuts.txt`
+which contains a list of useful keyboard shortcuts. Use the arrows to navigate to
+this file and press **Enter**. The file will open in a text editor. You will
+probably notice that text editting works as in Windows. You can close the text editor
+using the **Alt+F4** keyboard shortcut.
 
-Na ploše se též nachází soubor handout,html, který nejspíš právě čtete.
-Po vybrání souboru a stisknutí klávesy Enter se otevře Prohlížeč Mozilla
-Firefox a zobrazí se obsah souboru.
+On the workspace, the `handout.html` file is located, too, and you are probably
+reading it now. When you select the file and press **Enter**, the Mozilla Firefox
+browser opens and shows the file content.
 
 ## Quick introduction to the Orca screen reader
 
