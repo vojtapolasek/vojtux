@@ -218,7 +218,7 @@ umístěn v domovské složce.
 By default, there is one panel placed above the workspace. You can switch
 between the workspace and the panels using the **Ctrl+Alt+Tab** keyboard
 shortcut. When you have switched to the panel, use the **Tab** and
-**Shift+Tab** to thumb trough the particular items. On the panel, you 
+**Shift+Tab** to cycle trough the particular items. On the panel, you 
 will find icons for network connections, volume settings, battery
 indicator, and further notifications.
 
@@ -226,10 +226,10 @@ Unfortunately, the icons may not be correctly announced, especially after
 the system has just started. It is recommended to navigate throughout the
 whole panel using the **Tab** key first to have the icons announced
 correctly on consecutive passes. You can activate the icon by pressing
-the **Space** key.
+the **Spacebar** key.
 
-You can add more panels, or add icons to the current panels. Use 
-the **Shift+F10** combination to open the corresponding dialogue.
+You can add more panels, or add icons to already existing panels. Use 
+the **Shift+F10** combination to open the corresponding menu.
 To return to the workspace, use the **Ctrl+Alt+D** combination.
 
 ## Prohlížení webu
