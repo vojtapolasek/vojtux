@@ -162,7 +162,7 @@ Na ploše se též nachází soubor handout,html, který nejspíš právě čtet
 Po vybrání souboru a stisknutí klávesy Enter se otevře Prohlížeč Mozilla
 Firefox a zobrazí se obsah souboru.
 
-## Quick introduction to the Orca reader
+## Quick introduction to the Orca screen reader
 
 Orca has most of the functions that you might expect from a modern
 screen reader. Similary to NVDA, for example, Orca has its **special key**
@@ -170,22 +170,22 @@ that we will refer to as the **Orca**. By default, it corresponds with
 the **CapsLock** key.
 
 As a matter of course, Orca offers a solid number of settings. The **Preferences**
-dialogue can be activated using **Orca+Space**. The cursor can be found on
-a row of tabs which can be switched using the **right and left arrows**. 
-The **Tab** key iterates over the control items (**Shift+Tab** in the reversed 
-order). The buttons, check-buttons and radio-buttons can be activated using the 
-**Space** key. Any list item is selected using the **up and down arrows**. 
+dialogue can be activated using **Orca+Space**. The focus will be placed on
+a row of tabs which can be browsed using the **right and left arrows**. 
+The **Tab** key iterates over the controls (**Shift+Tab** in the reversed 
+order). The buttons, checkboxes and radio-buttons can be activated using the 
+**Spacebar** key. Any list item is selected using the **up and down arrows**. 
 The same way you toggle switches and move sliders. If you want to save the
-changes, mind to activate the **OK** button.
+changes, remember to activate the **OK** button.
 
 An interesting setting for you will probably be the keyboard layout.
 This switch is located on the **General** tab and you can reach it by 
 pressing **Tab** immediately after the Settings dialogue opens. If you
-change the layout to **Desktop**, the Orca key will be moved to the **Insert**
+change the layout to **Desktop**, the Orca key will be set to the **Insert**
 key and some other changes will be made as well to enable better 
 ergonomics on a fullsize keyboard with a numerical block. Some of you
-might want to change the voice synthesis. You can do so on the **Voice** tab.
-Change only the **Voice input** and **Person** values and leave the **Speech
+might want to change the voice synthesis. You can do so on the **Speech** tab.
+Change only the **Speech Synthesizer** and **Person** values and leave the **Speech
 system** as is.
 
 ## Klávesové zkratky
