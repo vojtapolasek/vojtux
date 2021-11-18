@@ -235,29 +235,29 @@ plochu se můžete opět vrátit zkratkou CTRL+ALT+D.
 Fegora uses the pre-installed Mozilla Firefox browser. Web browsing
 with Firefox and Orca does not differ much from the Firefox and NVDA
 combination. The **Tab** key works as expected and you can use it to
-navigate between links and form items. Orca offers the browsing modes
+navigate between links and form items. Orca offers two modes
 which can be toggled between using the **Orca+A** shortcut.
 
-The *browsing mode* is recommended whenever you need to browse through
+The *browse mode* is recommended whenever you need to browse through
 a page and read the text. There is a plenty of various keyboard shortcuts
-that you can use to move among the control items. For instance, the **H**
+that you can use to move among the page elements. For instance, the **H**
 key takes you to a next heading while **Shift+H** takes you to the previous
 one. The **Alt+Shift+H** combination lists all available headings. To see all 
 such keyboard shortcuts, switch on the *learning mode* in the active Firefox 
 window and press the **F3** key. Obviously, all arrow keys as well as their 
 combinations with the **Shift** key to select pieces of text do work.
 
-The *targetting mode* corresponds with the *form mode* in NVDA. You will
+The *focus mode* corresponds with the *form mode* in NVDA. You will
 mainly use this mode to work with forms. This makes it possible to type
-into entry fields, toggle switches, and so on. This would not work in the
+into form fields, toggle switches, and so on. This would not work in the
 browsing mode, because the reader would interpret the majority of the keys 
 as navigation keys and would move you around the page.
 
 The reader should be able to tell automatically that you have entered
-the form and should immediately switch to the targetting mode. This is only
-indicated in the voice, however not by any sound. To toggle the modes manually,
+a form and should immediately switch to the focus mode. This is only
+indicated by the speech but not by any sound. To toggle the modes manually,
 you can use the **Orca+A** combination. If you make two quick consecutive presses
-of this combo, the targetting mode will lock and stay active even upon leaving
+of this combo, the focus mode will lock and stay active even upon leaving
 the form. This can be useful on some complicated web pages.
 
 ## Virtual workspaces
