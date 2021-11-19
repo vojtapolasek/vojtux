@@ -17,7 +17,7 @@ services --enabled="chronyd,brltty,festival"
 timezone Europe/Prague --isUtc
 
 
-part / --size 8500
+part / --size 10240 --fstype ext4
 
 %packages
 @mate
@@ -106,7 +106,7 @@ git
 curl
 vlc
 sed
-java-atk-wrapper
+#java-atk-wrapper
 qt-at-spi
 wget
 jmtpfs
@@ -134,7 +134,7 @@ lightdm-gtk-greeter-settings
 g++
 python3-devel
 tesseract-devel
-python3-tesserwrap
+#python3-tesserwrap
 lios
 hunspell-cs
  # remote support
@@ -198,9 +198,9 @@ echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
 #installing ocrdesktop
-git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
-chmod -R 755 /opt/ocrdesktop
-ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
+#git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
+#chmod -R 755 /opt/ocrdesktop
+#ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
 # create script to toggle monitor
 mkdir -p /usr/local/bin
 cat > /usr/local/bin/monitor-toggle <<EOM
