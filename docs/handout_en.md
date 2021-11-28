@@ -235,36 +235,35 @@ You can add more panels, or add icons to already existing panels. Use
 the **Shift+F10** combination to open the corresponding menu.
 To return to the workspace, use the **Ctrl+Alt+D** combination.
 
-## Prohlížení webu
+## Web Browsing
 
-Fegora má předinstalovaný prohlížeč Mozilla Firefox. Prohlížení
-internetu s Firefoxem a odečítačem Orca se příliš neliší třeba od
-kombinace Firefox a NVDA. Klávesa TAB funguje podle očekávání a můžete
-ji použít k přesunu mezi odkazy a formulářovými prvky. Dále Orca
-disponuje dvěma módy prohlížení, mezi nimiž se přepínáte pomocí zkratky
-Orca+A.
+Fegora uses the pre-installed Mozilla Firefox browser. Web browsing
+with Firefox and Orca does not differ much from the Firefox and NVDA
+combination. The **Tab** key works as expected and you can use it to
+navigate between links and form items. Orca offers two modes
+which can be toggled between using the **Orca+A** shortcut.
 
-Režim prohlížení doporučuji používat, pokud se potřebujete pohybovat po
-stránce a číst text. Můžete použít spoustu klávesových zkratek pro
-přecházení po různých ovládacích prvcích. Například klávesa H vás
-přenese na následující nadpis. Kombinace Shift+H na předchozí. A
-kombinace ALT+SHIFT+H zobrazí seznam všech nadpisů. Pro seznam všech
-takovýchto zkratek doporučuji v aktivním okně Firefox zapnout výukový
-režim a stisknout klávesu F3. Samozřejmě fungují kurzorové šipky včetně
-jejich kombinací s klávesou Shift pro výběr textu.
+The *browse mode* is recommended whenever you need to browse through
+a page and read the text. There is a plenty of various keyboard shortcuts
+that you can use to move among the page elements. For instance, the **H**
+key takes you to a next heading while **Shift+H** takes you to the previous
+one. The **Alt+Shift+H** combination lists all available headings. To see all 
+such keyboard shortcuts, switch on the *learning mode* in the active Firefox 
+window and press the **F3** key. Obviously, all arrow keys as well as their 
+combinations with the **Shift** key to select pieces of text do work.
 
-Režim zaměřování by se dal přirovnat k formulářovému režimu v NVDA.
-Používá se v případě, kdy pracujete s formuláři. V takovém režimu můžete
-psát do editačních polí, přepínat přepínače a podobně. V režimu
-prohlížení by toto nefungovalo, protože by většinu kláves odchytával
-odečítač a přesouval vás po stránce.
+The *focus mode* corresponds with the *form mode* in NVDA. You will
+mainly use this mode to work with forms. This makes it possible to type
+into form fields, toggle switches, and so on. This would not work in the
+browsing mode, because the reader would interpret the majority of the keys 
+as navigation keys and would move you around the page.
 
-Odečítač by měl rozpoznat, kdy jste vstoupili do formuláře a automaticky
-se přepínat mezi režimy prohlížení a zaměřování. Je to indikováno pouze
-hlasem, nikoli zvukem. Pokud se chcete přepínat mezi režimy sami,
-použijte zkratku Orca+A. Pokud ji stisknete dvakrát rychle za sebou,
-uzamkne se režim zaměřování a zůstane aktivní i v případě, kdy opustíte
-formulář. Může se to hodit na některých složitějších stránkách.
+The reader should be able to tell automatically that you have entered
+a form and should immediately switch to the focus mode. This is only
+indicated by the speech but not by any sound. To toggle the modes manually,
+you can use the **Orca+A** combination. If you make two quick consecutive presses
+of this combo, the focus mode will lock and stay active even upon leaving
+the form. This can be useful on some complicated web pages.
 
 ## Virtual workspaces
 
