@@ -216,22 +216,24 @@ To reach the desktop, use the above mentioned **Ctrl-Alt-D** shortcut.
 Consult the `keyboard_shortcuts.txt` file in the home directory to
 get a full list of keyboard shortcuts.
 
-## Panely
+## Panels
 
-Ve výchozím nastavení je nad pracovní plochou umístěn jeden panel. Mezi
-plochou a panely se přepínáte pomocí klávesové zkratky CTRL+Alt+TAB. Po
-přepnutí na panel přecházíte mezi jednotlivými položkami pomocí kláves
-TAB a Shift+TAB. Na panelu najdete ikonu pro nastavení připojení k síti,
-nastavení hlasitosti, ukazatel baterie a případná další oznámení.
+By default, there is one panel placed above the workspace. You can switch
+between the workspace and the panels using the **Ctrl+Alt+Tab** keyboard
+shortcut. When you have switched to the panel, use the **Tab** and
+**Shift+Tab** to cycle trough the particular items. On the panel, you 
+will find icons for network connections, volume settings, battery
+indicator, and further notifications.
 
-Bohužel se hlavně po spuštění systému stává, že některé ikony nejsou
-ohlašovány. Doporučuji nejprve projít úplně celým panelem pomocí
-opakovaného mačkání TAB a při druhém průchodu už jsou všechny ikony
-korektně ohlašovány. Ikonu aktivujete klávesou Mezerník.
+Unfortunately, the icons may not be correctly announced, especially after
+the system has just started. It is recommended to navigate throughout the
+whole panel using the **Tab** key first to have the icons announced
+correctly on consecutive passes. You can activate the icon by pressing
+the **Spacebar** key.
 
-je možné přidat další panely, či na stávající panely přidat další ikony.
-Příslušnou nabídku otevřete klávesovou zkratkou Shift+F10. Na pracovní
-plochu se můžete opět vrátit zkratkou CTRL+ALT+D.
+You can add more panels, or add icons to already existing panels. Use 
+the **Shift+F10** combination to open the corresponding menu.
+To return to the workspace, use the **Ctrl+Alt+D** combination.
 
 ## Prohlížení webu
 
