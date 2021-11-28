@@ -26,30 +26,30 @@ a Linux kernel, graphical user interface, and pre-installed
 applications. Armed with the knowledge of Linux terminology,
 let us move on.
 
-## Linux a nevidomí uživatelé
+## Linux and visually impaired users
 
-Protože tento workshop byl vytvořen pro začátečníky, předpokládám, že
-budete Linux používat skrze jeho grafické rozhraní. Jen pro úplnost
-dodávám, že jej lze ovládat i skrze čistě textové rozhraní.
+This workshop is aimed at beginner users, so I expect most of you
+will use Linux with the graphical user interface. However, note
+that you can fully control Linux by using only a text interface as well.
 
-Pro Linux existuje pouze jeden odečítač obrazovky, který se jmenuje
-[Orca](https://help.gnome.org/users/orca/stable/). Pro úplnost,
-odečítačů existuje více, ale jen tento lze použít s grafickým rozhraním.
-Ostatní odečítače se dají použít jen v příkazové řádce a tou se zde
-zabývat nebudeme.
+[Orca](https://help.gnome.org/users/orca/stable/) is the only
+screen reader that works completely on Linux. You can use other
+screen readers on Linux, but only Orca works with the graphical interface.
+Other screen readers work only in the command line interface, which
+is not in scope of this workshop.
 
-Budeme používat distribuci Fegora. Název Fegora vznikl spojením slov
-Fedora a Agora. [Fedora](https://mojefedora.cz/) je Linuxová distribuce
-podporovaná firmou [Red Hat](https://redhat.com/) a
+The subject of this workshop is Fegora. The name Fegora a blend
+of the words Fedora and Agora. [Fedora](https://getfedora.org/) is a
+Linux distribution supported by [Red Hat](https://redhat.com/).
 [Agora](https://www3.teiresias.muni.cz/cz/vzdelavani-sport-a-volny-cas/agora)
-je cyklus workshopů o informačních technologiích pro zrakově postižené.
-Konkrétně jsme vycházeli z odnože [Fedora Mate
-Compiz](https://spins.fedoraproject.org/mate-compiz/). Tato
-verze sama o sobě byla relativně dobře přístupná pro nevidomé uživatele,
-ale provedli jsme různá vylepšení, aby se používala ještě lépe.
-Především jsme zajistili, aby odečítač mluvil už na přihlašovací
-obrazovce a nainstalovali některé zajímavé programy, například pro
-rozpoznávání textu pomocí technologie OCR.
+is a Czech series of workshops about information technologies aimed at visually
+impaired users. We based Fegora on
+[Fedora Mate Compiz](https://spins.fedoraproject.org/mate-compiz/). Fedora
+Mate Compiz provides a good accessibility base for visually impaired users.
+However, we have added a number of improvements to ensure better experience.
+For example, the screen reader now works in the login screen, and Fegora comes
+pre-installed with a number of useful programs, such as OCR-based
+text-recognition software.
 
 ## Jak si můžu Linux vyzkoušet?
 
