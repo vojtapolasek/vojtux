@@ -144,25 +144,25 @@ the system has started successfully you will hear the "The screen
 reader is switched on." message.
 
 Press the **Ctrl+Alt+D** keyboard shortcuts which takes you to the 
-workplace. You need to do it after the system starts, otherwise it will 
+desktop. You need to do it after the system starts, otherwise it will 
 not accept the keyboard shortcuts. The speech volume might be too loud 
 for you. You can change the volume of the system sound using the dedicated 
 hardware buttons or the **Alt+Win** combination with the **up** and **down** 
 arrow keys.
 
-Now you are on the workplace. Using the arrows, you can browse through several 
+Now you are on the desktop. Using the arrows, you can browse through several 
 icons. You can activate the icons with the **Enter** key. If you activate 
 the *Home liveuser* icon, the file manager opens your home folder. The system 
 has already created several folders in this location and will store all your 
 settings here.
 
-On the workplace, there will be a very interesting file called `keyboard_shortcuts.txt`
+On the desktop, there will be a very interesting file called `keyboard_shortcuts.txt`
 which contains a list of useful keyboard shortcuts. Use the arrows to navigate to
 this file and press **Enter**. The file will open in a text editor. You will
-probably notice that text editting works as in Windows. You can close the text editor
+probably notice that text editing works as in Windows. You can close the text editor
 using the **Alt+F4** keyboard shortcut.
 
-On the workspace, the `handout.html` file is located, too, and you are probably
+The `handout.html` file is located on the desktop as well and you are probably
 reading it now. When you select the file and press **Enter**, the Mozilla Firefox
 browser opens and shows the file content.
 
