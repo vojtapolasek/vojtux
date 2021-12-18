@@ -6,7 +6,10 @@
 %include fedora-live-base.ks
 
 
+selinux --disabled
 
+# add group because of brltty
+group --name brlapi
 
 # System language
 lang cs_CZ.UTF-8
@@ -17,9 +20,11 @@ services --enabled="chronyd,brltty,festival"
 timezone Europe/Prague --isUtc
 
 
-part / --size 8500
+part / --size 10240 --fstype ext4
 
 %packages
+-nfs-utils
+-NetworkManager-openvpn-gnome
 @mate
 compiz
 compiz-plugins-main
@@ -106,7 +111,7 @@ git
 curl
 vlc
 sed
-java-atk-wrapper
+#java-atk-wrapper
 qt-at-spi
 wget
 jmtpfs
@@ -134,7 +139,7 @@ lightdm-gtk-greeter-settings
 g++
 python3-devel
 tesseract-devel
-python3-tesserwrap
+#python3-tesserwrap
 lios
 hunspell-cs
  # remote support
@@ -157,6 +162,7 @@ if [ -f /usr/share/applications/liveinst.desktop ]; then
   sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop ""
 fi
 mkdir /home/liveuser/Desktop
+usermod -a -G brlapi liveuser
 cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
 
 # and mark it as executable
@@ -198,9 +204,9 @@ echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
 #installing ocrdesktop
-git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
-chmod -R 755 /opt/ocrdesktop
-ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
+#git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
+#chmod -R 755 /opt/ocrdesktop
+#ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
 # create script to toggle monitor
 mkdir -p /usr/local/bin
 cat > /usr/local/bin/monitor-toggle <<EOM
@@ -455,8 +461,8 @@ WorkingDirectory=/usr/share/festival/lib
 
 EOM
 #configure speech dispatcher
-sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
-sed -i 's/#AddModule "festival"                 "sd_festival"  "festival.conf"/AddModule "festival"                 "sd_festival"  "festival.conf"/' /etc/speech-dispatcher/speechd.conf
+#sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
+#sed -i 's/#AddModule "festival"                 "sd_festival"  "festival.conf"/AddModule "festival"                 "sd_festival"  "festival.conf"/' /etc/speech-dispatcher/speechd.conf
 # prevent long delay when shutting down
 echo "DefaultTimeoutStopSec=10s" >> /etc/systemd/system.conf
 #setup lightdm
