@@ -128,12 +128,12 @@ Ikony aktivujete stiskem klávesy Enter.
 Pokud tak učiníte na ikoně "Domov liveuser", otevře se správce souborů s vaší domovskou složkou.
 Zde už je vytvořeno několik složek a ukládá se sem veškeré vaše nastavení.
 
-Na ploše bude nejspíš zajímavý soubor klavesove_zkratky.txt, který obsahuje seznam užitečných klávesových zkratek.
+V této složce bude nejspíš zajímavý soubor klavesove_zkratky.txt, který obsahuje seznam užitečných klávesových zkratek.
 Pokud se šipkami přesunete na tento soubor a stisknete Enter, otevře se soubor v textovém editoru.
 Nejspíš zjistíte, že práce s textem zde funguje jako v systémech Windows.
 Editor můžete zavřít známou zkratkou Alt+F4.
 
-Na ploše se též nachází soubor handout,html, který nejspíš právě čtete.
+V domovské složce se též nachází soubor handout,html, který nejspíš právě čtete.
 Po vybrání souboru a stisknutí klávesy Enter se otevře Prohlížeč Mozilla Firefox a zobrazí se obsah souboru.
 
 ## Rychlý úvod do odečítače Orca

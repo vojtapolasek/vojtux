@@ -142,13 +142,13 @@ You can activate the icons with the **Enter** key.
 If you activate  the *Home liveuser* icon, the file manager opens your home folder.
 The system  has already created several folders in this location and will store all your  settings here.
 
-On the desktop, there will be a very interesting file called `keyboard_shortcuts.txt` which contains a list of useful keyboard shortcuts.
+In the home folder, there will be a very interesting file called `keyboard_shortcuts.txt` which contains a list of useful keyboard shortcuts.
 Use the arrows to navigate to this file and press **Enter**.
 The file will open in a text editor.
 You will probably notice that text editing works like in Windows.
 You can close the text editor using the **Alt+F4** keyboard shortcut.
 
-The `handout.html` file is located on the desktop as well and you are probably reading it now.
+The `handout.html` file is located in the home folder as well and you are probably reading it now.
 When you select the file and press **Enter**, the Mozilla Firefox browser opens and shows the file content.
 
 ## Quick introduction to the Orca screen reader
