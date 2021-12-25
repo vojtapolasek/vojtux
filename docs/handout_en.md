@@ -51,89 +51,92 @@ For example, the screen reader now works in the login screen, and Fegora comes
 pre-installed with a number of useful programs, such as OCR-based
 text-recognition software.
 
-## Jak si můžu Linux vyzkoušet?
+## How can I try out Linux?
 
-Existují dvě možnosti, jak si můžete Linux vyzkoušet bez toho, abyste se
-báli, že si rozbijete svůj stávající operační systém. Zjednodušeně
-řečeno si stáhnete soubor, který obsahuje plně funkční operační systém.
-Takovému souboru říkáme obraz disku. První možnost spočívá v tom, že
-použijete virtuální počítač a Linux spustíte v něm. Druhou možností je
-přenést obraz disku na USB disk a spustit Linux místo vašeho hlavního
-operačního systému. I když to zní trochu nebezpečně, tak se nemusíte
-bát. Pokud budete postupovat podle instrukcí, s vašimi daty by se nic
-nemělo stát.
+There exist two options how to try out Linux without being afraid of damaging your existing operating system setup.
+Briefly said, you will download a file which contains fully working operating system.
+Such a file is called a disk image.
+The first option requires you to use a virtual computer and run the image within it.
+The second option requires you to transfer the image to an USB drive and launch Linux instead of your primary operating system.
+Although it might seem a bit dangerous, you don't need to be afraid.
+If you follow the instructions, your data should stay safe.
 
-Linuxové distribuce můžeme často stáhnout ve formě tzv. live obrazů
-(live images). To znamená, že si stáhneme obraz a jedním z výše
-nastíněných způsobů z něj spustíme plnohodnotný operační systém. Tento
-systém nikam neinstalujeme a můžeme jej okamžitě začít používat. Zároveň
-ale platí, že všechny změny, které uděláme v rámci systému (instalace
-aplikací, změna nastavení odečítače obrazovky) zůstanou v platnosti
-pouze do vypnutí nebo restartu systému. Zároveň nemůžete flashdisk
-použít pro nic jiného, bude obsahovat pouze live distribuci. Tento
-způsob jsme zvolili například na Podzimní Agoře 2018. Po dvouletém experimentu s předinstalovanými obrazy pro USB disky jsme se k live obrazům opět vrátili.
+We can often downloda Linux distributions as live images. 
+That implies that we download the image and we run the fully working system using one of methods outlined above 
+We do not install this system anywhere and we can start using it right away.
+At the same time, we have to be aware that any changes made in the scope of the operating system (installation of packages, changes in screenreader configuration) will persist only until the system is rebooted or shut down.
+Also in this case you can't use the flash drive for anything else, it will contain only the live image of the distribution.
+We used this method for example at Agora workshop in Autumn 2018.
+We started using premade images for USB drives. After two years of this experiment, we switched back to live images.
 
-### Spuštění z USB disku
+### running Linux from the USB drive
 
-Dostáváme se k samotnému spuštění Linuxu. Pokud to děláte poprvé,
-najděte si někoho vidícího. Nemělo by to zabrat víc než pár minut.
-Vypněte počítač a připojte USB disk, na který jste zapsali obraz,
-případně jste jej obdrželi na workshopu. Počítač zapněte a požádejte
-vidící osobu, aby pečlivě sledovala monitor. Na několik vteřin se hned
-po zapnutí počítače objeví zpráva typu "Press F12 for boot menu". Na
-každém počítači může zpráva vypadat trochu jinak, takže vám nemůžu dát
-přesnější informace. Příslušnou klávesu si dobře zapamatujte, budete ji
-používat při každém spuštění Fegory z USB disku.
+Now we are getting to the process of actually launching the Linux.
+If you are doing it for the first time, it is a good idea to find someone sighted to help you.
+It should not take more than few minutes.
+Turn off the computer and connect the USB drive which has the live image written.
+Turn on the computer and ask the sighted person to watch the screen carefully.
 
-Pokud jste nestihli stisknout správnou klávesu, nic se neděje, naběhne
-váš běžný operační systém. Počítač vypněte, znovu zapněte a proces
-opakujte. Hned po zapnutí mačkejte příslušnou klávesu. Objeví se
-bootovací nabídka, která vám umožní zvolit zařízení, ze kterého se bude
-načítat operační systém. Opět toto menu může vypadat na každém počítači
-jinak. Pomocí šipek zvolte "USB" nebo "USB disk". Zapamatujte si,
-kolikrát musíte po zobrazení menu stisknout šipku. Potvrďte volbu
-klávesou Enter. Pokud je váš počítač vybaven interním reproduktorem,
-spouštění Fegory bude oznámeno krátkou znělkou. Nyní již pomoc vidící
-osoby potřebovat nebudete.
+The message similar to "press F12 for boot menu" will appear for a few seconds.
+The message can look differently on each computer, therefore I can't unfortunately tell you what to exactly look for.
+Remember the key displayed within the message, you will use it each time you will launch Fegora from the USB drive.
 
-Existuje také možnost změnit nastavení počítače tak, aby z USB disků
-spouštěl systém automaticky. Bohužel přesný popis postupu, jak toho
-docílit, je mimo naše síly, protože se liší počítač od počítače.
-Požádejte vidící osobu o pomoc. Doporučuji použít internetové
-vyhledávače a najít návod, jak toho docílit na vašem počítači.
+If you do not manage to press the designated key, don't worry. Your regular operating system will launch.
+Turn off the computer, turn it on again and repeat the process.
+Keep pressing the designated key immediatelly upon turning on the computer.
+The boot menu will appear.
+This menu allows you to choose the device from which the operating system will be loaded.
 
-Když tímto způsobem spustíte Linux z USB disku, tak chvilku počkejte,
-systém se spouští. Hodně záleží na rychlosti vašeho disku, doporučujeme
-používat rychlé flashdisky s rozhraním USB 3.0. Ujistěte se, že máte
-zapnuté reproduktory nebo připojená sluchátka. Po několika desítkách
-vteřin by se měla ozvat hláška "Čtečka obrazovky zapnuta". Právě jste
-spustili Linux a můžete jej začít používat, gratulujeme!
+Again, this menu can look differently on each computer.
+Choose "USB" or "USB drive" or something similar using up and down arrows.
+It is a good idea to remember how many times you have to press the arrow after the menu appears.
+Confirm the selection by pressing **ENTER**.
+If Fegora starts booting, various text messages will be scrolling over the screen.
+If you remember how to activate the boot menu and which item to choose, you should no longer require help from a sighted person.
 
-### Spuštění ve virtuálním počítači
+It is possible to configure the computer to automatically launch operating system from the USB media if present.
+However, description of such a process is out of scope of this text, because it can be different on each computer.
+If you want to try it, use your prefered search engine to fin instructions for your system and ask a sighted person for help.
 
-Tato metoda se může zdát pohodlnější, protože vám umožní mít spuštěný
-váš hlavní operační systém a zároveň si hrát s Linuxem. Bohužel jsem ale
-zjistil, že přístupnost programů pro práci s virtuálními počítači není
-tak dobrá, jak jsem předpokládal. Testoval jsem programy na systému
-Windows s odečítačem NVDA. Proto vám doporučuji použít metodu s USB
-diskem. Pokud se přece jen rozhodnete jít cestou virtuálních počítačů,
-připravte se na to, že budete občas trochu bojovat s přístupností.
+When you manage to launch Linux from the USB drive, please be patient, the system is loading.
+The load time depends on the speed of your drive.
+We recommend to use fast drives with USB 3 interface.
+make sure that your speakers are turned on or your headphones are connected.
+After several tens of seconds you should hear "Screenreader on".
+congratulations! You have just managed to launch the Linux operating system and you can start using it.
+
+### Running Linux in a virtual computer
+
+This method may seem more comfortable, because you can have your primary operating system running while playing with Linux.
+Unfortunately I have discovered that accessibility of virtual computer software is not as good as I expected.
+I tested such applications on Windows 7 system with NVDA screenreader.
+Therefore, I recommend you to use the USB drive method.
+If you still wish to use virtual computers, get ready for some accessibility quirks.
 
 nejprve si musíte stáhnout software pro práci s virtuálními počítači.
+First, you need to download a software for managing of virtual computers.
 Virtuální počítače jsou přesně to, co napovídá jejich název. Umožňují
 mít spuštěný virtuální počítač ve vašem fyzickém počítači. A v tomto
+Virtual computers are exactly what you might thing they are.
+They allow you to run virtual computer within your physical computer.
 virtuálním počítači můžete mít spuštěný třeba Linux a zároveň neopustíte
 svůj hlavní operační systém. Doporučuji vyzkoušet program
-{Virtualbox}(https://www.virtualbox.org/wiki/Downloads). Podobných
-programů je více, například VMWare Workstation nebo Microsoft Virtual
-PC, ale nemám s nimi dostatečné zkušenosti.
+And you can have Linux running within this virtual computer without leaving your primary operating system.
+I recommend trying {Virtualbox}(https://www.virtualbox.org/wiki/Downloads). Podobných
+There are similar applications, such as VMWare Workstation or Microsoft Virtual
+PC but I have not enough experience with them.
 
 Protože nevím, jaký software budete používat, popíšu kroky jen obecně.
+Because I don't know which software you use, I describe only general steps here.
 Nejprve musíte vytvořit virtuální počítač. Během tohoto procesu se vás
-program nejspíš zeptá na to, jaký operační systém na tomto počítači
-budete spouštět, zvolte Linux. Nastavte počítač tak, aby měl k dispozici
-alespoň 4 Gb paměti RAM. přidejte počítači CD mechaniku tak, aby její obsah odkazoval na stažený live obraz Fegory. Pokud si chcete Linux opravdu jen vyzkoušet, nemusíte přidávat žádný virtuální pevný disk. Pokud si chcete vyzkoušet i instalaci, přidejte dostatečně velký pevný disk (20 GiB by mělo stačit. Pak už jen stačí spustit
-virtuální počítač a Linux by měl automaticky naběhnout.
+First you have to create a new virtual computer.
+During the process you will be probably asked which operating system you are going to run in the new virtual computer.
+Choose Linux.
+Configure the virtual computer to have at least 4 GiB of RAM memory.
+Add a CD drive and configure it to load the Fegora live image which you previously downloaded.
+If you only want to try the system, you do not need to assign a virtual hard drive to the computer.
+If you want to experiment with installation of the system, add a virtual hard drive; 20 GiB should be enough.
+Then it should be enough to turn on the virtual computer and Linux should load automatically.
 
 ## I have managed to run Linux. What now?
 
