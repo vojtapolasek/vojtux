@@ -139,7 +139,7 @@ You can change the volume of the system sound using the dedicated  hardware butt
 Now you are on the desktop.
 Using the arrows, you can browse through several  icons.
 You can activate the icons with the **Enter** key.
-If you activate  the *Home liveuser* icon, the file manager opens your home folder.
+If you activate  the *liveuser's home folder* icon, the file manager opens your home folder.
 The system  has already created several folders in this location and will store all your  settings here.
 
 In the home folder, there will be a very interesting file called `keyboard_shortcuts.txt` which contains a list of useful keyboard shortcuts.
