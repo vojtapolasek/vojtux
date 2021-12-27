@@ -461,8 +461,8 @@ WorkingDirectory=/usr/share/festival/lib
 
 EOM
 #configure speech dispatcher
-#sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
-#sed -i 's/#AddModule "festival"                 "sd_festival"  "festival.conf"/AddModule "festival"                 "sd_festival"  "festival.conf"/' /etc/speech-dispatcher/speechd.conf
+sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
+sed -i 's/#AddModule "festival"                 "sd_festival"  "festival.conf"/AddModule "festival"                 "sd_festival"  "festival.conf"/' /etc/speech-dispatcher/speechd.conf
 # prevent long delay when shutting down
 echo "DefaultTimeoutStopSec=10s" >> /etc/systemd/system.conf
 #setup lightdm
