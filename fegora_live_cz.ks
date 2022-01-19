@@ -446,8 +446,6 @@ cp mimeapps.list /etc/skel/.config/
 cp klavesove_zkratky.txt /etc/skel/
 cp handout.html /etc/skel/
 cp .tmux.conf /etc/skel/
-mkdir -p /etc/skel/.mozilla/firefox
-cp -r firefox/* /etc/skel/.mozilla/firefox/
 cd /opt/
 rm -rf Fegora
 #configure festival
