@@ -6,13 +6,13 @@ The repo currently contains Kickstart files to create a live media image with ac
 
 ## Building live media ISO
 
-The kicstart file is inspired by the FFedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
+The kickstart file is inspired by the Fedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
 Building of this image requires Fedora. So how to build it?
 
-1. sudo dnf install livecd-tools
+1. sudo dnf install lorax-lmc-novirt
 
 2. clone this repo
 
@@ -20,20 +20,16 @@ Building of this image requires Fedora. So how to build it?
 
     1. mkdir -p live/tmp
 
-    2. mkdir live/cache
+4. sudo livemedia-creator --make-iso --no-virt --ks <ks_file.ks --tmp live/tmp --anaconda-arg="--noselinux" 
 
-4. sudo livecd-creator -c fegora_live_cz.ks -p -d -t <absolute_path_to_tmp_dir> --cache <absolute_path_to_cache_dir> -f fegora_33_cz
-
-    - if you did not create your own cache and tmp dir, you can leave out the -t and --cache arguments
+    - if you did not create your own temporary directory, you can leave out the --tmp argument
 
 
 ## What is actually done?
 
-As mentioned, the aim of this project is to automatically create images which can be later transfered to USB drives and handed to actual users. The installation is based on Fedora Mate Spin. The image is composed of three partitions, one EFI partition taking 512 MiB, one root partition taking cca 16 GiB and one data partition taking rest of the provided disk. The data partition is formatted as FAT32. The purpose of FAT32 partition is to maximize usage of provided space on USB drive and exchange of data with non-Linux world.
+The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be folder images and in this folder there will be a file called anaconda.iso. The live image is based on Fedora Mate spin.
 
 Following additional changes are applied:
-
-- Grub is configured so that it can boot on both BIOS and UEFI, even with Secure boot enabled
 
 - added RPM Fusion free and nonfree package repositories
 
@@ -53,13 +49,11 @@ Following additional changes are applied:
 
 - Grub tune is added, although it does not work in every case
 
-- LIOS OCR software is installed, so far not as a package
+- LIOS OCR software is installed
 
 - A short help in Czech is placed into home directory (handout.html), list of keyboard shortcuts (klavesove_zkratky.txt)
 
 - some keyboard shortcuts are added, see below
-
-- default Firefox profile is used with custom home page and bookmarks
 
 - Caja audio previews are disabled
 
@@ -73,8 +67,6 @@ Following additional changes are applied:
 
 - Slick greeter is replaced with Lightdm GTK greeter because of problems with Orca not starting after login
 
-- Ocrdesktop software is instaled, not as a package
-
 - Tmux is configured with special keyboard shortcuts inspired by the Byobu project
 
 - extra packages are preinstalled
@@ -86,8 +78,6 @@ Following additional changes are applied:
     - Xsane
 
     - various firmware and software for broader hardware support including wireless cards, printers, scanners, graphic cards
-
-    - Exfat support through Fuse
 
     - Audacity
 
@@ -103,7 +93,7 @@ Following additional changes are applied:
 
     - VLC player
 
-    - Java-atk-wrapper, Qt-at-spi
+    - Qt-at-spi
 
     - Tmux for better working with consoles
 
@@ -121,10 +111,9 @@ Following additional changes are applied:
 
 - there is a special script which ensures that the sound is not muted and is at 50% of volume on login screen
 
-- a script for turning off physical monitor is added, functionality not tested
+- a script for toggling physical monitor is added, functionality not tested
 
 - a sound theme is added, [source](https://github.com/coffeeking/Linux-a11y-sound-theme)
-
 
 ## Orca modifications
 
@@ -153,10 +142,6 @@ Following additional changes are applied:
 - Alt-Super-s toggle screenreader through Mate
 
 - Alt-Super-l start the LIOS software
-
-- Super-o recognize current window with Ocrdesktop using Czech language
-
-- CTRL-Super-o recognize current window with Ocrdesktop using English language
 
 - ALT-Super-m - vypnutí / zapnutí monitoru
 
