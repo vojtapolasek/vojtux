@@ -18,9 +18,13 @@ Building of this image requires Fedora. So how to build it?
 
 3. create a directory structure to store cache and tmp files (optional)
 
-    1. mkdir -p live/tmp
+    - mkdir -p live/tmp
 
-4. sudo livemedia-creator --make-iso --no-virt --ks <ks_file.ks --tmp live/tmp --anaconda-arg="--noselinux" 
+5. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
+
+    - this makes sure that all includes will be handled correctly
+
+5. sudo livemedia-creator --make-iso --no-virt --ks <ks_file.ks --tmp live/tmp --anaconda-arg="--noselinux" 
 
     - if you did not create your own temporary directory, you can leave out the --tmp argument
 
