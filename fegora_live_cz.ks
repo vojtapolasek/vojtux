@@ -6,7 +6,10 @@
 %include fedora-live-base.ks
 
 
+selinux --disabled
 
+# add group because of brltty
+group --name brlapi
 
 # System language
 lang cs_CZ.UTF-8
@@ -17,9 +20,11 @@ services --enabled="chronyd,brltty,festival"
 timezone Europe/Prague --isUtc
 
 
-part / --size 8500
+part / --size 10240 --fstype ext4
 
 %packages
+-nfs-utils
+-NetworkManager-openvpn-gnome
 @mate
 compiz
 compiz-plugins-main
@@ -106,7 +111,7 @@ git
 curl
 vlc
 sed
-java-atk-wrapper
+#java-atk-wrapper
 qt-at-spi
 wget
 jmtpfs
@@ -134,7 +139,7 @@ lightdm-gtk-greeter-settings
 g++
 python3-devel
 tesseract-devel
-python3-tesserwrap
+#python3-tesserwrap
 lios
 hunspell-cs
  # remote support
@@ -157,6 +162,7 @@ if [ -f /usr/share/applications/liveinst.desktop ]; then
   sed -i -e 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop ""
 fi
 mkdir /home/liveuser/Desktop
+usermod -a -G brlapi liveuser
 cp /usr/share/applications/liveinst.desktop /home/liveuser/Desktop
 
 # and mark it as executable
@@ -198,9 +204,9 @@ echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
 #installing ocrdesktop
-git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
-chmod -R 755 /opt/ocrdesktop
-ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
+#git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
+#chmod -R 755 /opt/ocrdesktop
+#ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
 # create script to toggle monitor
 mkdir -p /usr/local/bin
 cat > /usr/local/bin/monitor-toggle <<EOM
@@ -343,15 +349,15 @@ action='lios'
 binding='<Alt><Mod4>l'
 name='Linux Intelligent OCR Software'
 
-[org/mate/desktop/keybindings/custom8]
-action='/opt/ocrdesktop/ocrdesktop -l ces'
-binding='<Mod4>o'
-name='OCR aktuálního okna (český jazyk)'
+#[org/mate/desktop/keybindings/custom8]
+#action='/opt/ocrdesktop/ocrdesktop -l ces'
+#binding='<Mod4>o'
+#name='OCR aktuálního okna (český jazyk)'
 
-[org/mate/desktop/keybindings/custom9]
-action='/opt/ocrdesktop/ocrdesktop -l eng'
-binding='<Primary><Mod4>o'
-name='OCR aktuálního okna (anglický jazyk)'
+#[org/mate/desktop/keybindings/custom9]
+#action='/opt/ocrdesktop/ocrdesktop -l eng'
+#binding='<Primary><Mod4>o'
+#name='OCR aktuálního okna (anglický jazyk)'
 
 [org/mate/desktop/keybindings/custom10]
 action='/usr/local/bin/monitor-toggle'
@@ -440,8 +446,6 @@ cp mimeapps.list /etc/skel/.config/
 cp klavesove_zkratky.txt /etc/skel/
 cp handout.html /etc/skel/
 cp .tmux.conf /etc/skel/
-mkdir -p /etc/skel/.mozilla/firefox
-cp -r firefox/* /etc/skel/.mozilla/firefox/
 cd /opt/
 rm -rf Fegora
 #configure festival

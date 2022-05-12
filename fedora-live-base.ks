@@ -10,13 +10,12 @@
 #lang en_US.UTF-8
 #keyboard us
 #timezone US/Eastern
-auth --useshadow --passalgo=sha512
+authselect --useshadow --passalgo=sha512
 selinux --enforcing
 firewall --enabled --service=mdns
 xconfig --startxonboot
 zerombr
 clearpart --all
-part / --size 5120 --fstype ext4
 services --enabled=NetworkManager,ModemManager --disabled=sshd
 network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
