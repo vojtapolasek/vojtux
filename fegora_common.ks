@@ -210,7 +210,7 @@ cat > /etc/dconf/db/local.d/01-accessibility <<- EOM
 screen-reader-enabled=true
 
 [org/mate/desktop/applications/at/visual]
-startup=true
+exec='orca'
 
 [org/mate/desktop/interface]
 accessibility=true
