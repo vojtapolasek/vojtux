@@ -2,7 +2,7 @@
 
 # System language
 lang en_US.UTF-8
-keyboard --xlayouts='en'
+keyboard us
 
 timezone US/Eastern
 
