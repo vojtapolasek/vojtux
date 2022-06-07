@@ -352,7 +352,7 @@ git clone https://github.com/coffeeking/linux-a11y-sound-theme.git
 cp -r linux-a11y-sound-theme/linux-a11y /usr/share/sounds/
 
 
-/system/festival.service.d
+mkdir /etc/systemd/system/festival.service.d
 cat > /etc/systemd/system/festival.service.d/override.conf <<EOM
 [Service]
 WorkingDirectory=/usr/share/festival/lib
