@@ -2,7 +2,7 @@
 
 This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Fegora, because it is based on Fedora and it was presented at Agora event. Agora is an event in Czech Republic, where workshops about information technology for visually impaired are presented.
 
-The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device.
+The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
 
 ## Building live media ISO
 
@@ -22,9 +22,11 @@ Building of this image requires Fedora. So how to build it?
 
 5. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
 
+    - choose ks/fegora_cs.ks or ks/fegora_en.ks as a input file, based on your language choice
+
     - this makes sure that all includes will be handled correctly
 
-5. sudo livemedia-creator --make-iso --no-virt --ks <ks_file.ks --tmp live/tmp --anaconda-arg="--noselinux" 
+5. sudo livemedia-creator --make-iso --no-virt --ks <output_kickstart_file.ks> --tmp live/tmp --anaconda-arg="--noselinux" 
 
     - if you did not create your own temporary directory, you can leave out the --tmp argument
 
@@ -39,9 +41,11 @@ Following additional changes are applied:
 
 - added custom repository with Festival Czech voices and one specific for this distro so that we can push updates
 
-- system locale is set to Czech, keyboard to Czech qwertz, Czech and Slovak language packs are downloaded
+- in case of Czech version:
 
-- the time zone is set to Europe/Prague
+    - system locale is set to Czech, keyboard to Czech qwertz, Czech and Slovak language packs are downloaded
+
+    - the time zone is set to Europe/Prague
 
 - Orca screenreader starts at login screen and also after login for current and also newly created users
 
@@ -55,7 +59,7 @@ Following additional changes are applied:
 
 - LIOS OCR software is installed
 
-- A short help in Czech is placed into home directory (handout.html), list of keyboard shortcuts (klavesove_zkratky.txt)
+- some documentation is placed within the home directory (short handout + list of keyboard shortcuts)
 
 - some keyboard shortcuts are added, see below
 
