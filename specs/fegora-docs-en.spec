@@ -1,7 +1,7 @@
-Name:           fegora-docs
+Name:           fegora-docs-en
 Version:        0.0.1
-Release:        2%{?dist}
-Summary:        documentation files for Fegora distribution
+Release:        1%{?dist}
+Summary:        documentation files for Fegora distribution - English version
 BuildArch:        noarch
 
 License:        CC-BY-SA
@@ -12,7 +12,7 @@ BuildRequires:  pandoc
 
 
 %description
-This package contains documentation specific for Fegora distribution. It contains Czech and English version of documentation.
+This package contains documentation specific for Fegora distribution in English language.
 
 %prep
 %autosetup -n Fegora-add_packaged_documentation
@@ -20,7 +20,6 @@ This package contains documentation specific for Fegora distribution. It contain
 
 %build
 pandoc -s --self-contained -t html -o docs/en/handout.html docs/en/handout.md
-pandoc -s --self-contained -t html -o docs/cs/handout.html docs/cs/handout.md
 
 
 %install
@@ -28,11 +27,8 @@ pandoc -s --self-contained -t html -o docs/cs/handout.html docs/cs/handout.md
 
 
 %files
-%doc docs/*
+%doc docs/en/*
 
 %changelog
-* Thu Jun 09 2022 Vojtech Polasek <vpolasek@redhat.com> - 0.0.1-2
-- change directory structure
-
 * Tue Jun 07 2022 Vojtech Polasek <vpolasek@redhat.com>
 - initial version
