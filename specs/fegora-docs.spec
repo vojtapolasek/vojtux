@@ -1,6 +1,6 @@
 Name:           fegora-docs
 Version:        0.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        documentation files for Fegora distribution
 BuildArch:        noarch
 
@@ -19,8 +19,8 @@ This package contains documentation specific for Fegora distribution. It contain
 
 
 %build
-pandoc -s --self-contained -t html -o handout_en.html docs/handout_en.md
-pandoc -s --self-contained -t html -o handout_cs.html docs/handout_cs.md
+pandoc -s --self-contained -t html -o docs/en/handout.html docs/en/handout.md
+pandoc -s --self-contained -t html -o docs/cs/handout.html docs/cs/handout.md
 
 
 %install
@@ -28,13 +28,11 @@ pandoc -s --self-contained -t html -o handout_cs.html docs/handout_cs.md
 
 
 %files
-%doc handout_en.html
-%doc handout_cs.html
-%doc docs/keyboard_shortcuts.txt
-%doc docs/klavesove_zkratky.txt
-
-
+%doc docs/*
 
 %changelog
+* Thu Jun 09 2022 Vojtech Polasek <vpolasek@redhat.com> - 0.0.1-2
+- change directory structure
+
 * Tue Jun 07 2022 Vojtech Polasek <vpolasek@redhat.com>
 - initial version
