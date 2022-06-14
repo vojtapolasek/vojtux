@@ -6,7 +6,7 @@ BuildArch:        noarch
 
 License:        CC-BY-SA
 URL:            https://github.com/vojtapolasek/fegora
-Source0:        https://github.com/vojtapolasek/fegora/archive/add_packaged_documentation.tar.gz
+Source0:        https://github.com/vojtapolasek/fegora/archive/master.tar.gz
 
 BuildRequires:  pandoc
 
@@ -15,7 +15,7 @@ BuildRequires:  pandoc
 This package contains documentation specific for Fegora distribution in Czech language.
 
 %prep
-%autosetup -n Fegora-add_packaged_documentation
+%autosetup -n Fegora-master
 
 
 %build
