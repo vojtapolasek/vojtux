@@ -67,7 +67,6 @@ nss-mdns
 -exaile
 
 #additional software for Agora
-gimagereader-qt
 pidgin
 purple-facebook
 purple-skypeweb
