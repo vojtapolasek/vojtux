@@ -20,6 +20,7 @@ festvox-czech-machac
 festvox-czech-krb
 festvox-czech-ph 
 hunspell-cs
+fegora-docs-cs
 %end
 
 %post
@@ -102,13 +103,15 @@ mkdir -p /etc/skel/.local/share/orca
 cp -r orca/* /etc/skel/.local/share/orca/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
-cp klavesove_zkratky.txt /etc/skel/
-cp handout.html /etc/skel/
 cp .tmux.conf /etc/skel/
 cd /opt/
 rm -rf Fegora
 #configure festival
 sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
 echo "(set! voice_default 'voice_czech_dita)" > /etc/skel/.festivalrc
+
+# setup symlink to documentation
+ln -s /usr/share/doc/fegora-docs-cs /etc/skel/dokumentace
+ln -s /usr/share/doc/fegora-docs-cs /home/liveuser/dokumentace
 
 %end
