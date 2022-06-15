@@ -17,6 +17,7 @@ festvox-rab-diphone
 festvox-rms-arctic-hts
 festvox-slt-arctic-hts
 hunspell-en
+fegora-docs-en
 %end
 
 %post
@@ -87,9 +88,11 @@ mkdir -p /etc/skel/.local/share/orca
 cp -r orca/* /etc/skel/.local/share/orca/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
-cp keyboard_shortcuts.txt /etc/skel/
-cp handout.html /etc/skel/
 cp .tmux.conf /etc/skel/
 cd /opt/
 rm -rf Fegora
+
+# setup symlink to documentation
+ln -s /usr/share/doc/fegora-docs-en /etc/skel/documentation
+ln -s /usr/share/doc/fegora-docs-en /home/liveuser/documentation
 %end
