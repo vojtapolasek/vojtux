@@ -1,7 +1,7 @@
 # Mastering Linux
 
 This document was created as a part of the Podzimní Agora workshop
-in 2019. It was updated in October 2021.
+in 2019. It was updated in October 2022.
 
 Created by Vojtěch Polášek <vojtech.polasek@gmail.com>.
 
@@ -21,7 +21,7 @@ and portable computers.
 Linux is also commonly used on servers, smartphones, industrial devices, routers, supercomputers, and other computers.
 
 To make the terminology clear, we use the word _Linux_ to denote the operating system, but also the kernel of the operating system.
-When we say we use Linux, such as Fegora, what we mean is that we use a Linux distribution.
+When we say we use Linux, such as Vojtux, we mean that we use a Linux distribution.
 A Linux distribution is a combination of a Linux kernel, graphical user interface, and pre-installed applications.
 Armed with the knowledge of Linux terminology, let us move on.
 
@@ -34,14 +34,14 @@ However, note that you can fully control Linux by using only a text interface as
 You can use other screen readers on Linux, but only Orca works with the graphical interface.
 Other screen readers work only in the command line interface. This is not in scope of this workshop.
 
-The subject of this workshop is Fegora.
-The name Fegora is a blend of the words Fedora and Agora.
-[Fedora](https://getfedora.org/) is a Linux distribution supported by [Red Hat](https://redhat.com/).
-[Agora](https://www3.teiresias.muni.cz/cz/vzdelavani-sport-a-volny-cas/agora) is a Czech series of workshops about information technology aimed at visually impaired users.
-We based Fegora on [Fedora Mate Compiz](https://spins.fedoraproject.org/mate-compiz/).
+The subject of this workshop is Vojtux.
+The name Vojtux is based on first name of the main contributor of the project; Vojtech.
+The project was called Fegora in past.
+However, in October 2022, the name was changed to Vojtux.
+We based Vojtux on [Fedora Mate Compiz](https://spins.fedoraproject.org/mate-compiz/).
 Fedora Mate Compiz provides a good accessibility base for visually impaired users.
 However, we have added a number of improvements to ensure better experience.
-For example, the screen reader now works in the login screen, and Fegora comes pre-installed with a number of useful programs, such as OCR-based text-recognition software.
+For example, the screen reader now works in the login screen, and Vojtux comes pre-installed with a number of useful programs, such as OCR-based text-recognition software.
 
 ## How can I try out Linux?
 
@@ -72,7 +72,7 @@ Turn on the computer and ask the sighted person to watch the screen carefully.
 
 The message similar to "press F12 for boot menu" will appear for a few seconds.
 The message can look differently on each computer, therefore I can't unfortunately tell you what to exactly look for.
-Remember the key displayed within the message, you will use it each time you will launch Fegora from the USB drive.
+Remember the key displayed within the message, you will use it each time you will launch Vojtux from the USB drive.
 
 If you do not manage to press the designated key, don't worry. Your regular operating system will launch.
 Turn off the computer, turn it on again and repeat the process.
@@ -84,7 +84,7 @@ Again, this menu can look differently on each computer.
 Choose "USB" or "USB drive" or something similar using up and down arrows.
 It is a good idea to remember how many times you have to press the arrow after the menu appears.
 Confirm the selection by pressing **ENTER**.
-If Fegora starts booting, various text messages scroll over the screen.
+If Vojtux starts booting, various text messages scroll over the screen.
 If you remember how to activate the boot menu and which item to choose, you should no longer require help from a sighted person.
 
 It is possible to configure the computer to automatically launch operating system from the USB media if present.
@@ -119,7 +119,7 @@ First you have to create a new virtual computer.
 During the process you will be probably asked which operating system you are going to run in the new virtual computer.
 Choose Linux.
 Configure the virtual computer to have at least 4 GiB of RAM memory.
-Add a CD drive and configure it to load the Fegora live image which you previously downloaded.
+Add a CD drive and configure it to load the Vojtux live image which you previously downloaded.
 If you only want to try the system, you do not need to assign a virtual hard drive to the computer.
 If you want to experiment with installation of the system, add a virtual hard drive; 20 GiB should be enough.
 Then it should be enough to turn on the virtual computer and Linux should load automatically.
@@ -211,7 +211,7 @@ To return to the workspace, use the **Ctrl+Alt+D** combination.
 
 ## Web Browsing
 
-Fegora uses the pre-installed Mozilla Firefox browser.
+Vojtux uses the pre-installed Mozilla Firefox browser.
 Web browsing with Firefox and Orca does not differ much from the Firefox and NVDA combination.
 The **Tab** key works as expected and you can use it to navigate between links and form items.
 Orca offers two modes which can be cycled between using the **Orca+A** shortcut.
@@ -249,18 +249,22 @@ But it's possible to move it; just go to that window and press CTRL+ALT+SHIFT+ar
 
 ## Where can I get more information?
 
-You can find the main page with the information about the modified distribution Fegora [here](https://a-fs.cz/fedora-29-mate-pro-nevidome/).(CZ)
-I have to say that the page is outdated.
-I recommend you joining some of conferences listed below.
+Vojtux currently does not have any official  web site.
+There exists a [Github repo](https://github.com/vojtapolasek/vojtux) containing scripts and tooling which helps in creating of live images.
+It also contains files used in Vojtux-specific packages.
+The project is still in its development stage.
+After we consider that the project is developed enough, we will create a web site with files for download.
 
-We also recommend you join the [e-mail conference](https://a-fs.cz/emailova-konference/), which was established together with the a-fs.cz website.
-We send the latest news about Fegora there, and most importantly, it's a place where we answer your questions and suggestions.
+We recommend you join the [e-mail conference](https://a-fs.cz/emailova-konference/), which was established together with the a-fs.cz website.
+We send the latest news about Vojtux there, and most importantly, it's a place where we answer your questions and suggestions.
+The conference is currently in Czech, but the reason is that there are not many English Vojtux users yet.
+
 
 Another conference we recommend is the Orca screen reader conference.
 It's in English language and very active.
 You can find it [here](https://mail.gnome.org/mailman/listinfo/orca-list).
 
-As we mentioned above, Fegora is based on the Fedora distribution.
+As we mentioned above, Vojtux is based on the Fedora distribution.
 You can find the official English website [here](https://getfedora.org).
 
 You can also contact us via e-mail adresses mentioned at the beginning of this document.

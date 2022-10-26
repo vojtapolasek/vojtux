@@ -1,7 +1,7 @@
 # Linux v kapse
 
 Tento dokument vznikl jako součást workshopu v rámci Podzimní Agory 2019.
-Byl aktualizován v prosinci 2021.
+Byl aktualizován v říjnu 2022.
 
 Vytvořil Vojtěch Polášek <vojtech.polasek@gmail.com>.
 
@@ -15,7 +15,7 @@ Spolu se systémy Windows a macOS patří mezi nejpoužívanější systémy na 
 Mimo jiné se také často používá na serverech, chytrých telefonech, průmyslových zařízeních, routerech, superpočítačích atd.
 
 Jen abychom si na začátku ujasnili pojmy, slovo Linux se používá pro označení operačního systému, ale především je to označení jeho jádra.
-Když říkáme, že používáme Linux, jako třeba v tomto případě Fegoru, myslíme tím, že používáme linuxovou distribuci.
+Když říkáme, že používáme Linux, jako třeba v tomto případě Vojtux, myslíme tím, že používáme linuxovou distribuci.
 Linuxová distribuce je kombinace linuxového jádra, grafického rozhraní a předinstalovaných aplikací.
 Dost teorie, pojďme na to.
 
@@ -29,9 +29,9 @@ Pro Linux existuje pouze jeden odečítač obrazovky, který se jmenuje
 Opět pro úplnost, odečítačů existuje více, ale jen tento lze použít s grafickým rozhraním.
 Ostatní odečítače se dají použít jen v příkazové řádce a tou se zde zabývat nebudeme.
 
-Budeme používat distribuci Fegora.
-Název Fegora vznikl spojením slov Fedora a Agora.
-[Fedora](https://mojefedora.cz/) je Linuxová distribuce podporovaná firmou [Red Hat](https://redhat.com/) a [Agora](https://www3.teiresias.muni.cz/cz/vzdelavani-sport-a-volny-cas/agora) je cyklus workshopů o informačních technologiích pro zrakově postižené.
+Budeme používat distribuci Vojtux.
+Jméno Vojtux je založeno na křestním jméně hlavního přispěvatele do projektu - Vojtěch.
+V minulosti se distribuce nazývala Fegora, ale v říjnu 2022 byl název změněn na Vojtux.
 Konkrétně jsme vycházeli z odnože [Fedora Mate Compiz](https://spins.fedoraproject.org/mate-compiz/).
 Tato verze sama o sobě byla relativně dobře přístupná pro nevidomé uživatele, ale provedli jsme různá vylepšení, aby se používala ještě lépe.
 Především jsme zajistili, aby odečítač mluvil už na přihlašovací obrazovce a nainstalovali některé zajímavé programy, například pro rozpoznávání textu pomocí technologie OCR.
@@ -63,7 +63,7 @@ Vypněte počítač a připojte USB disk, na který jste zapsali obraz, případ
 Počítač zapněte a požádejte vidící osobu, aby pečlivě sledovala monitor.
 Na několik vteřin se hned po zapnutí počítače objeví zpráva typu "Press F12 for boot menu".
 Na každém počítači může zpráva vypadat trochu jinak, takže vám nemůžu dát přesnější informace.
-Příslušnou klávesu si dobře zapamatujte, budete ji používat při každém spuštění Fegory z USB disku.
+Příslušnou klávesu si dobře zapamatujte, budete ji používat při každém spuštění Vojtuxu z USB disku.
 
 Pokud jste nestihli stisknout správnou klávesu, nic se neděje, naběhne váš běžný operační systém.
 Počítač vypněte, znovu zapněte a proces opakujte.
@@ -73,7 +73,7 @@ Opět toto menu může vypadat na každém počítači jinak.
 Pomocí šipek zvolte "USB" nebo "USB disk" nebo něco podobného.
 Zapamatujte si, kolikrát musíte po zobrazení menu stisknout šipku.
 Potvrďte volbu klávesou Enter.
-Pokud se vám podaří Fegoru úspěšně spustit, na obrazovce budou probíhat různé textové zprávy.
+Pokud se vám podaří Vojtux úspěšně spustit, na obrazovce budou probíhat různé textové zprávy.
 Nyní již pomoc vidící osoby potřebovat nebudete.
 
 Existuje také možnost změnit nastavení počítače tak, aby z USB disků spouštěl systém automaticky.
@@ -106,7 +106,7 @@ Protože nevím, jaký software budete používat, popíšu kroky jen obecně.
 Nejprve musíte vytvořit virtuální počítač.
 Během tohoto procesu se vás program nejspíš zeptá na to, jaký operační systém na tomto počítači budete spouštět, zvolte Linux.
 Nastavte počítač tak, aby měl k dispozici alespoň 4 Gb paměti RAM.
-Přidejte počítači CD mechaniku tak, aby její obsah odkazoval na stažený live obraz Fegory.
+Přidejte počítači CD mechaniku tak, aby její obsah odkazoval na stažený live obraz Vojtux.
 Pokud si chcete Linux opravdu jen vyzkoušet, nemusíte přidávat žádný virtuální pevný disk.
 Pokud si chcete vyzkoušet i instalaci, přidejte dostatečně velký pevný disk (20 GiB by mělo stačit.
 Pak už jen stačí spustit virtuální počítač a Linux by měl automaticky naběhnout.
@@ -198,7 +198,7 @@ Na pracovní plochu se můžete opět vrátit zkratkou CTRL+ALT+D.
 
 ## Prohlížení webu
 
-Fegora má předinstalovaný prohlížeč Mozilla Firefox.
+Vojtux má předinstalovaný prohlížeč Mozilla Firefox.
 Prohlížení internetu s Firefoxem a odečítačem Orca se příliš neliší třeba od kombinace Firefox a NVDA.
 Klávesa TAB funguje podle očekávání a můžete ji použít k přesunu mezi odkazy a formulářovými prvky.
 Dále Orca disponuje dvěma módy prohlížení, mezi nimiž se přepínáte pomocí zkratky Orca+A.
@@ -238,17 +238,19 @@ Stačí se do okna přepnout a použít kombinaci CTRL+ALT+SHIFT+šipky.
 
 ## Kde seženu další informace?
 
-Hlavní stránka, ze které můžete získat informace o upravené distribuci Fegora se nachází [zde](https://a-fs.cz/fedora-29-mate-pro-nevidome/).
-Tato stránka je delší dobu neudržována, doporučuji se přihlásit na jednou z konferencí zmíněných níže.
+Vojtux zatím oficiální webové stránky nemá.
+Existuje [repozitář na Githubu](https://github.com/vojtapolasek/vojtux), který obsahuje různé soubory potřebné k sestavení live obrazu a balíčků specifických pro Vojtux.
+Projekt je momentálně stále ve fázi vývoje.
+Až jej budeme považovat za dostatečně vyspělý, vytvoříme webové stránky, kde budou k dispozici soubory ke stažení.
 
-Zároveň vám velmi doporučujeme přihlásit se do [emailové konference](https://a-fs.cz/emailova-konference/), která je zřízena společně se stránkou a-fs.cz.
-Do této konference budeme také posílat aktuální novinky ohledně Fegory a hlavně je to místo, kde budeme odpovídat na vaše dotazy a podněty.
+ velmi doporučujeme přihlásit se do [emailové konference](https://a-fs.cz/emailova-konference/), která je zřízena společně se stránkou a-fs.cz.
+Do této konference budeme také posílat aktuální novinky ohledně Vojtuxu a hlavně je to místo, kde budeme odpovídat na vaše dotazy a podněty.
 
 Druhou konferencí, kterou doporučím, je konference odečítače Orca.
 Je v angličtině, ale je velmi aktivní.
 Nachází se [zde](https://mail.gnome.org/mailman/listinfo/orca-list).
 
-Jak jsme psali výše, Fegora je založena na distribuci Fedora.
+Jak jsme psali výše, Vojtux je založen na distribuci Fedora.
 České stránky věnující se této distribuci jsou [zde](https://www.mojefedora.cz), oficiální anglické pak [zde](https://getfedora.org).
 
 Můžete nás také kontaktovat na emailových adresách uvedených na začátku tohoto dokumentu.
