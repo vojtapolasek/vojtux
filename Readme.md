@@ -1,6 +1,6 @@
 # What is it about?
 
-This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Fegora, because it is based on Fedora and it was presented at Agora event. Agora is an event in Czech Republic, where workshops about information technology for visually impaired are presented.
+This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Vojtux. It is based on first name of the main contributor; Vojtech.
 
 The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
 
@@ -22,7 +22,7 @@ Building of this image requires Fedora. So how to build it?
 
 5. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
 
-    - choose ks/fegora_cs.ks or ks/fegora_en.ks as a input file, based on your language choice
+    - choose ks/vojtux_cs.ks or ks/vojtux_en.ks as an input file, based on your language choice
 
     - this makes sure that all includes will be handled correctly
 
@@ -67,7 +67,7 @@ Following additional changes are applied:
 
 - file associations are modified so that audio files open in VLC
 
-- Festival is enabled with Czech voice, however, behaves strangely on physical hardware
+- Festival is enabled with Czech voice, however it behaves strangely on physical hardware
 
 - /etc/systemd/system.conf is modified to speed up shutdown
 
@@ -103,7 +103,7 @@ Following additional changes are applied:
 
     - Qt-at-spi
 
-    - Tmux for better working with consoles
+    - Tmux to enhance working with consoles
 
     - Chromium
 
@@ -117,7 +117,7 @@ Following additional changes are applied:
 
     - Gnote
 
-- there is a special script which ensures that the sound is not muted and is at 50% of volume on login screen
+- there is a special script which ensures that the sound at the login screen is not muted and is at 50% of volume
 
 - a script for toggling physical monitor is added, functionality not tested
 

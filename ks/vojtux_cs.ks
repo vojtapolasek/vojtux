@@ -1,4 +1,4 @@
-%include fegora_common.ks
+%include vojtux_common.ks
 
 
 # System language
@@ -20,7 +20,7 @@ festvox-czech-machac
 festvox-czech-krb
 festvox-czech-ph 
 hunspell-cs
-fegora-docs-cs
+vojtux-docs-cs
 %end
 
 %post
@@ -96,22 +96,22 @@ EOM
 echo "Updating dconf databases..."
 dconf update
 
-#apply Fegora customizations
-git clone https://github.com/vojtapolasek/Fegora.git
-cd Fegora/downloads
+#apply Vojtux customizations
+git clone https://github.com/vojtapolasek/vojtux.git
+cd vojtux/downloads
 mkdir -p /etc/skel/.local/share/orca
 cp -r orca/* /etc/skel/.local/share/orca/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
 cp .tmux.conf /etc/skel/
 cd /opt/
-rm -rf Fegora
+rm -rf vojtux
 #configure festival
 sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
 echo "(set! voice_default 'voice_czech_dita)" > /etc/skel/.festivalrc
 
 # setup symlink to documentation
-ln -s /usr/share/doc/fegora-docs-cs /etc/skel/dokumentace
-ln -s /usr/share/doc/fegora-docs-cs /home/liveuser/dokumentace
+ln -s /usr/share/doc/vojtux-docs-cs /etc/skel/dokumentace
+ln -s /usr/share/doc/vojtux-docs-cs /home/liveuser/dokumentace
 
 %end
