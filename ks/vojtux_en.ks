@@ -1,4 +1,4 @@
-%include fegora_common.ks
+%include vojtux_common.ks
 
 # System language
 lang en_US.UTF-8
@@ -17,7 +17,7 @@ festvox-rab-diphone
 festvox-rms-arctic-hts
 festvox-slt-arctic-hts
 hunspell-en
-fegora-docs-en
+vojtux-docs-en
 %end
 
 %post
@@ -81,18 +81,18 @@ EOM
 
 dconf update
 
-#apply Fegora customizations
-git clone https://github.com/vojtapolasek/Fegora.git
-cd Fegora/downloads
+#apply Vojtux customizations
+git clone https://github.com/vojtapolasek/Vojtux.git
+cd vojtux/downloads
 mkdir -p /etc/skel/.local/share/orca
 cp -r orca/* /etc/skel/.local/share/orca/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
 cp .tmux.conf /etc/skel/
 cd /opt/
-rm -rf Fegora
+rm -rf vojtux
 
 # setup symlink to documentation
-ln -s /usr/share/doc/fegora-docs-en /etc/skel/documentation
-ln -s /usr/share/doc/fegora-docs-en /home/liveuser/documentation
+ln -s /usr/share/doc/vojtux-docs-en /etc/skel/documentation
+ln -s /usr/share/doc/vojtux-docs-en /home/liveuser/documentation
 %end
