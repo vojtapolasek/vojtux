@@ -4,13 +4,17 @@ This repository contains resources concerning unofficial Linux distribution aime
 
 The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
 
+The live media is currently based on Fedora 37.
+
 ## Building live media ISO
 
 The kickstart file is inspired by the Fedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Building of this image requires Fedora. So how to build it?
+Building of this image requires Fedora. It is strongly recommended to use Fedora version matching the one you are going to build. So if you are going to build a live media based on Fedora 37, it is strongly recommended to do it from Fedora 37 environment.
+
+So how to build it?
 
 1. sudo dnf install lorax-lmc-novirt
 
