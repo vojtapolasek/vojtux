@@ -33,11 +33,6 @@ cat > /etc/dconf/db/local.d/03-keybindings <<- EOM
 #binding='<Primary><Mod4>o'
 #name='OCR aktuálního okna (anglický jazyk)'
 
-[org/mate/desktop/keybindings/custom10]
-action='/usr/local/bin/monitor-toggle'
-binding='<Alt><Mod4>m'
-name='Toggle monitor'
-
 EOM
 
 dconf update

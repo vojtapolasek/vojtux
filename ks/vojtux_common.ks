@@ -190,25 +190,7 @@ dnf copr enable -y tyrylu/vojtux-apps
 #git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
 #chmod -R 755 /opt/ocrdesktop
 #ln -s /opt/ocrdesktop/ocrdesktop /usr/local/bin/ocrdesktop
-# create script to toggle monitor
-mkdir -p /usr/local/bin
-cat > /usr/local/bin/monitor-toggle <<EOM
-#!/bin/sh
-output=$(xrandr | grep ' connected ' | awk '{print $1}' | head -1)
-screenSize=$(xrandr | awk 'BEGIN {foundOutput=0}
-    / '$output' / {foundOutput=1}
-    /\*\+/ {print $1}
-    /^[^ ]/ {if(foundOutput) exit 0}')
-if [ "$screenSize" != "" ]; then
-    xrandr --output $output --fb $screenSize --off
-	spd-say 'monitor off'
-else
-    xrandr --output $output --auto
-    spd-say 'Monitor on'
-fi
 
-EOM
-chmod 755 /usr/local/bin/monitor-toggle
 echo "Updating dconf databases..."
 dconf update
 # enabling accessibility
