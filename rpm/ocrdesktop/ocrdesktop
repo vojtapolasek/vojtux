@@ -1,0 +1,1592 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+"""OCRdesktop"""
+
+__version__   = "4.0"
+__copyright__ = "Copyright (c) 2022 Chrys"
+__license__   = "GPL"
+__authors__   = ["chrys"]
+__website__   = "https://github.com/chrys87/ocrdesktop"
+__appname__   = "OCRdesktop"
+__comments__  = "A accessibility tool for woring with inaccessible windows and dialogs"
+
+#Python Utils
+import os, sys, getopt, locale, time, re, _thread, shutil, tempfile
+from collections import defaultdict
+from mimetypes import MimeTypes
+
+#PIL
+from PIL import Image
+from PIL import ImageOps
+
+#pytesseract
+import pytesseract
+from pytesseract import Output
+
+# pdf2image
+pdf2imageAvailable = True
+try:
+    from pdf2image import convert_from_path
+except:
+    pdf2imageAvailable = False
+
+# scipy
+scipyAvailable = True
+try:
+    from scipy.spatial import KDTree
+except:
+    scipyAvailable = False
+
+# webcolors
+webColorsAvailable = True
+try:
+    from webcolors import CSS2_HEX_TO_NAMES
+    from webcolors import CSS3_HEX_TO_NAMES
+    from webcolors import hex_to_rgb
+except:
+    webColorsAvailable = False
+    
+    
+UIAvailable = True
+try:
+    #gi
+    import gi
+
+    #GTK/GDK/Wnck/GObject
+    gi.require_version("Gtk", "3.0")
+    gi.require_version("Gdk", "3.0")
+    gi.require_version("Wnck", "3.0")
+    from gi.repository import Gtk, Gdk, GObject, Wnck
+
+    # AT-SPI
+    gi.require_version('Atspi', '2.0')
+    import pyatspi
+except:
+    UIAvailable = False
+
+
+# here the class
+class OCRScreenReader(Gtk.Window):
+    def __init__(self, debug_p = False):
+        self._debug = debug_p
+        self._tree = None
+        self._textbox = None
+        self._textbuffer = None
+        self._saveToMacroButton = None
+        self._viewButton = None
+        self._viewMode = 0
+        self._showHelp = False
+        self._keyboardOverlayActive = False
+        self._screenShotMode = 0 # 0 = Window; 1 = Desktop; 2 = Clipboard; 3 = File
+        self._sendToClipboard = False
+        self._hideGui = False
+        self._saveToMacro = False
+        self._scrolledWindowTree = None
+        self._scrolledWindowText = None
+        self._keyboardOverlayLabel = None
+        self._grid = None
+        self._menubar = None
+        self._font_button = None
+        self._accelerators = None
+        self._OCRWords = None
+        self._OCRWordList = []
+        self._OCRText = ''
+        self._img = []
+        self._modifiedImg = []
+        self._grayscaleImg = False
+        self._invertImg = False
+        self._blackWhiteImg = False
+        self._printToStdOut = False
+        self._blackWhiteImgValue = 200
+        self._scaleFactor = 3
+        self._offsetXpos = 0
+        self._offsetYpos = 0
+        self.GTKmainIsRunning = False
+        locale.setlocale(locale.LC_ALL, 'C') #needed by tesseract in non english languages 
+        self._macro = OCRMacroManager()
+        self._languageCode = 'eng'
+        self._tess = None
+        self._isRefreshing = False
+        self._colorCalculation = False
+        self._colorCalculationMax = 3
+        self._kdtDB = None
+        self.colorNames = []
+        self.colorCache = {}
+        self._file = ''
+    def _setHideGui(self, hideGui_p = False):
+        self.hideGui = hideGui_p
+
+    def _setlanguageCode(self, languageCode_p = 'eng'):
+        self._languageCode = languageCode_p
+        
+    def _setGrayscaleImg(self, grayscaleImg_p = False):
+        self._grayscaleImg = grayscaleImg_p
+
+    def _setInvertImg(self, invertImg_p = False):
+        self._invertImg = invertImg_p
+
+    def _setBlackWhiteImg(self, blackWhiteImg_p = False):
+        self._blackWhiteImg = blackWhiteImg_p
+
+    def _setBlackWhiteImgValue(self, blackWhiteImgValue_p = 200):
+        self._blackWhiteImgValue = blackWhiteImgValue_p
+
+    def _setPrintToStdOut(self, printToStdOut_p = False):
+        self._printToStdOut = printToStdOut_p
+
+    def _setSendToClipboard(self, sendToClipboard_p = False):
+        self._sendToClipboard = sendToClipboard_p
+    
+    def _setScreenShotMode(self, screenShotMode_p):
+        self._screenShotMode = screenShotMode_p
+    def _setColorCalculation(self, newColorCalculation):
+        self._colorCalculation = newColorCalculation
+    def _setColorCalculationMax(self, newColorCalculationMax):
+        self._colorCalculationMax = newColorCalculationMax
+    def _setMacro(self, macro_p):
+        self._macro = macro_p
+    def _readClipboard(self):
+        Ok = False
+        ClipboardObj = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        try:
+            if self._debug:
+                print('get imagedata from clipboard')
+            pixBuff = ClipboardObj.wait_for_image()
+            self._img = [self.pixbuf2image(pixBuff)]
+            if self._debug:
+                if self._img[0] == None:
+                    print('no image data in clipboard')
+        except Exception as e:
+            if self._debug:
+                print(e)
+            return False
+        return self._img[0] != None
+    def _screenShotDesktop(self):
+        CurrDesktop = Gdk.get_default_root_window()
+        pixBuff = Gdk.pixbuf_get_from_window(CurrDesktop, 0, 0, CurrDesktop.get_width(), CurrDesktop.get_height())
+        if (pixBuff != None):
+            self._img = [self.pixbuf2image(pixBuff)]
+            if self._debug: # Debug code
+                self._img[0].save("/tmp/ocrScreenshot.png") 
+                print("save screenshot:/tmp/ocrScreenshot.png") 
+            return True
+        else:
+            if self._debug: # Debug code
+                print("Could not take screenshot") 
+            return False
+
+    def _screenShotWindow(self): 
+        Gtk.main_iteration_do(False) # workarround segfault
+        gdkCurrDesktop = Gdk.get_default_root_window()
+        #currWindow = Gdk.gdk_screen_get_active_window(Gdk.gdk_screen_get_default())
+        #pixBuff = Gdk.pixbuf_get_from_window(currWindow, 0, 0, currWindow.get_width(), currWindow.get_height())
+        try:
+            currWnckScreen = Wnck.Screen.get_default()
+            currWnckScreen.force_update()
+            currWnckWindow = currWnckScreen.get_active_window()
+            self._offsetXpos, self._offsetYpos, wnckWidth, wnckHeight = Wnck.Window.get_geometry(currWnckWindow)
+            pixBuff = Gdk.pixbuf_get_from_window(gdkCurrDesktop, self._offsetXpos, self._offsetYpos , wnckWidth, wnckHeight)
+        except Exception as e:
+            if self._debug: # Debug code
+                print("error while screenshot window:" + str(e)) 
+            return False
+
+        if self._debug:
+            pixBuff.savev('/tmp/ocrpixBuff.bmp', 'bmp', [], []) # Debug code
+            print("save pixBuff /tmp/ocrpixBuff.bmp")
+        if (pixBuff != None):
+            self._img = [self.pixbuf2image(pixBuff)]
+            if self._debug: # Debug code
+                self._img[0].save("/tmp/ocrScreenshot.png") 
+                print("save screenshot:/tmp/ocrScreenshot.png") 
+            return True
+        else:
+            if self._debug: # Debug code
+                print("Could not take screenshot") 
+            return False
+
+    def pixbuf2image(self, pix):
+        """Convert gdkpixbuf to PIL image"""
+        data = pix.get_pixels()
+        w = pix.props.width
+        h = pix.props.height
+        stride = pix.props.rowstride
+        mode = "RGB"
+        if pix.props.has_alpha == True:
+            mode = "RGBA"
+        im = Image.frombytes(mode, (w, h), data, "raw", mode, stride)
+        return im
+
+    def _scaleImg(self, img):
+        width_screen, height_screen = img.size
+        width_screen = width_screen * self._scaleFactor
+        height_screen = height_screen * self._scaleFactor
+        scaledImg = img.resize( (width_screen, height_screen), Image.BICUBIC)
+        if self._debug: # Debug code
+            scaledImg.save("/tmp/ocrScreenshotScaled.png")
+            print("save scaled screenshot:/tmp/ocrScreenshotScaled.png")
+        return scaledImg
+
+    def _screenShot(self):
+        Ok = False
+        global UIAvailable
+        if not UIAvailable:
+            if self._debug:
+                    print('GTK / GDK / GI or pyatspi is not available')
+            return Ok
+        time.sleep(0.3)
+        if self._screenShotMode == 0:
+            try: #take care that we get a screenshot
+                Ok = self._screenShotWindow()
+                if not Ok:
+                    if self._debug:
+                        print('FALLBACK: was not able to Screenshot active window. Try Rootwindow now')
+                    Ok = self._screenShotDesktop()
+            except:
+                if self._debug:
+                        print('FALLBACK: was not able to Screenshot active window. Try Rootwindow now')
+                Ok = self._screenShotDesktop()
+
+        elif self._screenShotMode == 1:
+            Ok = self._screenShotDesktop()
+        elif self._screenShotMode == 2:
+            Ok = self._readClipboard()
+        elif self._screenShotMode == 3:
+            Ok = self._readFile()
+        return Ok
+    def _readFile(self):
+        if self._file == '':
+            return False
+        if not os.path.exists(self._file):
+            return False
+        if not os.path.isfile(self._file):
+            return False
+        mime = MimeTypes()
+        mime_type = mime.guess_type(self._file)
+        if mime_type[0] != 'application/pdf':
+            try:
+                self._img = [Image.open(self._file)]
+            except Exception as e:
+                return False
+        else:
+            try:
+                global pdf2imageAvailable
+                if not pdf2imageAvailable:
+                    return False
+                # save temp image files in temp dir, delete them after we are finished
+                with tempfile.TemporaryDirectory() as temp_dir:
+
+                    # convert pdf to multiple image
+                    images = convert_from_path(self._file, output_folder=temp_dir)
+
+                    # save images to temporary directory
+                    temp_images = []
+                    for i in range(len(images)):
+                        image_path = f'{temp_dir}/{i}.jpg'
+                        images[i].save(image_path, 'JPEG')
+                        temp_images.append(image_path)
+
+                    # read images into pillow.Image
+                    self._img = list(map(Image.open, temp_images))
+            except Exception as e:
+                return False
+        return True
+    def convert_rgb_to_names(self, rgb_tuple):
+        try:
+            return self.colorCache[rgb_tuple]
+        except KeyError:
+            pass
+        # a dictionary of all the hex and their respective names in css3
+        if not self._kdtDB:
+            css_db = CSS3_HEX_TO_NAMES
+            rgb_values = []
+            for color_hex, color_name in css_db.items():
+                self.colorNames.append(color_name)
+                rgb_values.append(hex_to_rgb(color_hex))
+            self._kdtDB = KDTree(rgb_values)
+        distance, index = self._kdtDB.query(rgb_tuple)
+        self.colorCache[rgb_tuple] = self.colorNames[index]
+        return self.colorNames[index]
+
+    def _getColorString(self, box, index, img):
+        global scipyAvailable, webColorsAvailable
+        if not self._colorCalculation:
+            return 'unknown'
+        else:
+            if not scipyAvailable:
+                if self._debug:
+                    print('getColorString scipy not available')
+                return 'unknown'
+            if not webColorsAvailable:
+                if self._debug:
+                    print('getColorString webcolors not available')
+                return 'unknown'
+
+        if self._colorCalculationMax < 1:
+            return 'unknown'
+        if not img:
+            return 'unknown'
+        if not box:
+            return 'unknown'
+        try:
+            width = box['width'][index]
+            height = box['height'][index]
+            left = box['left'][index]
+            top = box['top'][index]
+            boxImg = img.crop((left, top, left + width, top + height))
+            by_color = defaultdict(int)
+            for pixel in boxImg.getdata():
+                by_color[pixel] += 1
+            color_str = ''
+            by_color_name = defaultdict(int)
+            for color, count in by_color.items():
+                by_color_name[self.convert_rgb_to_names(color)] += count
+            colorList = [k for k, v in sorted(by_color_name.items(), key=lambda item: item[1], reverse=True)]
+            for i in range(0, self._colorCalculationMax):
+                if i >= len(colorList):
+                    break
+                colorName = colorList[i]
+                count = by_color_name[colorList[i]]
+                if width * height != 0:
+                    percent = int(round(count / (width * height) * 100, 0))
+                    if percent > 0:
+                        color_str += '{}: {} %, '.format(colorName, percent)
+                else:
+                    color_str += '{}: {} pixel, '.format(colorName, count)
+            return color_str[:-2]
+        except Exception as e:
+            print(e)
+        return 'unknown'
+
+    def _ocrAllImages(self):
+        if self._debug:
+            print('start OCR')
+        self._modifiedImg = []
+        self._OCRText = ''
+        self._OCRWords = {}
+        self._OCRWordList = []
+        for img in self._img:
+            modifiedImg = self._transformImg(img)
+            self._modifiedImg.append(modifiedImg)
+            OCRWords = self._ocrImage(modifiedImg)
+            self.appendToOCRWords(OCRWords)
+            self._processOCRWords(OCRWords, modifiedImg)
+        if self._debug:
+            print('OCR complete')
+        self._cleanOCRText()
+        if self._sendToClipboard:
+            self._setTextToClipboard( self._OCRText)
+        if self._printToStdOut:
+            print(self._OCRText)
+    def appendToOCRWords(self, OCRWords):
+        for k, v in OCRWords.items():
+            try:
+                x = self._OCRWords[k]
+                if isinstance(v,list):
+                    self._OCRWords[k].append(v)
+            except KeyError:
+                self._OCRWords[k] = v
+    def _cleanOCRText(self):
+        regexSpace = re.compile('[^\S\r\n]{2,}') #remove double spaces
+        self._OCRText = regexSpace.sub(' ',self._OCRText)
+        regexSpace = re.compile('\n\s*\n') #remove empty lines
+        self._OCRText = regexSpace.sub('\n',self._OCRText)
+        regexSpace = re.compile('\s*\n') #remove ending spaces
+        self._OCRText = regexSpace.sub('\n',self._OCRText)
+        regexSpace = re.compile('^\s') #remove trailing space in first line
+        self._OCRText = regexSpace.sub( '\n', self._OCRText)
+        regexSpace = re.compile('$\n') #remove ending newline
+        self._OCRText = regexSpace.sub( '', self._OCRText)
+        regexSpace = re.compile('\n\s') #remove trailing spaces
+        self._OCRText = regexSpace.sub( '\n', self._OCRText)
+        self._OCRText = self._OCRText[:-1]
+
+    def _ocrImage(self, img):
+        if img is None:
+            return {}
+        OCRWords = pytesseract.image_to_data(img, output_type=Output.DICT, lang=self._languageCode, config='--psm 4')
+        return OCRWords
+    def _processOCRWords(self, OCRWords, img):
+        boxCounter = len(OCRWords['level'])
+        if boxCounter == 0:
+            return False
+        lastPage = -1
+        lastBlock = -1
+        lastPar = -1
+        lastLine = -1
+        
+        for i in range(boxCounter):
+            if (len(OCRWords['text'][i]) == 0) or OCRWords['text'][i].isspace():
+                continue
+            if lastLine != -1:
+                if lastLine != -1 and \
+                ((lastPage != OCRWords['page_num'][i]) or \
+                (lastBlock != OCRWords['block_num'][i]) or \
+                (lastPar != OCRWords['par_num'][i]) or \
+                (lastLine != OCRWords['line_num'][i])):
+                    self._OCRText += '\n'
+                else:
+                    self._OCRText += ' '
+            self._OCRText += OCRWords['text'][i]
+            if not self._hideGui:
+                self._OCRWordList.append([OCRWords['text'][i],
+                  round(OCRWords['height'][i] / 3 * 0.78,0), # calculated fontsize
+                  self._getColorString(OCRWords, i, img), # guess color
+                  'text', # guess object type
+                  int(OCRWords['width'][i] / 2 + OCRWords['left'][i]), # x
+                  int(OCRWords['height'][i] / 2 + OCRWords['top'][i]), # y
+                  int(float(OCRWords['conf'][i]))]) # confidence
+
+            lastPage = OCRWords['page_num'][i]
+            lastBlock = OCRWords['block_num'][i]
+            lastPar = OCRWords['par_num'][i]
+            lastLine = OCRWords['line_num'][i]
+        self._OCRText += '\n'
+
+        #if os.path.exists("/usr/share/tesseract-ocr/4.00/tessdata/"):
+        #    tesseractData = "/usr/share/tesseract-ocr/4.00/tessdata/"
+        #elif os.path.exists("/usr/share/tesseract-ocr/tessdata/"):
+        #    tesseractData = "/usr/share/tesseract-ocr/tessdata/"
+        #elif os.path.exists("/usr/share/tesseract/tessdata/"):
+        #    tesseractData = "/usr/share/tesseract/tessdata/"
+        #elif os.path.exists("/usr/share/tessdata/"):
+        #    tesseractData = "/usr/share/tessdata/"
+        #else:
+        #    tesseractData = "/usr/share/"
+        
+        return True
+
+    def add_accelerator(self, widget, accelerator, signal="activate"):
+        """Adds a keyboard shortcut"""
+        if accelerator is not None:
+            key, mod = Gtk.accelerator_parse(accelerator)
+            widget.add_accelerator(signal, self._accelerators, key, mod, Gtk.AccelFlags.VISIBLE)
+
+    def on_font_set(self, widget):
+        font_description = widget.get_font_desc()
+        self._textbox.modify_font(label="font_description")
+        
+    def _onRefreshContent(self, widget):
+        self._refreshContent()
+    
+    def _transformImg(self, img):
+        modifiedImg = self._scaleImg(img)
+        if self._invertImg:
+            modifiedImg = ImageOps.invert(modifiedImg)
+        if self._grayscaleImg:
+            modifiedImg = ImageOps.grayscale(modifiedImg)
+        if self._blackWhiteImg:
+            lut = [255 if v > self._blackWhiteImgValue else 0 for v in range(256)]
+            modifiedImg = modifiedImg.point(lut)
+        if self._debug: # Debug code
+            modifiedImg.save("/tmp/ocrScreenshotTransformed.png")
+            print("save scaled screenshot:/tmp/ocrScreenshotTransformed.png")
+        return modifiedImg
+    def _refreshContent(self):
+        if self._isRefreshing == True:
+            print("refresh already running")
+            return
+        self._isRefreshing = True
+        if self._debug:
+            print("refresh")
+        self._tree = None
+        self._scrolledWindowTree = None
+        self._scrolledWindowText = None
+        self._textbox = None
+        self._ocrAllImages()
+
+        self._scrolledWindowText = Gtk.ScrolledWindow()
+
+        self._textbox = Gtk.TextView()
+        self._textbox.set_hexpand(True)
+        self._textbox.set_vexpand(True)
+        self._textbox.show()
+        self._textbuffer = self._textbox.get_buffer()
+        self._textbuffer.set_text(self._OCRText)
+        self._textbox.set_editable(False)
+        if not self._textbuffer.get_start_iter() is None:
+            self._textbuffer.place_cursor(self._textbuffer.get_start_iter())
+        self._scrolledWindowText.add(self._textbox)
+        
+        self._scrolledWindowTree = Gtk.ScrolledWindow()
+        self._tree = Gtk.TreeView()
+        self._tree.set_hexpand(True)
+        self._tree.set_vexpand(True)
+        self._tree.show()
+        self._scrolledWindowTree.add(self._tree)
+
+        cols = [GObject.TYPE_STRING]
+        cols.extend([GObject.TYPE_STRING])
+        cols.extend([GObject.TYPE_INT])
+        cols.extend([GObject.TYPE_STRING])
+        cols.extend([GObject.TYPE_STRING])
+        cols.extend([GObject.TYPE_INT])
+        cols.extend([GObject.TYPE_INT])
+        cols.extend([GObject.TYPE_INT])
+        model = Gtk.ListStore(*cols)
+        self._tree.set_model(model)
+        columnHeaders = ['OCR Text','Fontsize','Color','Object','X Position','Y Position','Confidence']
+        
+        cell = Gtk.CellRendererText()
+        column = Gtk.TreeViewColumn("OCR Text", cell, text=0)
+        column.set_visible(False)
+        self._tree.append_column(column)
+
+        for i, header in enumerate(columnHeaders):
+            cell = Gtk.CellRendererText()
+            column = Gtk.TreeViewColumn(header, cell, text=i+1)
+            #column.set_sort_column_id(i+1)
+            self._tree.append_column(column)
+
+        model = self._tree.get_model()
+        for row in self._OCRWordList:
+            rowIter = model.append(None)
+            i = 0
+            for cell in row:
+                i = i + 1
+                if i == 5:
+                    cell = cell / self._scaleFactor + self._offsetXpos
+                if i == 6:
+                    cell = cell / self._scaleFactor + self._offsetYpos
+#                if i == 1:
+                model.set_value(rowIter, i, cell)
+#                    i = i + 1
+#                    cell = 12
+#                    model.set_value(rowIter, i, cell)
+#                    i = i + 1
+#                    cell = 'black'
+#                    model.set_value(rowIter, i, cell)
+#                else:
+#                    model.set_value(rowIter, i, cell)
+
+        self._tree.set_search_column(1)
+        self._grid.attach(self._scrolledWindowTree, 0, 1, 10, 10)
+        self._grid.attach(self._scrolledWindowText, 0, 1, 10, 10)
+        self._setView(False)
+        self._isRefreshing = False
+        
+    def _onSendKey(self, event):
+        eventTypeID = 0
+        
+        if self._debug:
+            print("_onSendKey")
+            print('Type:' + str(event.type))
+            print('String: ' + event.event_string)
+            print('ID: ' + str(event.id))
+            print('hw_code: ' + str(event.hw_code))
+
+        if event.type == pyatspi.Atspi.EventType.KEY_PRESSED_EVENT:
+            if event.event_string =='F4':
+                self._keyboardOverlayActive = False
+                self._setView(False)
+                pyatspi.Registry.deregisterKeystrokeListener(self._onSendKey)
+                if self._debug:
+                    print('deregisterKeystrokeListener')
+                return True
+            eventTypeID = 0
+            
+        elif event.type == pyatspi.Atspi.EventType.KEY_RELEASED_EVENT:
+            eventTypeID = 1
+
+        self._macro._writeKeyboardToMacro(0, event.event_string, eventTypeID)
+        return True
+        
+    def _sendKeyMode(self, widget):
+        self._keyboardOverlayActive = True
+        if self._debug:
+            print("sendKeyMode")
+        pyatspi.Registry.registerKeystrokeListener(self._onSendKey,mask=pyatspi.allModifiers(), kind=(pyatspi.KEY_PRESS,pyatspi.KEY_RELEASE,pyatspi.KEY_PRESSRELEASE), synchronous=True, preemptive=True)
+        self._setView(False)
+        if self._debug:
+            print("Keyboardlistener is registered")
+
+    def _toggleGrayscaleImg(self, widget):
+        self._grayscaleImg = widget.get_active()
+        if not self._grayscaleImg:
+            self.item_barrierbw.set_active(False)
+
+    def _toggleInvertImg(self, widget):
+        self._invertImg = widget.get_active()
+
+    def _toggleBlackWhiteImg(self, widget):
+        self._blackWhiteImg = widget.get_active()
+        if self._blackWhiteImg:
+            self.item_grayscale.set_active(True)
+
+    def _createNavListDialog(self):
+        Gtk.Window.__init__(self, title="OCR")
+        self.set_default_size(700,800)
+        self._grid = Gtk.Grid()
+    
+        self._accelerators = Gtk.AccelGroup()
+
+        self._menubar = Gtk.MenuBar()
+
+        self.menu_ocrdesktop = Gtk.Menu()
+        self.item_toggleview = Gtk.MenuItem(label="Toggle V_iew")
+        self.item_toggleview.set_use_underline(True)
+        self.add_accelerator(self.item_toggleview, "<Alt>v","activate")
+        self.item_ocroptions = Gtk.MenuItem(label="_OCR Options")
+        self.item_ocroptions.set_use_underline(True)
+        self.option_sub_menu = Gtk.Menu()
+        self.item_ocroptions.set_submenu(self.option_sub_menu)
+        self.item_invert = Gtk.CheckMenuItem(label="_Invert")
+        self.item_invert.set_use_underline(True)
+        self.item_grayscale = Gtk.CheckMenuItem(label="_Grayscale")
+        self.item_grayscale.set_use_underline(True)
+        self.item_barrierbw = Gtk.CheckMenuItem(label="_Barrier Black White")
+        self.item_barrierbw.set_use_underline(True)
+        self.option_sub_menu.append(self.item_invert)
+        self.option_sub_menu.append(self.item_grayscale)
+        self.option_sub_menu.append(self.item_barrierbw)
+        self.item_invert.set_active(self._invertImg)
+        self.item_grayscale.set_active(self._grayscaleImg)
+        self.item_barrierbw.set_active(self._blackWhiteImg)
+        self.item_invert.connect("activate", self._toggleInvertImg)
+        self.item_grayscale.connect("activate", self._toggleGrayscaleImg)
+        self.item_barrierbw.connect("activate", self._toggleBlackWhiteImg)
+        
+        self.item_retry = Gtk.MenuItem(label="_Retry OCR")
+        self.item_retry.set_use_underline(True)
+        self.add_accelerator(self.item_retry, "F5","activate")
+        self.item_clipboard = Gtk.MenuItem(label="Send to _Clipboard")
+        self.item_clipboard.set_use_underline(True)
+        self.add_accelerator(self.item_clipboard, "<Control>b","activate")
+        self.item_font = Gtk.MenuItem(label="_Font")
+        self.item_font.set_use_underline(True)
+        self.item_close = Gtk.MenuItem(label="_Close")
+        self.add_accelerator(self.item_close, "<Control>q","activate")
+        self.item_close.set_use_underline(True)
+        self.menu_ocrdesktop.append(self.item_toggleview)
+        self.menu_ocrdesktop.append(self.item_ocroptions)
+        self.menu_ocrdesktop.append(self.item_retry)
+        self.menu_ocrdesktop.append(self.item_clipboard)
+        #self.menu_ocrdesktop.append(self.item_font)
+        self.menu_ocrdesktop.append(self.item_close)
+        self.item_toggleview.connect("activate", self._onSetView,True)
+        self.item_retry.connect("activate", self._onRefreshContent)
+        self.item_clipboard.connect("activate", self._onSetTextToClipboard)
+        self.item_close.connect("activate", Gtk.main_quit)
+        
+        self.menu_interact = Gtk.Menu()
+        self.item_preclick = Gtk.CheckMenuItem(label="_Preclick")
+        self.item_preclick.set_use_underline(True)
+        self.add_accelerator(self.item_preclick, "<Control>p","activate")
+        self.item_leftclick = Gtk.MenuItem(label="_Left Click")
+        self.item_leftclick.set_use_underline(True)
+        self.add_accelerator(self.item_leftclick, "<Control>l","activate")
+        self.item_doubletclick = Gtk.MenuItem(label="_Double Click")
+        self.item_doubletclick.set_use_underline(True)
+        self.add_accelerator(self.item_doubletclick, "<Control>d","activate")
+        self.item_rightclick = Gtk.MenuItem(label="_Right Click")
+        self.item_rightclick.set_use_underline(True)
+        self.add_accelerator(self.item_rightclick, "<Control>r","activate")
+        self.item_middleclick = Gtk.MenuItem(label="_Middle Click")
+        self.item_middleclick.set_use_underline(True)
+        self.add_accelerator(self.item_middleclick, "<Control>m","activate")
+        self.item_routeto = Gtk.MenuItem(label="Route _To")
+        self.item_routeto.set_use_underline(True)
+        self.add_accelerator(self.item_routeto, "<Control>t","activate")
+        self.item_sendkey = Gtk.MenuItem(label="Send _Key")
+        self.item_sendkey.set_use_underline(True)
+        self.add_accelerator(self.item_sendkey, "<Control>k","activate")
+        self.menu_interact.append(self.item_preclick)
+        self.menu_interact.append(self.item_leftclick)
+        self.menu_interact.append(self.item_doubletclick)
+        self.menu_interact.append(self.item_rightclick)
+        self.menu_interact.append(self.item_middleclick)
+        self.menu_interact.append(self.item_routeto)
+        self.menu_interact.append(self.item_sendkey)
+        self.item_preclick.connect("activate", self._setSaveToMacro)
+        self.item_leftclick.connect("activate", self._onLeftClick)
+        self.item_doubletclick.connect("activate", self._onDoubleLeftClick)
+        self.item_rightclick.connect("activate", self._onRightClick)
+        self.item_middleclick.connect("activate", self._onMiddleClick)
+        self.item_routeto.connect("activate", self._routeToPoint)
+        self.item_sendkey.connect("activate", self._sendKeyMode)
+        
+        self.menu_macro = Gtk.Menu()
+        self.item_save = Gtk.MenuItem(label="_Save As")
+        self.item_save.set_use_underline(True)
+        self.add_accelerator(self.item_save, "<Control>s","activate")
+        self.item_load = Gtk.MenuItem(label="_Load")
+        self.item_load.set_use_underline(True)
+        self.add_accelerator(self.item_load, "<Control>o","activate")
+        self.item_delete = Gtk.MenuItem(label="_Unload")
+        self.item_delete.set_use_underline(True)
+        self.add_accelerator(self.item_delete, "<Control>u","activate")
+        self.item_run = Gtk.MenuItem(label="_Run")
+        self.item_run.set_use_underline(True)
+        self.add_accelerator(self.item_run, "<Control>n","activate")
+        self.menu_macro.append(self.item_save)
+        self.menu_macro.append(self.item_load)
+        self.menu_macro.append(self.item_delete)
+        self.menu_macro.append(self.item_run)
+        self.item_save.connect("activate", self._macro._saveMacro, self)
+        self.item_load.connect("activate", self._macro._onLoadMacro, self)
+        self.item_delete.connect("activate", self._macro._onDeleteMacro, False)
+        self.item_run.connect("activate", self._onRunMacro)
+        
+        self.menu_help = Gtk.Menu()
+        self.item_about = Gtk.MenuItem(label="_About")
+        self.item_about.set_use_underline(True)
+        self.menu_help.append(self.item_about)
+        self.item_about.connect("activate", self._onRunAboutDialog, self)
+
+        self.item_ocrdesktop = Gtk.MenuItem(label="_OCRDesktop")
+        self.item_ocrdesktop.set_use_underline(True)
+        self.item_ocrdesktop.set_submenu(self.menu_ocrdesktop)
+        self._menubar.append(self.item_ocrdesktop)
+        if self._screenShotMode in [0,1]: # window, desktop
+            self.item_interact = Gtk.MenuItem(label="_Interact")
+            self.item_interact.set_use_underline(True)
+            self.item_interact.set_submenu(self.menu_interact)
+            self._menubar.append(self.item_interact)
+            self.item_macro = Gtk.MenuItem(label="_Macro")
+            self.item_macro.set_use_underline(True)
+            self.item_macro.set_submenu(self.menu_macro)
+            self._menubar.append(self.item_macro)
+        self.item_help = Gtk.MenuItem(label="_Help")
+        self.item_help.set_use_underline(True)
+        self.item_help.set_submenu(self.menu_help)
+        self._menubar.append(self.item_help)
+        self.add_accel_group(self._accelerators)
+        
+        self._keyboardOverlayLabel = Gtk.Label(label="Please insert keyboard commands. exit with: F4")
+        self._keyboardOverlayLabel.set_selectable(True)
+
+        self._font_button = Gtk.FontButton()
+        self._font_button.connect('font-set', self.on_font_set)
+        
+        self._refreshContent()
+
+        self.connect("delete-event", Gtk.main_quit)
+        self.connect('key-release-event', self._onKeyRelease)
+        #self._textbuffer.connect("notify::cursor-position", self._onCursorTextPositionChanged)
+        #self._tree.connect("notify::cursor-position", self._onCursorTreePositionChanged)
+        
+
+        self._grid.attach(self._menubar,0,0,10,1)
+        self._grid.attach(self._keyboardOverlayLabel, 0, 1, 10, 1)
+        self._grid.attach(self._font_button, 0, 11, 3, 1)
+        self.add(self._grid)
+
+    def _onCursorTextPositionChanged(self, widget, event):
+        #print(widget.props.cursor_position)
+        #position = widget.get_iter_at_offset(widget.props.cursor_position)
+        #if not widget.get_start_iter() is None:
+        #    print(widget.get_text(widget.get_start_iter(),position,False).count('\n')+widget.get_text(widget.get_start_iter(),position,True).count(' '))
+#TODO set the pos correct        
+    #wtf is thist not working        self._tree.set_cursor(widget.get_text(widget.get_start_iter(),position,True).count('\n')+widget.get_text(widget.get_start_iter(),position,True).count(' '))
+        pass
+
+    def _onCursorTreePositionChanged(self, widget, event):
+#TODO set the pos correct
+        #print(widget.props.cursor_position)
+        #position = widget.get_iter_at_offset(widget.props.cursor_position)
+        #if not widget.get_start_iter() is None:
+        #    print(widget.get_text(widget.get_start_iter(),position,False).count('\n')+widget.get_text(widget.get_start_iter(),position,True).count(' '))
+        #    self._tree.set_cursor(widget.get_text(widget.get_start_iter(),position,True).count('\n')+widget.get_text(widget.get_start_iter(),position,True).count(' '))
+        pass
+
+    def _setSaveToMacro(self, widget):
+        self._saveToMacro = widget.get_active()
+
+    def setFocus(self):
+        if self._viewMode == 0:
+            position = self._textbuffer.get_iter_at_offset(self._textbuffer.props.cursor_position)
+            if not self._textbuffer.get_start_iter() is None:
+                self._tree.set_cursor(
+                    self._textbuffer.get_text(self._textbuffer.get_start_iter(),position,True).count('\n') +
+                    self._textbuffer.get_text(self._textbuffer.get_start_iter(),position,True).count(' ')
+                )
+
+    def showGUI(self):
+        self._gui = self._createNavListDialog()
+        self.set_modal(True)
+        self.show_all()
+        self._setView(False)
+        self.startMain()
+        
+    def startMain(self):
+        self.GTKmainIsRunning = True
+        Gtk.main()
+
+    def _onRunAboutDialog(self,widget,window):
+        dialog = Gtk.AboutDialog(window)
+        dialog.set_authors(__authors__)
+        dialog.set_website(__website__)
+        dialog.set_copyright(__copyright__)
+        dialog.set_license(__license__)
+        dialog.set_version(__version__)
+        dialog.set_program_name(__appname__)
+        dialog.set_comments(__comments__)
+        dialog.run()
+        dialog.destroy()
+        
+    def _onSetView(self, widget, Toggle=True):
+        self._setView(Toggle)
+            
+    def _setView(self, Toggle):
+        
+        self._scrolledWindowTree.hide()
+        self._scrolledWindowText.hide()
+        self._keyboardOverlayLabel.hide()
+        
+        if self._keyboardOverlayActive:
+            self._keyboardOverlayLabel.show()
+            return
+
+        self.setFocus()
+            
+        if Toggle:
+            if self._viewMode == 0:
+                self._viewMode = 1
+            elif self._viewMode == 1:
+                self._viewMode = 0
+        
+        if self._viewMode == 1:
+            self._scrolledWindowTree.show()
+            self._tree.grab_focus()
+        elif self._viewMode == 0:
+            self._scrolledWindowText.show()
+            self._textbox.grab_focus()
+
+
+    def _onKeyRelease(self, widget, event):
+        keycode = event.hardware_keycode
+        keymap = Gdk.Keymap.get_for_display(Gdk.Display.get_default())
+        entries_for_keycode = keymap.get_entries_for_keycode(keycode)
+        entries = entries_for_keycode[-1]
+        eventString = Gdk.keyval_name(entries[0])
+#        if self._debug:
+#            print(eventString)
+#        if eventString == 'Escape':
+#            Gtk.main_quit()
+#        if eventString == 'Return':
+#            self._leftClickButton.grab_focus()
+
+    def _cancel(self):
+        if self.GTKmainIsRunning:
+            Gtk.main_quit()
+            GTKmainIsRunning = False
+
+    def _routeToPoint(self, widget):
+        self.setFocus()
+        self.hide()
+        xpos, ypos = self._getSelectedEntry()
+        _thread.start_new_thread( self._threadrouteToPoint, (xpos,ypos, ) )
+
+    def _onRightClick(self, widget):
+        self.setFocus()
+        xpos, ypos = self._getSelectedEntry()
+        self.hide()
+        _thread.start_new_thread( self._threadDoClick, (xpos,ypos,"b3c", ) )
+
+    def _onLeftClick(self, widget):
+        self.setFocus()
+        xpos, ypos = self._getSelectedEntry()
+        self.hide()
+        _thread.start_new_thread( self._threadDoClick, (xpos,ypos, "b1c", ) )
+
+    def _onDoubleLeftClick(self, widget):
+        self.setFocus()
+        xpos, ypos = self._getSelectedEntry()
+        self.hide()
+        _thread.start_new_thread( self._threadDoClick, (xpos,ypos,"b1d", ) )
+
+    def _onMiddleClick(self, widget):
+        self.setFocus()
+        xpos, ypos = self._getSelectedEntry()
+        self.hide()
+        _thread.start_new_thread( self._threadDoClick, (xpos,ypos,"b2c", ) )
+
+    def _threadrouteToPoint(self, xpos=1,ypos=1,delay=0.8, posRelation = "abs"):
+        if self._saveToMacro:
+            self._macro._writeMouseToMacro(xpos,ypos,'None')
+        else:
+            time.sleep(delay)
+            pyatspi.Registry.generateMouseEvent(xpos,ypos,posRelation)
+        self._cancel()
+        
+    def _onRunMacro(self, widget):
+        if self._macro._macroExists():
+            self.hide()
+            _thread.start_new_thread( self._threadRunMacro, () )
+        else:
+            dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO,
+                Gtk.ButtonsType.OK, "No Macro loaded")
+            dialog.format_secondary_text(
+                "You have to load a macro for execution.")
+            dialog.run()
+            dialog.destroy()
+
+    def _threadRunMacro(self):
+        self._macro._threadRunMacro()
+        self._cancel()
+
+    def _threadDoClick(self, xpos=1,ypos=1,mouseEvent='b1c',delay=0.8):
+        if self._saveToMacro:
+            self._macro._writeMouseToMacro(xpos,ypos,mouseEvent)
+        else:
+            time.sleep(delay)
+            pyatspi.Registry.generateMouseEvent(xpos,ypos, mouseEvent)
+        self._cancel()
+
+    def _onSetTextToClipboard(self, widget):
+        self._setTextToClipboard(self._OCRText)
+
+    def _setTextToClipboard(self, text_p):
+        global UIAvailable
+        if not UIAvailable:
+            if self._debug:
+                print('GTK / GDK / GI or pyatspi is not available')
+            return
+
+        if self._debug:
+            print("----_setTextToClipboard Start--")
+            print(text_p)
+            print("----_setTextToClipboard End----")
+        try:
+            ClipboardObj = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+            ClipboardObj.set_text(text_p, -1)
+            ClipboardObj.store()
+        except:
+            pass
+    def _getSelectedEntry(self):
+        if not self._tree:
+            return None
+
+        selection = self._tree.get_selection()
+        if not selection:
+            return None
+
+        model, paths = selection.get_selected_rows()
+        if not paths:
+            return None
+
+        return model.get_value(model.get_iter(paths[0]), 5),model.get_value(model.get_iter(paths[0]), 6)
+
+    def run(self):
+        self._setCommandLineOptions()
+        
+        if self._showHelp:
+            return
+
+        #MACRO
+        if self._screenShotMode in [0,1]: # window, desktop
+            if not self._hideGui:
+                self._macro.showGUI()
+            else:
+                if self._macro._macroExists():
+                    self._macro._RunMacro()
+
+        if self._debug:
+            print("PreWaitForFinish")
+        if self._screenShotMode in [0,1]: # window, desktop
+            self._macro.WaitForFinish()
+            self._setMacro(self._macro)
+            time.sleep(0.5)
+        if self._screenShot():
+            if not self._hideGui:
+                self.showGUI()
+            else:
+                self._ocrAllImages()
+
+        #FUNCTIONS
+    def _setCommandLineOptions(self):
+        # set hideGui of GTK is not available
+        global UIAvailable
+        if not UIAvailable:
+            if self._debug:
+                print('GTK / GDK / GI or pyatspi is not available')
+            self._hideGui = True
+        try:
+            myopts, args = getopt.getopt(sys.argv[1:],"hl:vndocCOx:gibt:m:f:")
+            ###############################
+            # o == option
+            # a == argument passed to the o
+            ###############################
+            for o, a in myopts:
+                if o == '-v':
+                    self._debug = True
+                    print('Debugmode ON')
+                elif o == '-f':
+                    self._screenShotMode = 3
+                    self._file = a
+                elif o == '-C':
+                    if UIAvailable:
+                        self._screenShotMode = 2
+                elif o == '-d':
+                    if UIAvailable:
+                        self._screenShotMode = 1
+                elif o == '-g':
+                    self._grayscaleImg = True
+                elif o == '-i':
+                    self._invertImg = True
+                elif o == '-b':
+                    self._grayscaleImg = True
+                    self._blackWhiteImg = True
+                elif o == '-t':
+                    self._blackWhiteImgValue = int(a)
+                elif o == '-c':
+                    if UIAvailable:
+                        self._sendToClipboard = True
+                elif o == '-l':
+                    self._languageCode = a
+                elif o == '-m':
+                    if UIAvailable:
+                        self._macro._loadMcroFile(a)
+                elif o == '-n':
+                    self._hideGui = True
+                elif o == '-o':
+                    self._printToStdOut = True
+                elif o == '-O':
+                    self._colorCalculation = True
+                elif o == '-x':
+                    self._colorCalculationMax = int(a)
+                elif o == '-h':
+                    self._printHelp()
+        except:
+                    self._printHelp()
+
+    def _printHelp(self):
+        print('Version {}'.format(__version__))
+        print("ocrdesktop -h -l <lang> -n -d -c -C -o -O -x <Value> -v -i -g -b -t <Value> -f <File> -m <MacroFile>")
+        print("-h               Print help with start")
+        print("-l <lang>        set the OCR language default=eng")
+        print("-n               hide GUI (use with -c,-o or -m")
+        print("-d               OCR the Destkop")
+        print("-c               Send to Clipboard")
+        print("-f <File>        Read Image from File (PDF, JPG, PNG...)")
+        print("-C               Read Image from Clipboard")
+        print("-o               print to STDOUT")
+        print("-O               analyze color information (will take more time)")
+        print("-x <Value>       limit of colors to analyze (>1)")
+        print("-v               print debug messages")
+        print("-i               Invert the picture colors")
+        print("-g               Grayscale picture")
+        print("-b               break into hard black and white")
+        print("-t <Value>       the value for braking into black and white (-b) 0 (black) - 255 (white)")
+        print("-m <MacroFile>   run a macro before starting.")
+        self._showHelp = True
+
+
+class OCRMacroManager:
+
+    def __init__(self,debug_p = False):
+        self._cancelButton = None
+        self._runMacroButton = None
+        self._deleteMacroButton = None
+        self._menubar = None
+        self._accelerators = None
+        self._grid = None
+        self._labelAutoClickExists = None
+        self._macroFile = os.path.expanduser('~') + '/.activeOCRMacro.ocrm'
+        self._gui = None
+        self._MacroFinished = False
+        self._debug = debug_p
+        
+    def _loadMcroFile(self, macroFile_p):
+        if self._loadMacroExists(macroFile_p):
+            if macroFile_p != self._macroFile:
+                shutil.copy(macroFile_p, self._macroFile)
+        
+    def _setDebug(self, debug_p):
+        self._debug = debug_p
+
+    def add_accelerator(self, widget, accelerator, signal="activate"):
+        """Adds a keyboard shortcut"""
+        if accelerator is not None:
+            key, mod = Gtk.accelerator_parse(accelerator)
+            widget.add_accelerator(signal, self._accelerators, key, mod, Gtk.AccelFlags.VISIBLE)
+
+
+    def _createMacroConfirm(self):
+
+        dialog = Gtk.Window( title="Preclicks Manager")
+        dialog.set_default_size(500, 60)
+        dialog.set_modal(True)
+        self._accelerators = Gtk.AccelGroup()
+        self._menubar = Gtk.MenuBar()
+
+        self._menubar = Gtk.MenuBar()
+        
+        self.menu_macro = Gtk.Menu()
+        self.item_save = Gtk.MenuItem(label="_Save As")
+        self.item_save.set_use_underline(True)
+        self.add_accelerator(self.item_save, "<Control>s","activate")
+        self.item_load = Gtk.MenuItem(label="_Load")
+        self.item_load.set_use_underline(True)
+        self.add_accelerator(self.item_load, "<Control>o","activate")
+        self.item_delete = Gtk.MenuItem(label="_Unload")
+        self.item_delete.set_use_underline(True)
+        self.add_accelerator(self.item_delete, "<Control>u","activate")
+        self.item_run = Gtk.MenuItem(label="_Run")
+        self.item_run.set_use_underline(True)
+        self.add_accelerator(self.item_run, "<Control>n","activate")
+        self.menu_macro.append(self.item_save)
+        self.menu_macro.append(self.item_load)
+        self.menu_macro.append(self.item_delete)
+        self.menu_macro.append(self.item_run)
+        self.item_save.connect("activate", self._saveMacro, dialog)
+        self.item_load.connect("activate", self._onLoadMacro, dialog)
+        self.item_delete.connect("activate", self._onDeleteMacro, False)
+        self.item_run.connect("activate", self._onRunMacro)
+        
+        self.menu_help = Gtk.Menu()
+        self.item_about = Gtk.MenuItem(label="_About")
+        self.item_about.set_use_underline(True)
+        self.menu_help.append(self.item_about)
+        self.item_about.connect("activate", self._onRunAboutDialog, dialog)
+
+        self.item_macro = Gtk.MenuItem(label="_Macro")
+        self.item_macro.set_use_underline(True)
+        self.item_help = Gtk.MenuItem(label="_Help")
+        self.item_help.set_use_underline(True)
+
+        self.item_macro.set_submenu(self.menu_macro)
+        self.item_help.set_submenu(self.menu_help)
+
+        self._menubar.append(self.item_macro)
+        self._menubar.append(self.item_help)
+
+        dialog.add_accel_group(self._accelerators)
+
+        self._labelAutoClickExists = Gtk.Label(label="Preclicks are existing. What do you want do do with the preclicks?")
+        self._labelAutoClickExists.set_selectable(True)
+
+        self._runMacroButton = Gtk.Button(label="_Run")
+        self._runMacroButton.set_use_underline(True)
+        self._runMacroButton.connect('clicked', self._onRunMacro)
+
+        self._deleteMacroButton = Gtk.Button(label='_Unload')
+        self._deleteMacroButton.set_use_underline(True)
+        self._deleteMacroButton.connect('clicked', self._onDeleteMacro)
+
+        self._cancelButton = Gtk.Button(label='_Cancel')
+        self._cancelButton.set_use_underline(True)
+        self._cancelButton.connect('clicked', self._onCancel)
+
+        self._grid = Gtk.Grid()
+
+        dialog.connect("delete-event", self._onCancel)
+        dialog.connect('key-release-event', self._onKeyRelease)
+        self._grid.attach(self._menubar,0,0,3,1)
+        self._grid.attach(self._labelAutoClickExists, 0 , 1, 3, 1)
+        self._grid.attach(self._runMacroButton , 0, 2, 1, 1)
+        self._grid.attach(self._deleteMacroButton, 1, 2, 1, 1)
+        self._grid.attach(self._cancelButton, 2, 2, 1, 1)
+        dialog.add(self._grid)
+        
+        return dialog
+    
+    def _onRunMacro(self, widget):
+        self._gui.hide()
+        _thread.start_new_thread( self._threadRunMacro, () )
+        self._cancel(False)
+        
+    def _onDeleteMacro(self, widget, close_p=True):
+        self._deleteMacro()
+        if close_p:
+            self._cancel(True)
+
+    def _onCancel(self, widget, event=None):
+        self._cancel(True)
+
+    def _cancel(self, setMacroFinished):
+        if self._gui != None:
+            self._gui.hide()
+        if setMacroFinished:
+            self._MacroFinished = True
+        Gtk.main_quit()
+
+
+    def _macroExists(self):
+        return (os.path.exists(self._macroFile) and os.path.isfile(self._macroFile))
+
+    def _loadMacroExists(self, newMacro_p):
+        return (os.path.exists(newMacro_p) and os.path.isfile(newMacro_p))
+
+    def _RunMacro(self):
+        if not self._macroExists():
+            if self._debug:
+                print("No Macro loaded..")
+            return
+        self._MacroFinished = False
+        macroFile = open(self._macroFile, "r")
+        while 1:
+            line = macroFile.readline()
+            if not line:
+                break
+            if self._debug:
+                print("_RunMacro: " + line)
+            line = line.split(',')
+            # doing stuff
+            if line[0] == 'c':
+                if line[1] == 'delay':
+                    time.sleep(float(line[2]))
+
+            if line[0] == 'k':
+                self._doKeyboardMacroStep(int(line[1]), line[2], int(line[3]))
+            if line[0] == 'm':
+                self._doMouseMacroStep(int(line[1]), int(line[2]), line[3])
+        macroFile.close()
+        self._MacroFinished = True
+        
+    def getMacroFinished(self):
+        return self._MacroFinished
+        
+    def WaitForFinish(self):
+        while not self.getMacroFinished() and self._macroExists():
+            time.sleep(0.3)
+            if self._debug:
+                print(self.getMacroFinished())
+        time.sleep(0.2)
+        self._MacroFinished = False
+        if self._debug:
+            print("WaitForFinish complete")
+        
+    def _deleteMacro(self):
+        if self._macroExists():
+            os.remove(self._macroFile)
+    
+    def _saveMacro(self, widget, window):
+        if not self._macroExists():
+            return
+        fileDialog = Gtk.FileChooserDialog("Save As", window,Gtk.FileChooserAction.SAVE,("_Cancel",Gtk.ResponseType.CANCEL,"_Save",Gtk.ResponseType.OK))
+        fileDialog.set_modal(True)
+        fileDialog.set_default_size(800, 400)
+        fileDialog.set_local_only(False)
+        self.add_filters(fileDialog)
+        Gtk.FileChooser.set_current_name(fileDialog, "NewOCRdesktopMakro.ocrm")
+
+        response = fileDialog.run()
+
+        if response == Gtk.ResponseType.OK:
+            shutil.copy( self._macroFile, fileDialog.get_filename(),)
+        elif response == Gtk.ResponseType.CANCEL:
+            pass
+
+        fileDialog.destroy()
+
+    def _onRunAboutDialog(self,widget,window):
+        dialog = Gtk.AboutDialog(window)
+        dialog.set_authors(__authors__)
+        dialog.set_website(__website__)
+        dialog.set_copyright(__copyright__)
+        dialog.set_license(__license__)
+        dialog.set_version(__version__)
+        dialog.set_program_name(__appname__)
+        dialog.set_comments(__comments__)
+        dialog.run()
+        dialog.destroy()
+
+    def _onLoadMacro(self, widget, window):
+        fileDialog = Gtk.FileChooserDialog("Please choose a file", window,Gtk.FileChooserAction.OPEN,("_Cancel",Gtk.ResponseType.CANCEL,"_Open",Gtk.ResponseType.OK))
+        fileDialog.set_modal(True)
+        fileDialog.set_default_size(800, 400)
+        fileDialog.set_local_only(False)
+        self.add_filters(fileDialog)
+
+        response = fileDialog.run()
+        if response == Gtk.ResponseType.OK:
+            shutil.copy(fileDialog.get_filename(), self._macroFile)
+        elif response == Gtk.ResponseType.CANCEL:
+            pass
+
+        fileDialog.destroy()
+
+    def add_filters(self, fileDialog):
+        filter_text = Gtk.FileFilter()
+        filter_text.set_name("Macro Textfiles")
+        filter_text.add_mime_type("text/plain")
+        filter_text.add_pattern("*.ocrm")
+        fileDialog.add_filter(filter_text)
+
+        filter_any = Gtk.FileFilter()
+        filter_any.set_name("Any files")
+        filter_any.add_pattern("*")
+        fileDialog.add_filter(filter_any)
+
+    def _doKeyboardMacroStep(self,keyValue_p, keyString_p, eventType_p = 2):
+        """
+        Arguments:
+        - keyValue_p: a long integer indicating the keycode or keysym of the key event
+            being synthesized.
+        - keyString_p: an (optional) UTF-8 string which, if keyval is NULL,
+            indicates a 'composed' keyboard input string which is
+            being synthesized; this type of keyboard event synthesis does
+            not emulate hardware keypresses but injects the string
+            as though a composing input method (such as XIM) were used.
+        - eventType_p: an AccessibleKeySynthType flag indicating whether keyval
+            is to be interpreted as a keysym rather than a keycode
+            (pyatspi.KEY_SYM), or whether to synthesize
+            KEY_PRESS = 0, KEY_RELEASE = 1, or both (KEY_PRESSRELEASE = 2).
+        """
+        if keyValue_p == 0:
+            if keyString_p != '':
+                keyValue_p = KEY_CODE[keyString_p]
+            else:
+                if self._debug:
+                    print("invalid keyboard macro",keyValue_p,keyString_p)
+                    print("format:")
+                    print("c, KeyValue, KeyString, eventType")
+                return     
+        if eventType_p == 0:
+            pyatspi.Registry.generateKeyboardEvent(keyValue_p, keyString_p, pyatspi.KEY_PRESS)
+        elif eventType_p == 1:
+            pyatspi.Registry.generateKeyboardEvent(keyValue_p, keyString_p, pyatspi.KEY_RELEASE)
+        elif eventType_p == 2:
+            pyatspi.Registry.generateKeyboardEvent(keyValue_p, keyString_p, pyatspi.KEY_PRESSRELEASE)
+
+    def _doMouseMacroStep(self,xpos, ypos, mouseEvent, posRelation = "abs"):
+        pyatspi.Registry.generateMouseEvent(xpos,ypos,posRelation)
+        if (mouseEvent != 'None'):
+            pyatspi.Registry.generateMouseEvent(xpos,ypos,mouseEvent)
+            
+    def _threadRunMacro(self):
+        if self._debug:
+            print("_threadRunMacro starts")
+        self._RunMacro()
+
+    def _writeKeyboardToMacro(self,keyValue_p, keyString_p, eventType_p):
+        if eventType_p == pyatspi.KEY_PRESS:
+            eventTypeID = 0
+        elif eventType_p == pyatspi.KEY_RELEASE:
+            eventTypeID = 1
+        elif eventType_p == pyatspi.KEY_PRESSRELEASE:
+            eventTypeID = 2
+        macroFile = open(self._macroFile, "a")
+        macroFile.write('k,' + str(keyValue_p) + ',' + str(keyString_p) + ',' + str(eventTypeID) + '\n')
+        macroFile.close()
+
+    def _writeMouseToMacro(self, Xpos_p, Ypos_p, MouseEvent_p):
+        macroFile = open(self._macroFile, "a")
+        macroFile.write('c,' + 'delay' + ',0.9\n')
+        macroFile.write('m,' + str(Xpos_p) + ',' + str(Ypos_p) + ',' + MouseEvent_p + '\n')
+        macroFile.close()
+
+    def showGUI(self):
+        if not self._macroExists():
+            return
+
+        self._gui = self._createMacroConfirm()
+        self._gui.show_all()
+        ts = Gtk.get_current_event_time()
+        self._gui.present_with_time(ts)
+        self._runMacroButton.grab_focus()
+        Gtk.main()
+
+    def _onKeyRelease(self, widget, event):
+        keycode = event.hardware_keycode
+        keymap = Gdk.Keymap.get_for_display(Gdk.Display.get_default())
+        entries_for_keycode = keymap.get_entries_for_keycode(keycode)
+        entries = entries_for_keycode[-1]
+        eventString = Gdk.keyval_name(entries[0])
+#        if self._debug:
+#            print(eventString)
+#        if eventString == 'Escape':
+#            self._cancel(True)
+#        if eventString == 'Return':
+#            self._leftClickButton.grab_focus()
+
+
+KEY_CODE = {
+    '¼':13,
+    '½':14,
+    '0':19,
+    '!':10,
+    '/':106,
+    '"':11,
+    '1':10,
+    '¹':10,
+    '§':12,
+    '$':13,
+    '%':14,
+    '¬':15,
+    '&':15,
+    '/':16,
+    '{':16,
+    '(':17,
+    '[':17,
+    ')':18,
+    ']':18,
+    '=':19,
+    '}':19,
+    '?':20,
+    '\\':20,
+    '2':11,
+    '²':11,
+    '@':24,
+    '€':26,
+    '¶':27,
+    '←':29,
+    '↓':30,
+    '→':31,
+    '3':12,
+    '³':12,
+    '~':35,
+    '*':35,
+    '+':35,
+    '':37,
+    '4':13,
+    '°':49,
+    '′':49,
+    "'":51,
+    '#':51,
+    '5':14,
+    '»':52,
+    '«':53,
+    '¢':54,
+    '„':55,
+    '“':56,
+    '”':57,
+    'µ':58,
+    ',':59,
+    ';':59,
+    '·':59,
+    ':':60,
+    '.':60,
+    '…':60,
+    '_':61,
+    '-':61,
+    '–':61,
+    '6':15,
+    '*':63,
+    '7':16,
+    '7':79,
+    '8':17,
+    '-':82,
+    '+':86,
+    '':9,
+    '9':18,
+    '<':94,
+    '>':94,
+    '|':94,
+    'a':38,
+    'A':38,
+    'ä':48,
+    'Ä':48,
+    'Alt_L':64,
+    'b':56,
+    'B':56,
+    'BackSpace':22,
+    'c':54,
+    'C':54,
+    'Caps_Lock':66,
+    'd':40,
+    'D':40,
+    'đ':41,
+    'dead_acute':21,
+    'dead_cedilla':21,
+    'dead_circumflex':49,
+    'dead_diaeresis':34,
+    'dead_grave':21,
+    'Delete':119,
+    'Down':116,
+    'e':26,
+    'E':26,
+    'End':115,
+    'Escape':9,
+    'F10':76,
+    'F11':95,
+    'F12':96,
+    'F1':67,
+    'F2':68,
+    'F3':69,
+    'f':41,
+    'F':41,
+    'F4':70,
+    'F5':71,
+    'F6':72,
+    'F7':73,
+    'F8':74,
+    'F9':75,
+    'g':42,
+    'G':42,
+    'h':43,
+    'H':43,
+    'Home':110,
+    'i':31,
+    'I':31,
+    'Insert':118,
+    'ISO_Left_Tab':23,
+    'ISO_Level3_Shift':108,
+    'j':44,
+    'J':44,
+    'k':45,
+    'K':45,
+    'KP_Begin':84,
+    'KP_Delete':91,
+    'KP_Down':88,
+    'KP_End':87,
+    'KP_Enter':104,
+    'KP_Home':79,
+    'KP_Insert':90,
+    'KP_Left':83,
+    'KP_Next':89,
+    'KP_Page_Up':81,
+    'KP_Right':85,
+    'KP_Up':80,
+    'ł':25,
+    'l':46,
+    'L':46,
+    'Left':113,
+    'm':58,
+    'M':58,
+    'Menu':135,
+    'n':57,
+    'N':57,
+    'Num_Lock':77,
+    'o':32,
+    'O':32,
+    'ø':32,
+    'ö':47,
+    'Ö':47,
+    'p':33,
+    'P':33,
+    'Page_Down':117,
+    'Page_Up':112,
+    'Pause':127,
+    'q':24,
+    'Q':24,
+    'r':27,
+    'R':27,
+    'Return':36,
+    'Right':114,
+    's':39,
+    'S':39,
+    'Scroll_Lock':78,
+    'Shift_L':50,
+    'Shift_R':62,
+    'space':65,
+    'ß':20,
+    'Super_R':134,
+    't':28,
+    'T':28,
+    'ŧ':28,
+    'Tab':23,
+    'u':30,
+    'U':30,
+    'ü':34,
+    'Ü':34,
+    'Up':111,
+    'v':55,
+    'V':55,
+    'w':25,
+    'W':25,
+    'x':53,
+    'X':53,
+    'y':52,
+    'Y':52,
+    'z':29,
+    'Z':29,
+    'þ':33,
+    }
+
+if __name__ == "__main__":
+    Application = OCRScreenReader()
+    Application.run()
