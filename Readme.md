@@ -4,13 +4,17 @@ This repository contains resources concerning unofficial Linux distribution aime
 
 The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
 
+The live media is currently based on Fedora 37.
+
 ## Building live media ISO
 
 The kickstart file is inspired by the Fedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Building of this image requires Fedora. So how to build it?
+Building of this image requires Fedora. It is strongly recommended to use Fedora version matching the one you are going to build. So if you are going to build a live media based on Fedora 37, it is strongly recommended to do it from Fedora 37 environment.
+
+So how to build it?
 
 1. sudo dnf install lorax-lmc-novirt
 
@@ -20,20 +24,35 @@ Building of this image requires Fedora. So how to build it?
 
     - mkdir -p live/tmp
 
-5. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
+4. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
 
     - choose ks/vojtux_cs.ks or ks/vojtux_en.ks as an input file, based on your language choice
 
     - this makes sure that all includes will be handled correctly
 
-5. sudo livemedia-creator --make-iso --no-virt --ks <output_kickstart_file.ks> --tmp live/tmp --anaconda-arg="--noselinux" 
+5. sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_37.iso --project vojtux --releasever 37 --ks <output_kickstart_file.ks> --tmp live/tmp
 
-    - if you did not create your own temporary directory, you can leave out the --tmp argument
+    - --make-iso creates ISO image. Note that you can create multiple things with livemedia-creator.
 
+    - --no-virt uses local Anaconda to perform the installation without spinning up virtual machine. This is probably not mandatory, but I chose this approach because I am actually building the image within virtual machine running Fedora.
+
+    - --iso-only - after the process finishes, delete all artifacts except for the resulting ISO image. You may omit this if you need to inspect intermediate artifacts.
+
+    - --anaconda-arg="--noselinux" disables selinux during the installation, it was causing problems.
+
+    - --iso-name vojtux_37.iso provides name for the resulting ISO image
+
+    - --project vojtux project name, this is used as image label and it is visible in the boot menu
+
+    - --releasever 37 this is also visible in the boot menu
+
+    - --ks <output_kickstart_file.ks> use the kickstart file created in previous steps
+
+    - --tmp live/tmp optional argument if you want to use your own defined tmp directory
 
 ## What is actually done?
 
-The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be folder images and in this folder there will be a file called anaconda.iso. The live image is based on Fedora Mate spin.
+The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be "images" folder and in this folder there will be a file called according to the --iso-name parameter. The live image is based on Fedora 37 Mate spin.
 
 Following additional changes are applied:
 
