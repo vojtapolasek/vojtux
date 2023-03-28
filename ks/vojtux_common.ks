@@ -122,6 +122,8 @@ lios
 
 # settings and shortcuts
 vojtux-settings
+# OCR desktop
+ocrdesktop
 
  # remote support
 tmate
