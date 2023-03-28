@@ -13,12 +13,12 @@ SOURCE1:  10-keybindings-toggle-monitor
 RPM package with toggle-monitor script
 
 %install
-install -d %{buildroot}/usr/local/bin
-install -m 755 %{SOURCE0} %{buildroot}/usr/local/bin/monitor-toggle
+install -d %{buildroot}/usr/bin
+install -m 755 %{SOURCE0} %{buildroot}/usr/bin/monitor-toggle
 install -d %{buildroot}/etc/dconf/db/local.d
 install %{SOURCE1} %{buildroot}/etc/dconf/db/local.d/10-keybindings-toggle-monitor
 
 %files
-/usr/local/bin/monitor-toggle
+/usr/local/monitor-toggle
 /etc/dconf/db/local.d/10-keybindings-toggle-monitor
 
