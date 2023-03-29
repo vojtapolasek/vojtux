@@ -22,45 +22,6 @@ vojtux-docs-en
 
 %post
 cat > /etc/dconf/db/local.d/03-keybindings <<- EOM
-[org/mate/desktop/keybindings/custom0]
-action='firefox'
-binding='<Alt><Mod4>f'
-name='Firefox'
-
-[org/mate/desktop/keybindings/custom1]
-action='mate-terminal'
-binding='<Primary><Alt>t'
-name='Launch terminal'
-
-[org/mate/desktop/keybindings/custom2]
-action='sh -c "amixer set Master 5%+ && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
-binding='<Alt><Mod4>Up'
-name='Volume up'
-
-[org/mate/desktop/keybindings/custom3]
-action='sh -c "amixer set Master 5%- && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
-binding='<Alt><Mod4>Down'
-name='Volume down'
-
-[org/mate/desktop/keybindings/custom4]
-action='sh -c "amixer set Master toggle && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
-binding='<Alt><Mod4>Left'
-name='Toggle mute'
-
-[org/mate/desktop/keybindings/custom5]
-action='caja .'
-binding='<Mod4>Home' 
-name='Home folder'
-
-[org/mate/desktop/keybindings/custom6]
-action='orca -r'
-binding='<Alt><Mod4>o'
-name='Restart Orca'
-
-[org/mate/desktop/keybindings/custom7]
-action='lios'
-binding='<Alt><Mod4>l'
-name='Linux Intelligent OCR Software'
 
 #[org/mate/desktop/keybindings/custom8]
 #action='/opt/ocrdesktop/ocrdesktop -l ces'
