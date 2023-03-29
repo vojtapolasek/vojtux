@@ -125,7 +125,10 @@ toggle-monitor
 # settings and shortcuts
 vojtux-settings
 
- # remote support
+# a11y sound theme
+a11y-sound-theme
+
+# remote support
 tmate
 %end
 
@@ -205,11 +208,6 @@ export GNOME_ACCESSIBILITY=1
 export QT_ACCESSIBILITY=1
 export QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
 EOM
-
-# install linux-a11y sound theme
-git clone https://github.com/coffeeking/linux-a11y-sound-theme.git
-cp -r linux-a11y-sound-theme/linux-a11y /usr/share/sounds/
-
 
 mkdir /etc/systemd/system/festival.service.d
 cat > /etc/systemd/system/festival.service.d/override.conf <<EOM
