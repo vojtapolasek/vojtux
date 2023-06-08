@@ -2,7 +2,7 @@ Name:     ocrdesktop
 Version:  4.0
 Release:  2
 Summary:  Accessibility tool that converts content of the current window into a text
-License:  Public Domain
+License:  GPL+
 
 Requires: python3 tesseract tesseract-langpack-eng python3-pillow python3-pyatspi python-pytesseract libwnck3 gtk3
 
