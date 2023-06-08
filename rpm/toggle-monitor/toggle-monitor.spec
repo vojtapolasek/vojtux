@@ -15,7 +15,7 @@ RPM package with toggle-monitor script
 %install
 install -d %{buildroot}%{_bindir}
 install -m 755 %{SOURCE0} %{buildroot}%{_bindir}/monitor-toggle
-install -d %{buildroot}/etc/dconf/db/local.d
+install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
 install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/10-keybindings-toggle-monitor
 
 %files
