@@ -24,7 +24,7 @@ install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
 install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/09-keybindings-ocrdesktop
 
 %files
-/usr/bin/ocrdesktop
+%{_bindir}/ocrdesktop
 /etc/dconf/db/local.d/09-keybindings-ocrdesktop
 
 %clean
