@@ -19,6 +19,6 @@ install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
 install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/10-keybindings-toggle-monitor
 
 %files
-/usr/bin/monitor-toggle
+%{_bindir}/monitor-toggle
 /etc/dconf/db/local.d/10-keybindings-toggle-monitor
 
