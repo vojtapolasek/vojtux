@@ -20,7 +20,7 @@ RPM package for ocrdesktop
 install -d %{buildroot}%{_bindir}
 cp ocrdesktop %{buildroot}/usr/bin/ocrdesktop
 chmod 755 %{buildroot}/usr/bin/ocrdesktop
-install -d %{buildroot}/etc/dconf/db/local.d
+install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
 install %{SOURCE1} %{buildroot}/etc/dconf/db/local.d/09-keybindings-ocrdesktop
 
 %files
