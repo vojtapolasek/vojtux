@@ -17,7 +17,7 @@ RPM package for ocrdesktop
 %setup -q
 
 %install
-install -d %{buildroot}/usr/bin
+install -d %{buildroot}%{_bindir}
 cp ocrdesktop %{buildroot}/usr/bin/ocrdesktop
 chmod 755 %{buildroot}/usr/bin/ocrdesktop
 install -d %{buildroot}/etc/dconf/db/local.d
