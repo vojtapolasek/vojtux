@@ -9,6 +9,8 @@ BuildRequires: git
 %description
 RPM package with Linux-A11y sound themes
 
+%prep
+
 %build
 git clone https://github.com/coffeeking/linux-a11y-sound-theme.git
 
@@ -21,26 +23,20 @@ theme-name='linux-a11y'
 
 EOM
 
-cat > 12-accessibility-a11y <<EOM
-# Be nice to the users and pre-enable screen reading if they decide to install Gnome.
-[org/gnome/desktop/a11y/applications]
-screen-reader-enabled=true
-
-EOM
-
 %install
-install -d %{buildroot}/usr/share/sounds/
-cp -r linux-a11y-sound-theme/linux-a11y %{buildroot}/usr/share/sounds/
-install -d %{buildroot}/etc/dconf/db/local.d
-cp 12-panel-a11y %{buildroot}/etc/dconf/db/local.d/12-panel-a11y
-cp 12-accessibility-a11y %{buildroot}/etc/dconf/db/local.d/12-accessibility-a11y
+install -d %{buildroot}%{_datadir}/sounds/
+cp -r linux-a11y-sound-theme/linux-a11y %{buildroot}%{_datadir}/sounds/
+install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
+install 12-panel-a11y %{buildroot}%{_sysconfdir}/dconf/db/local.d/12-panel-a11y
 
 %files
-/usr/share/sounds/linux-a11y
-/etc/dconf/db/local.d/12-panel-a11y
-/etc/dconf/db/local.d/12-accessibility-a11y
+%{_datadir}/sounds/linux-a11y
+%{_sysconfdir}/dconf/db/local.d/12-panel-a11y
 
 %clean
 rm -rf linux-a11y-sound-theme
-rm -rf 12-accessibility-a11y
 rm -rf 12-panel-a11y
+
+%changelog
+* Sat Jun 10 2023 Konstantin Kuminsky <k.k@redhat.com> - 1-2
+- First linux-a11y-sounds-theme package
