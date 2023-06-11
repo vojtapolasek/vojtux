@@ -1,0 +1,14 @@
+# Be nice to the users and pre-enable screen reading if they decide to install Gnome.
+[org/gnome/desktop/a11y/applications]
+screen-reader-enabled=true
+
+[org/mate/desktop/applications/at/visual]
+exec='orca'
+
+[org/mate/desktop/interface]
+accessibility=true
+
+#enabling sound theme
+[org/mate/desktop/sound]
+theme-name='freedesktop'
+event-sounds=true
