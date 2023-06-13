@@ -6,20 +6,23 @@ License:  GPL+
 
 Requires: python3 tesseract tesseract-langpack-eng python3-pillow python3-pyatspi python-pytesseract libwnck3 gtk3
 
-URL:      https://github.com/chrys87/ocrdesktop/
-SOURCE0:  https://github.com/chrys87/ocrdesktop/archive/refs/tags/4.0.tar.gz
+URL:      https://github.com/chrys87/ocrdesktop/releases
+SOURCE0:  https://github.com/chrys87/ocrdesktop/archive/refs/tags/%{version}.tar.gz
 SOURCE1:  09-keybindings-ocrdesktop
 
 %description
 RPM package for ocrdesktop
 
+%global debug_package %{nil}
+
 %prep
 %setup -q
+
+%build
 
 %install
 install -d %{buildroot}%{_bindir}
 install -m 0755 ocrdesktop %{buildroot}%{_bindir}/ocrdesktop
-chmod 755 %{buildroot}/usr/bin/ocrdesktop
 install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
 install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/09-keybindings-ocrdesktop
 
@@ -27,5 +30,6 @@ install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/09-keybindings-oc
 %{_bindir}/ocrdesktop
 %{_sysconfdir}/dconf/db/local.d/09-keybindings-ocrdesktop
 
-%clean
-rm -rf ../4.0.tar.gz
+%changelog
+* Mon Jun 12 2023 Konstantin Kuminsky <k.k@redhat.com> - 4.0-2
+- First ocrdesktop package
