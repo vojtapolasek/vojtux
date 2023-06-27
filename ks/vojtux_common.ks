@@ -120,6 +120,9 @@ python3-devel
 tesseract-devel
 lios
 
+# settings and shortcuts
+vojtux-settings
+
  # remote support
 tmate
 %end
@@ -202,137 +205,6 @@ fi
 
 EOM
 chmod 755 /usr/local/bin/monitor-toggle
-echo "Preparing accessibility override..."
-cat > /etc/dconf/db/local.d/01-accessibility <<- EOM
-# Be nice to the users and pre-enable screen reading if they decide to install Gnome.
-[org/gnome/desktop/a11y/applications]
-screen-reader-enabled=true
-
-[org/mate/desktop/applications/at/visual]
-exec='orca'
-
-[org/mate/desktop/interface]
-accessibility=true
-
-#enabling sound theme
-[org/mate/desktop/sound]
-theme-name='freedesktop'
-event-sounds=true
-
-EOM
-echo "Preparing Mate panel configuration override..."
-cat > /etc/dconf/db/local.d/02-panel <<- EOM
-[org/mate/panel/general]
-object-id-list=['menu-bar', 'terminal', 'web-browser', 'email-client', 'volume-control', 'notification-area', 'show-desktop', 'window-list', 'object-0']
-toplevel-id-list=['top']
-
-[org/mate/panel/objects/clock]
-applet-iid='ClockAppletFactory::ClockApplet'
-locked=true
-object-type='applet'
-panel-right-stick=true
-position=0
-toplevel-id='top'
-
-[org/mate/panel/objects/email-client]
-launcher-location='/usr/share/applications/mozilla-thunderbird.desktop'
-locked=true
-object-type='launcher'
-position=40
-toplevel-id='top'
-
-[org/mate/panel/objects/file-browser]
-launcher-location='/usr/share/applications/caja-browser.desktop'
-locked=true
-object-type='launcher'
-position=10
-toplevel-id='top'
-
-[org/mate/panel/objects/menu-bar]
-locked=true
-object-type='menu-bar'
-position=0
-toplevel-id='top'
-
-[org/mate/panel/objects/notification-area]
-applet-iid='NotificationAreaAppletFactory::NotificationArea'
-locked=true
-object-type='applet'
-panel-right-stick=true
-position=10
-toplevel-id='top'
-
-[org/mate/panel/objects/terminal]
-launcher-location='/usr/share/applications/mate-terminal.desktop'
-locked=true
-object-type='launcher'
-position=20
-toplevel-id='top'
-
-[org/mate/panel/objects/web-browser]
-launcher-location='/usr/share/applications/firefox.desktop'
-locked=true
-object-type='launcher'
-position=30
-toplevel-id='top'
-
-# advanced mate menu
-[org/mate/panel/objects/object-0]
-applet-iid='MateMenuAppletFactory::MateMenuApplet'
-object-type='applet'
-panel-right-stick=false
-position=-1
-toplevel-id='top'
-
-
-[org/gnome/desktop/wm/keybindings]
-begin-move=@as []
-begin-resize=@as []
-close=['<Alt>F4']
-lower=@as []
-maximize=@as []
-maximize-horizontally=@as []
-maximize-vertically=@as []
-move-to-monitor-left=['<Super>Left']
-move-to-monitor-right=['<Super>Right']
-move-to-workspace-1=['<Shift><Alt>F1']
-move-to-workspace-2=['<Shift><Alt>F2']
-move-to-workspace-3=['<Shift><Alt>F3']
-move-to-workspace-4=['<Shift><Alt>F4']
-move-to-workspace-down=['<Primary><Super>Down', '<Control><Shift><Alt>Down']
-move-to-workspace-left=['<Primary><Super>Left']
-move-to-workspace-right=['<Primary><Super>Right']
-move-to-workspace-up=['<Primary><Super>Up', '<Control><Shift><Alt>Up']
-raise=@as []
-raise-or-lower=@as []
-show-desktop=['<Super>d']
-switch-applications=['', '<Alt>Tab']
-switch-group=['<Super>Tab', '<Alt>Above_Tab']
-switch-to-workspace-down=['<Primary><Alt>Down', '<Control><Alt>Down']
-switch-to-workspace-left=['<Primary><Alt>Left']
-switch-to-workspace-right=['<Primary><Alt>Right']
-switch-to-workspace-up=['<Primary><Alt>Up', '<Control><Alt>Up']
-switch-windows=['<Alt>Tab']
-toggle-maximized=@as []
-toggle-on-all-workspaces=@as []
-toggle-shaded=@as []
-unmaximize=@as []
-
-#preventing sound previews in Caja
-[org/mate/caja/preferences]
-preview-sound='never'
-
-#shortcut for stopping and starting screenreader
-[org/mate/settings-daemon/plugins/media-keys]
-screenreader='<Alt><Mod4>s'
-
-#sound theme
-[org/mate/desktop/sound]
-event-sounds=true
-input-feedback-sounds=true
-theme-name='linux-a11y'
-
-EOM
 echo "Updating dconf databases..."
 dconf update
 # enabling accessibility
