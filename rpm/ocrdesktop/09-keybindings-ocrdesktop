@@ -1,5 +1,4 @@
 [org/mate/desktop/keybindings/custom9]
-action='/opt/ocrdesktop/ocrdesktop -l eng'
+action='/usr/bin/ocrdesktop -l eng'
 binding='<Primary><Mod4>o'
 name='OCR active window'
-
