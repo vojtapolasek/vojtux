@@ -1,4 +1,4 @@
-%include fedora-live-base.ks
+%include /usr/share/spin-kickstarts/fedora-live-base.ks  
 
 selinux --disabled
 
