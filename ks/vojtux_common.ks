@@ -77,7 +77,6 @@ mate-menu
 #hardware support
 @hardware-support
 gutenprint-cups
-cups-bjnp
 cups-filters
 foomatic-db
 foomatic-db-ppds
