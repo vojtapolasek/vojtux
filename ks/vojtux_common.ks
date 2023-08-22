@@ -1,4 +1,5 @@
 %include fedora-live-base.ks
+%include repos.ks
 
 selinux --disabled
 
