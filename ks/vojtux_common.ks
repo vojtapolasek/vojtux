@@ -182,6 +182,10 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-*-primary
 echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
+# import Vojtux-apps key
+dnf copr enable -y tyrylu/vojtux-apps
+
+
 #installing ocrdesktop
 #git clone https://github.com/chrys87/ocrdesktop.git /opt/ocrdesktop
 #chmod -R 755 /opt/ocrdesktop
