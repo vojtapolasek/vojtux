@@ -7,57 +7,44 @@
 # Does includes "default" language configuration (kickstarts including
 # this template can override these settings)
 
-#lang en_US.UTF-8
-#keyboard us
-#timezone US/Eastern
-authselect --useshadow --passalgo=sha512
-selinux --enforcing
+lang en_US.UTF-8
+keyboard us
+timezone US/Eastern
 firewall --enabled --service=mdns
 xconfig --startxonboot
 zerombr
 clearpart --all
+part / --size 5120 --fstype ext4
 services --enabled=NetworkManager,ModemManager --disabled=sshd
 network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
 shutdown
 
-%include repos.ks
+
 
 %packages
-@base-x
-@guest-desktop-agents
-@standard
-@core
-@fonts
-@input-methods
-@dial-up
-@multimedia
-@hardware-support
-@printing
-
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
 kernel
 kernel-modules
 kernel-modules-extra
 
-# This was added a while ago, I think it falls into the category of
-# "Diagnosis/recovery tool useful from a Live OS image".  Leaving this untouched
-# for now.
-memtest86+
-
 # The point of a live image is to install
 anaconda
 anaconda-install-env-deps
 anaconda-live
 @anaconda-tools
+# Anaconda has a weak dep on this and we don't want it on livecds, see
+# https://fedoraproject.org/wiki/Changes/RemoveDeviceMapperMultipathFromWorkstationLiveCD
+-fcoe-utils
+-device-mapper-multipath
 
 # Need aajohan-comfortaa-fonts for the SVG rnotes images
 aajohan-comfortaa-fonts
 
 # Without this, initramfs generation during live image creation fails: #1242586
 dracut-live
-syslinux
+# syslinux is in @x86-baremetal-tools
 
 # anaconda needs the locales available to run for different locales
 glibc-all-langpacks
@@ -106,13 +93,7 @@ for arg in \`cat /proc/cmdline\` ; do
   fi
 done
 
-# enable swaps unless requested otherwise
-swaps=\`blkid -t TYPE=swap -o device\`
-if ! strstr "\`cat /proc/cmdline\`" noswap && [ -n "\$swaps" ] ; then
-  for s in \$swaps ; do
-    action "Enabling swap partition \$s" swapon \$s
-  done
-fi
+# enable swapfile if it exists
 if ! strstr "\`cat /proc/cmdline\`" noswap && [ -f /run/initramfs/live/\${livedir}/swap.img ] ; then
   action "Enabling swap file" swapon /run/initramfs/live/\${livedir}/swap.img
 fi
@@ -199,9 +180,6 @@ systemctl --no-reload disable mdmonitor-takeover.service 2> /dev/null || :
 systemctl stop mdmonitor.service 2> /dev/null || :
 systemctl stop mdmonitor-takeover.service 2> /dev/null || :
 
-# don't enable the gnome-settings-daemon packagekit plugin
-gsettings set org.gnome.software download-updates 'false' || :
-
 # don't start cron/at as they tend to spawn things which are
 # disk intensive that are painful on a live image
 systemctl --no-reload disable crond.service 2> /dev/null || :
@@ -223,7 +201,7 @@ touch /.liveimg-configured
 # https://bugzilla.redhat.com/show_bug.cgi?id=679486
 # the hostname must be something else than 'localhost'
 # https://bugzilla.redhat.com/show_bug.cgi?id=1370222
-echo "localhost-live" > /etc/hostname
+hostnamectl set-hostname "localhost-live"
 
 EOF
 
@@ -303,11 +281,8 @@ EOF
 
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-releasever=$(rpm -q --qf '%{version}\n' --whatprovides system-release)
-basearch=$(uname -i)
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this LiveCD"
-rpm -qa
+rpm -qa --qf '%{size}\t%{name}-%{version}-%{release}.%{arch}\n' |sort -rn
 # Note that running rpm recreates the rpm db files which aren't needed or wanted
 rm -f /var/lib/rpm/__db*
 
@@ -342,23 +317,15 @@ touch /etc/machine-id
 
 
 %post --nochroot
-cp $INSTALL_ROOT/usr/share/licenses/*-release/* $LIVE_ROOT/
+# For livecd-creator builds only (lorax/livemedia-creator handles this directly)
+if [ -n "$LIVE_ROOT" ]; then
+    cp "$INSTALL_ROOT"/usr/share/licenses/*-release-common/* "$LIVE_ROOT/"
 
-# only works on x86, x86_64
-if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
-    # For livecd-creator builds
-    if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
-    cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
-
-    # For lorax/livemedia-creator builds
-    sed -i '
-    /## make boot.iso/ i\
-    # Add livecd-iso-to-disk script to .iso filesystem at /LiveOS/\
-    <% f = "usr/bin/livecd-iso-to-disk" %>\
-    %if exists(f):\
-        install ${f} ${LIVEDIR}/${f|basename}\
-    %endif\
-    ' /usr/share/lorax/templates.d/99-generic/live/x86.tmpl
+    # only installed on x86, x86_64
+    if [ -f /usr/bin/livecd-iso-to-disk ]; then
+        mkdir -p "$LIVE_ROOT/LiveOS"
+        cp /usr/bin/livecd-iso-to-disk "$LIVE_ROOT/LiveOS"
+    fi
 fi
 
 %end
