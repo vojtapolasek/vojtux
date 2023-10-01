@@ -4,7 +4,7 @@ This repository contains resources concerning unofficial Linux distribution aime
 
 The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
 
-The live media is currently based on Fedora 37.
+The live media is currently based on Fedora 38.
 
 ## Building live media ISO
 
@@ -12,7 +12,7 @@ The kickstart file is inspired by the Fedora Mate spin. The Mate environment is 
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Building of this image requires Fedora. It is strongly recommended to use Fedora version matching the one you are going to build. So if you are going to build a live media based on Fedora 37, it is strongly recommended to do it from Fedora 37 environment.
+Building of this image requires Fedora. It is strongly recommended to use Fedora version matching the one you are going to build. So if you are going to build a live media based on Fedora 38, it is strongly recommended to do it from Fedora 38 environment.
 
 So how to build it?
 
@@ -30,7 +30,7 @@ So how to build it?
 
     - this makes sure that all includes will be handled correctly
 
-5. sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_37.iso --project vojtux --releasever 37 --ks <output_kickstart_file.ks> --tmp live/tmp
+5. sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_38.iso --project vojtux --releasever 38 --ks <output_kickstart_file.ks> --tmp live/tmp
 
     - --make-iso creates ISO image. Note that you can create multiple things with livemedia-creator.
 
@@ -40,11 +40,11 @@ So how to build it?
 
     - --anaconda-arg="--noselinux" disables selinux during the installation, it was causing problems.
 
-    - --iso-name vojtux_37.iso provides name for the resulting ISO image
+    - --iso-name vojtux_38.iso provides name for the resulting ISO image
 
     - --project vojtux project name, this is used as image label and it is visible in the boot menu
 
-    - --releasever 37 this is also visible in the boot menu
+    - --releasever 38 this is also visible in the boot menu
 
     - --ks <output_kickstart_file.ks> use the kickstart file created in previous steps
 
@@ -52,7 +52,7 @@ So how to build it?
 
 ## What is actually done?
 
-The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be "images" folder and in this folder there will be a file called according to the --iso-name parameter. The live image is based on Fedora 37 Mate spin.
+The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be a file called according to the --iso-name parameter. The live image is based on Fedora 38 Mate spin.
 
 Following additional changes are applied:
 
