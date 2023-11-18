@@ -55,17 +55,17 @@ So how to build it?
 There is a simple build.sh script included to show the sequence that I used to build the image.
 
 ```
-./build.sh
+./dockerbuild/build.sh
 ```
 
 Which should end in something like:
 
 ```
-sudo find ./tmp -name vojtux_38.iso
-./tmp/lmc-result-DEADBEEF_cg/vojtux_38.iso
+sudo find ./dockerbuild/output -name vojtux_38.iso
+./dockerbuild/output/vojtux_38.iso
 ```
 
-Your vojtux_38.iso should be listed as above, where DEADBEEF will be some unique ID.
+Your `vojtux_38.iso` should be listed as above.
 
 ## What is actually done?
 

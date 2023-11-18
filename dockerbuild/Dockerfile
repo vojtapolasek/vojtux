@@ -9,4 +9,5 @@ RUN sudo dnf install -yq lorax-lmc-novirt pykickstart \
 COPY ./ /target
 WORKDIR /target
 
-CMD /target/start.sh
+CMD ls -Rl /target
+CMD /target/dockerbuild/start.sh
