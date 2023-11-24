@@ -50,6 +50,23 @@ So how to build it?
 
     - --tmp live/tmp optional argument if you want to use your own defined tmp directory
 
+## Docker build
+
+There is a simple build.sh script included to show the sequence that I used to build the image.
+
+```
+./dockerbuild/build.sh
+```
+
+Which should end in something like:
+
+```
+sudo find ./dockerbuild/output -name vojtux_38.iso
+./dockerbuild/output/vojtux_38.iso
+```
+
+Your `vojtux_38.iso` should be listed as above.
+
 ## What is actually done?
 
 The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be a file called according to the --iso-name parameter. The live image is based on Fedora 38 Mate spin.
