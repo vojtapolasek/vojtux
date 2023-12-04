@@ -1,5 +1,5 @@
 [org/mate/desktop/keybindings/custom10]
-action='/usr/local/bin/monitor-toggle'
+action='/usr/bin/monitor-toggle'
 binding='<Alt><Mod4>m'
 name='Toggle monitor'
 
