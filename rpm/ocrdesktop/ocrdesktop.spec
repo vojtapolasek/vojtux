@@ -23,12 +23,18 @@ RPM package for ocrdesktop
 %install
 install -d %{buildroot}%{_bindir}
 install -m 0755 ocrdesktop %{buildroot}%{_bindir}/ocrdesktop
-install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
-install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/09-keybindings-ocrdesktop
+install -d %{buildroot}%{_sysconfdir}/dconf/db/distro.d
+install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/distro.d/09-keybindings-ocrdesktop
 
 %files
 %{_bindir}/ocrdesktop
-%{_sysconfdir}/dconf/db/local.d/09-keybindings-ocrdesktop
+%{_sysconfdir}/dconf/db/distro.d/09-keybindings-ocrdesktop
+
+%post
+dconf update
+
+%postrm
+dconf update
 
 %changelog
 * Mon Jun 12 2023 Konstantin Kuminsky <k.k@redhat.com> - 4.0-2
