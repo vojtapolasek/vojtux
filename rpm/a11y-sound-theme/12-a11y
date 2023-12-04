@@ -1,4 +1,3 @@
-#sound theme
 [org/mate/desktop/sound]
 event-sounds=true
 input-feedback-sounds=true
