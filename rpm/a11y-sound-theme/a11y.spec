@@ -6,7 +6,7 @@ License:  GPL-3.0
 
 BuildRequires: git
 
-SOURCE1:  12-panel-a11y
+SOURCE1:  12-a11y
 
 %description
 RPM package with Linux-A11y sound themes
@@ -19,12 +19,18 @@ git clone https://github.com/coffeeking/linux-a11y-sound-theme.git
 %install
 install -d %{buildroot}%{_datadir}/sounds/
 cp -r linux-a11y-sound-theme/linux-a11y %{buildroot}%{_datadir}/sounds/
-install -d %{buildroot}%{_sysconfdir}/dconf/db/local.d
-install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/local.d/12-panel-a11y
+install -d %{buildroot}%{_sysconfdir}/dconf/db/distro.d
+install %{SOURCE1} %{buildroot}%{_sysconfdir}/dconf/db/distro.d/12-a11y
 
 %files
 %{_datadir}/sounds/linux-a11y
-%{_sysconfdir}/dconf/db/local.d/12-panel-a11y
+%{_sysconfdir}/dconf/db/distro.d/12-a11y
+
+%post
+dconf update
+
+%postrm
+dconf update
 
 %clean
 rm -rf linux-a11y-sound-theme
