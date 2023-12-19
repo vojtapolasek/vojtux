@@ -184,6 +184,9 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-*-primary
 echo "Importing RPM Fusion keys"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
+# import Vojtux-apps key
+dnf copr enable -y tyrylu/vojtux-apps
+
 # create script to toggle monitor
 mkdir -p /usr/local/bin
 cat > /usr/local/bin/monitor-toggle <<EOM
