@@ -120,6 +120,8 @@ python3-devel
 tesseract-devel
 lios
 
+toggle-monitor
+
 # settings and shortcuts
 vojtux-settings
 
