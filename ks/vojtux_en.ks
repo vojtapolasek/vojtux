@@ -23,16 +23,6 @@ vojtux-docs-en
 %post
 cat > /etc/dconf/db/local.d/03-keybindings <<- EOM
 
-#[org/mate/desktop/keybindings/custom8]
-#action='/opt/ocrdesktop/ocrdesktop -l ces'
-#binding='<Mod4>o'
-#name='OCR aktuálního okna (český jazyk)'
-
-#[org/mate/desktop/keybindings/custom9]
-#action='/opt/ocrdesktop/ocrdesktop -l eng'
-#binding='<Primary><Mod4>o'
-#name='OCR aktuálního okna (anglický jazyk)'
-
 [org/mate/desktop/keybindings/custom10]
 action='/usr/local/bin/monitor-toggle'
 binding='<Alt><Mod4>m'
