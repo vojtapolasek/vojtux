@@ -8,6 +8,15 @@ The live media is currently based on Fedora 38.
 
 ## Building live media ISO
 
+*Warning!* The Czech kickstart file is outdated!
+
+This repository is currently transitioning from the state where customizations were present in the kickstart file to a state where most of customizations will be packaged as RPMs.
+
+This is currently implemented for the English kickstart file, Czech kickstart file is not maintained right now.
+
+In future, it will get updated or deleted entirely.
+
+
 The kickstart file is inspired by the Fedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
