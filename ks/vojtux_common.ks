@@ -120,6 +120,8 @@ python3-devel
 tesseract-devel
 lios
 
+toggle-monitor
+
 # settings and shortcuts
 vojtux-settings
 # OCR desktop
@@ -189,26 +191,6 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 
 # import Vojtux-apps key
 dnf copr enable -y tyrylu/vojtux-apps
-
-# create script to toggle monitor
-mkdir -p /usr/local/bin
-cat > /usr/local/bin/monitor-toggle <<EOM
-#!/bin/sh
-output=$(xrandr | grep ' connected ' | awk '{print $1}' | head -1)
-screenSize=$(xrandr | awk 'BEGIN {foundOutput=0}
-    / '$output' / {foundOutput=1}
-    /\*\+/ {print $1}
-    /^[^ ]/ {if(foundOutput) exit 0}')
-if [ "$screenSize" != "" ]; then
-    xrandr --output $output --fb $screenSize --off
-	spd-say 'monitor off'
-else
-    xrandr --output $output --auto
-    spd-say 'Monitor on'
-fi
-
-EOM
-chmod 755 /usr/local/bin/monitor-toggle
 
 echo "Updating dconf databases..."
 dconf update
