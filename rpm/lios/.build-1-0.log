@@ -1,4 +1,0 @@
-
-setting SOURCE_DATE_EPOCH=1706227200
-error: Failed build dependencies:
-	python3-rpm-macros is needed by lios-1-0.x86_64
