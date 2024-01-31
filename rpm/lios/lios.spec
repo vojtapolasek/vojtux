@@ -16,19 +16,19 @@ Lios package
 git clone https://github.com/zendalona/lios.git
 
 %install
-install -d %{buildroot}%{_prefix}
 cd lios
-python3 setup.py install --install-data=%{_prefix}
+python3 setup.py install --install-data=%{_prefix} --root=%{buildroot}
 
 %files
-%{_prefix}/share/lios
-%{_prefix}/share/applications/Lios.desktop
-%{_prefix}/share/applications/Lios-ocr-screenshot.desktop
-%{_prefix}/share/man/man1/lios.1.gz
-%{_prefix}/share/doc/lios/copyright
-%{_prefix}/share/pixmaps/lios.xpm
-%{_prefix}/share/locale/fr/LC_MESSAGES/lios.mo
-%{_prefix}/share/locale/it/LC_MESSAGES/lios.mo
+/usr/lib/python3.12/site-packages/
+%{_datadir}/lios
+%{_datadir}/applications/Lios.desktop
+%{_datadir}/applications/Lios-ocr-screenshot.desktop
+%{_datadir}/pixmaps/lios.xpm
+%{_datadir}/locale/fr/LC_MESSAGES/lios.mo
+%{_datadir}/locale/it/LC_MESSAGES/lios.mo
+%{_mandir}/man1/lios.1.gz
+%{_docdir}/lios/copyright
 %{_bindir}/lios
 
 %clean
