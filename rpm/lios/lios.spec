@@ -20,7 +20,7 @@ cd lios
 python3 setup.py install --install-data=%{_prefix} --root=%{buildroot}
 
 %files
-/usr/lib/python3.12/site-packages/
+/usr/lib/python*/site-packages/
 %{_datadir}/lios
 %{_datadir}/applications/Lios.desktop
 %{_datadir}/applications/Lios-ocr-screenshot.desktop
