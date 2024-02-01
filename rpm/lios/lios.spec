@@ -4,7 +4,7 @@ Release:        0
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 
-BuildRequires:  python3 python3-rpm-macros git
+BuildRequires:  python3 python3-rpm-macros git site-packages
 Requires:       espeak python3-gobject python3-enchant python3-speechd python3-sane PackageKit-gtk3-module aspell-en tesseract poppler-utils ImageMagick
 
 %description
