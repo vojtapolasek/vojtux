@@ -4,8 +4,8 @@ Release:        0
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 
-BuildRequires:  git
-Requires:       python3 python3-imaging-sane python3-speechd tesseract-ocr imagemagick cuneiform espeak poppler-utils python3-enchant aspell-en gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0
+BuildRequires:  git python3
+Requires:       python3-imaging-sane python3-speechd tesseract-ocr imagemagick cuneiform espeak poppler-utils python3-enchant aspell-en gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0
 
 %description
 Lios package
