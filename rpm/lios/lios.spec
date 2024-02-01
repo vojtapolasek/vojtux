@@ -4,8 +4,8 @@ Release:        0
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 
-BuildRequires:  git python3
-Requires:       python3-imaging-sane python3-speechd tesseract-ocr imagemagick cuneiform espeak poppler-utils python3-enchant aspell-en gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0
+BuildRequires:  git python3.11
+Requires:       python3.11-imaging-sane python3.11-speechd tesseract-ocr imagemagick cuneiform espeak poppler-utils python3-enchant aspell-en gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0
 
 %description
 Lios package
@@ -17,10 +17,10 @@ git clone https://github.com/zendalona/lios.git
 
 %install
 cd lios
-python3 setup.py install --install-data=%{_prefix} --root=%{buildroot}
+python3.11 setup.py install --install-data=%{_prefix} --root=%{buildroot}
 
 %files
-/usr/lib/python*/site-packages/
+/usr/lib/python3.11/site-packages/
 %{_datadir}/lios
 %{_datadir}/applications/Lios.desktop
 %{_datadir}/applications/Lios-ocr-screenshot.desktop
