@@ -1,26 +1,37 @@
+%global _lios_repo_url https://github.com/zendalona/lios
+%global _lios_repo_commit b1fe5e29968a695edabc500d4c4f7e5eb05de01a
+
 Name:           lios
-Version:        1
-Release:        0
+Version:        2.5
+Release:        20241025^b1fe5e29968a695e
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 
-BuildRequires:  git python3.11
-Requires:       python3.11-imaging-sane python3.11-speechd tesseract-ocr imagemagick cuneiform espeak poppler-utils python3-enchant aspell-en gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0
+BuildRequires:  git python%{python3_pkgversion}-devel
+Requires:       python%{python3_pkgversion}-sane python%{python3_pkgversion}-speechd tesseract ImageMagick espeak poppler-utils python%{python3_pkgversion}-enchant aspell-en
+
+%generate_buildrequires
+cd lios
+%pyproject_buildrequires
 
 %description
-Lios package
+Easy-OCR solution for GNU/Linux
 
 %prep
+git clone %{_lios_repo_url}.git lios
+cd lios
+git checkout %{_lios_repo_commit}
 
 %build
-git clone https://github.com/zendalona/lios.git
+cd lios
+%pyproject_wheel
 
 %install
 cd lios
-python3.11 setup.py install --install-data=%{_prefix} --root=%{buildroot}
+%pyproject_install
+%pyproject_save_files lios
 
-%files
-/usr/lib/python3.11/site-packages/
+%files -n lios -f %{pyproject_files}
 %{_datadir}/lios
 %{_datadir}/applications/Lios.desktop
 %{_datadir}/applications/Lios-ocr-screenshot.desktop
@@ -31,10 +42,7 @@ python3.11 setup.py install --install-data=%{_prefix} --root=%{buildroot}
 %{_docdir}/lios/copyright
 %{_bindir}/lios
 
-%clean
-rm -rf lios
-
 %changelog
-* Fri Jan 26 2024 Konstantin Kuminsky <k.k@redhat.com> - 1-0
-- package from git repo
+* Fri Nov 01 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5- -20241025^b1fe5e29968a695e
+- initial package from Zendalona git repo
 
