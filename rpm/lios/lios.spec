@@ -3,12 +3,13 @@
 
 Name:           lios
 Version:        2.5
-Release:        20241025^b1fe5e29968a695e
+Release:        20241107.1^b1fe5e29968a695e
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 
 BuildRequires:  git python%{python3_pkgversion}-devel
 Requires:       python%{python3_pkgversion}-sane python%{python3_pkgversion}-speechd tesseract ImageMagick espeak poppler-utils python%{python3_pkgversion}-enchant aspell-en
+Recommends: tesseract-osd
 
 %generate_buildrequires
 cd lios
@@ -43,6 +44,9 @@ cd lios
 %{_bindir}/lios
 
 %changelog
-* Fri Nov 01 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5- -20241025^b1fe5e29968a695e
+* Thu Nov 07 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241107.1^b1fe5e29968a695e
+- add tesseract-osd as a weak dependency
+
+* Fri Nov 01 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241025^b1fe5e29968a695e
 - initial package from Zendalona git repo
 
