@@ -3,7 +3,7 @@
 
 Name:           lios
 Version:        2.5
-Release:        20241107.1^b1fe5e29968a695e
+Release:        20241108.1.gitb1fe5e29968a695e
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 
@@ -44,6 +44,9 @@ cd lios
 %{_bindir}/lios
 
 %changelog
+* Fri Nov 08 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241108.1.git-b1fe5e29968a695e
+- restructurue the release field so that it is simpler
+
 * Thu Nov 07 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241107.1^b1fe5e29968a695e
 - add tesseract-osd as a weak dependency
 
