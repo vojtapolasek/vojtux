@@ -1,0 +1,4 @@
+[org/mate/desktop/keybindings/customlios]
+action='lios'
+binding='<Alt><Mod4>l'
+name='Linux Intelligent OCR Software'

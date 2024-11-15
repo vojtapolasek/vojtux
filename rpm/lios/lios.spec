@@ -3,12 +3,13 @@
 
 Name:           lios
 Version:        2.5
-Release:        20241108.1.gitb1fe5e29968a695e
+Release:        20241115.1.gitb1fe5e29968a695e
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
+SOURCE0:        10-keybindings-lios
 
 BuildRequires:  git python%{python3_pkgversion}-devel
-Requires:       python%{python3_pkgversion}-sane python%{python3_pkgversion}-speechd tesseract ImageMagick espeak poppler-utils python%{python3_pkgversion}-enchant aspell-en
+Requires:       python%{python3_pkgversion}-sane python%{python3_pkgversion}-speechd tesseract ImageMagick espeak poppler-utils python%{python3_pkgversion}-enchant aspell-en dconf
 Recommends: tesseract-osd
 
 %generate_buildrequires
@@ -31,6 +32,8 @@ cd lios
 cd lios
 %pyproject_install
 %pyproject_save_files lios
+install -d %{buildroot}%{_sysconfdir}/dconf/db/distro.d
+install %{SOURCE0} %{buildroot}%{_sysconfdir}/dconf/db/distro.d/10-keybindings-lios
 
 %files -n lios -f %{pyproject_files}
 %{_datadir}/lios
@@ -42,8 +45,19 @@ cd lios
 %{_mandir}/man1/lios.1.gz
 %{_docdir}/lios/copyright
 %{_bindir}/lios
+%{_sysconfdir}/dconf/db/distro.d/10-keybindings-lios
+
+%post
+dconf update
+
+%postun
+dconf update
 
 %changelog
+* Fri Nov 15 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241115.1.git-b1fe5e29968a695e
+- package the keyboard shortcut
+
+
 * Fri Nov 08 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241108.1.git-b1fe5e29968a695e
 - restructurue the release field so that it is simpler
 
