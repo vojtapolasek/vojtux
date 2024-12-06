@@ -13,12 +13,6 @@ timezone Europe/Prague --isUtc
 %packages
 tesseract-langpack-ces
 tesseract-langpack-slk
-
-#festival
-festvox-czech-dita
-festvox-czech-machac
-festvox-czech-krb
-festvox-czech-ph 
 hunspell-cs
 vojtux-docs-cs
 %end
@@ -106,9 +100,6 @@ cp mimeapps.list /etc/skel/.config/
 cp .tmux.conf /etc/skel/
 cd /opt/
 rm -rf vojtux
-#configure festival
-sed 's/#AddModule "festival"                 "sd_festival"  "festival\.conf"/AddModule "festival"                 "sd_festival"  "festival\.conf"/' /etc/speech-dispatcher/speechd.conf
-echo "(set! voice_default 'voice_czech_dita)" > /etc/skel/.festivalrc
 
 # setup symlink to documentation
 ln -s /usr/share/doc/vojtux-docs-cs /etc/skel/dokumentace
