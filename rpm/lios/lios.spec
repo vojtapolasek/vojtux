@@ -3,10 +3,11 @@
 
 Name:           lios
 Version:        2.5
-Release:        20241115.1.gitb1fe5e29968a695e
+Release:        20241206.1.gitb1fe5e29968a695e%{?dist}
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 SOURCE0:        10-keybindings-lios
+BuildArch:	noarch
 
 BuildRequires:  git python%{python3_pkgversion}-devel
 Requires:       python%{python3_pkgversion}-sane python%{python3_pkgversion}-speechd tesseract ImageMagick espeak poppler-utils python%{python3_pkgversion}-enchant aspell-en dconf
@@ -54,6 +55,9 @@ dconf update
 dconf update
 
 %changelog
+* Fri Dec 06 2024 Vojtech Polasek <vpolasek@redhat.com> 20241206.1.gitb1fe5e29968a695e
+- aligning spec file with standards
+
 * Fri Nov 15 2024 Vojtech Polasek <vpolasek@redhat.com> 2.5-20241115.1.git-b1fe5e29968a695e
 - package the keyboard shortcut
 
