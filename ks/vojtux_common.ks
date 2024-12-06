@@ -70,8 +70,6 @@ nss-mdns
 #additional software for Agora
 pidgin
 purple-facebook
-purple-skypeweb
-pidgin-skypeweb
 xsane
 chromium
 mate-menu
@@ -96,7 +94,6 @@ git
 curl
 vlc
 sed
-qt-at-spi
 wget
 jmtpfs
 nano
