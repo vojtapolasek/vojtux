@@ -8,14 +8,6 @@ timezone US/Eastern
 
 %packages
 tesseract-langpack-eng
-festvox-awb-arctic-hts
-festvox-bdl-arctic-hts
-festvox-clb-arctic-hts
-festvox-jmk-arctic-hts
-festvox-kal-diphone
-festvox-rab-diphone
-festvox-rms-arctic-hts
-festvox-slt-arctic-hts
 hunspell-en
 vojtux-docs-en
 %end
