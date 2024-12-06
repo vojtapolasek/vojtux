@@ -15,6 +15,7 @@ part / --size 10240 --fstype ext4
 -nfs-utils
 -NetworkManager-openvpn-gnome
 @mate
+@desktop-accessibility
 compiz
 compiz-plugins-main
 compiz-plugins-extra
