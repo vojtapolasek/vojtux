@@ -7,7 +7,7 @@ selinux --disabled
 group --name brlapi
 
 # System services
-services --enabled="chronyd,brltty,festival"
+services --enabled="chronyd,brltty"
 
 part / --size 10240 --fstype ext4
 
@@ -105,10 +105,6 @@ soundconverter
 tmux
 unrar
 timidity++
-#festival
-festival-freebsoft-utils
-speech-dispatcher-festival
-pulseaudio-utils
 #display manager
 -slick-greeter
 -slick-greeter-mate
@@ -205,15 +201,8 @@ export QT_ACCESSIBILITY=1
 export QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
 EOM
 
-mkdir /etc/systemd/system/festival.service.d
-cat > /etc/systemd/system/festival.service.d/override.conf <<EOM
-[Service]
-WorkingDirectory=/usr/share/festival/lib
-
-EOM
 #configure speech dispatcher
 sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
-sed -i 's/#AddModule "festival"                 "sd_festival"  "festival.conf"/AddModule "festival"                 "sd_festival"  "festival.conf"/' /etc/speech-dispatcher/speechd.conf
 # prevent long delay when shutting down
 echo "DefaultTimeoutStopSec=10s" >> /etc/systemd/system.conf
 #setup lightdm
