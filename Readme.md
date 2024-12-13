@@ -82,6 +82,8 @@ So how to build it?
 
 ## Docker build
 
+**Note: currently not maintained, will be updated soon.**
+
 There is a simple build.sh script included to show the sequence that I used to build the image.
 
 ```
