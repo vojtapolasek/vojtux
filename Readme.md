@@ -31,19 +31,32 @@ So if you are going to build a live media based on Fedora 41, it is strongly rec
 
 So how to build it?
 
-1. sudo dnf install lorax-lmc-novirt
+1. Install prerequisites.
+
+    ```bash
+    sudo dnf install lorax-lmc-novirt
+    ```
 
 2. clone this repo
 
+    ```bash
+    git clone https://github.com/vojtapolasek/vojtux
+    cd vojtux
+    ```
+
 3. create a directory structure to store cache and tmp files (optional)
 
-    - mkdir -p live/tmp
+    ```bash
+    mkdir -p live/tmp
+    ```
 
-4. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
+4. Create the final kickstart file, blending several kickstarts together.
 
-    - choose ks/vojtux_cs.ks or ks/vojtux_en.ks as an input file, based on your language choice
+    ```bash
+    ksflatten -c ks/vojtux_en.ks -o vojtux.ks
+    ```
 
-    - this makes sure that all includes will be handled correctly
+5. Build the image
 
     ```bash
     sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_41.iso --project vojtux --releasever 41 --ks <output_kickstart_file.ks> --tmp live/tmp
@@ -63,7 +76,7 @@ So how to build it?
 
     - --releasever 41 this is also visible in the boot menu
 
-    - --ks <output_kickstart_file.ks> use the kickstart file created in previous steps
+    - --ks vojtux.ks use the kickstart file created in previous steps
 
     - --tmp live/tmp optional argument if you want to use your own defined tmp directory
 
