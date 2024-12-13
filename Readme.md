@@ -108,13 +108,7 @@ Following additional changes are applied:
 
 - added RPM Fusion free and nonfree package repositories
 
-- added custom repository with Festival Czech voices and one specific for this distro so that we can push updates
-
-- in case of Czech version:
-
-    - system locale is set to Czech, keyboard to Czech qwertz, Czech and Slovak language packs are downloaded
-
-    - the time zone is set to Europe/Prague
+- added vojtux-apps repository specific for Vojtux distro so that it is easier to push updates
 
 - Orca screenreader starts at login screen and also after login for current and also newly created users
 
@@ -122,7 +116,7 @@ Following additional changes are applied:
 
 - QT accessibility is enabled
 
-- accessibility of applications run with sudo is enabled
+- accessibility of applications launched with sudo is enabled
 
 - Grub tune is added, although it does not work in every case
 
@@ -136,11 +130,9 @@ Following additional changes are applied:
 
 - file associations are modified so that audio files open in VLC
 
-- Festival is enabled with Czech voice, however it behaves strangely on physical hardware
-
 - /etc/systemd/system.conf is modified to speed up shutdown
 
-- Selinux policiy is set to permissive
+- Selinux policy is set to permissive
 
 - Slick greeter is replaced with Lightdm GTK greeter because of problems with Orca not starting after login
 
@@ -150,7 +142,7 @@ Following additional changes are applied:
 
     - gimagereader QT version
 
-    - pidgin with support for Facebook and Skype Web
+    - pidgin with support for Facebook
 
     - Xsane
 
@@ -169,8 +161,6 @@ Following additional changes are applied:
     - Git, Curl, Wget, Sed
 
     - VLC player
-
-    - Qt-at-spi
 
     - Tmux to enhance working with consoles
 
@@ -220,5 +210,5 @@ Following additional changes are applied:
 
 - Alt-Super-l start the LIOS software
 
-- ALT-Super-m - vypnutí / zapnutí monitoru
+- Alt-Super-m - vypnutí / zapnutí monitoru
 
