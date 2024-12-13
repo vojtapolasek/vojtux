@@ -17,13 +17,11 @@ The live media is currently based on Fedora 41.
 *Warning!* The Czech kickstart file is outdated!
 
 This repository is currently transitioning from the state where customizations were present in the kickstart file to a state where most of customizations will be packaged as RPMs.
-
 This is currently implemented for the English kickstart file, Czech kickstart file is not maintained right now.
-
 In future, it will get updated or deleted entirely.
 
-
-The kickstart file is inspired by the Fedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
+The kickstart file is inspired by the Fedora Mate spin.
+The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
@@ -88,7 +86,8 @@ Your `vojtux_38.iso` should be listed as above.
 
 ## What is actually done?
 
-The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be a file called according to the --iso-name parameter. The live image is based on Fedora 38 Mate spin.
+The result will be stored in the tmp directory in a folder with randomly generated name.
+In this folder there will be a file called according to the --iso-name parameter.
 
 Following additional changes are applied:
 
