@@ -15,6 +15,7 @@ part / --size 10240 --fstype ext4
 -nfs-utils
 -NetworkManager-openvpn-gnome
 @mate
+@desktop-accessibility
 compiz
 compiz-plugins-main
 compiz-plugins-extra
@@ -70,8 +71,6 @@ nss-mdns
 #additional software for Agora
 pidgin
 purple-facebook
-purple-skypeweb
-pidgin-skypeweb
 xsane
 chromium
 mate-menu
@@ -96,7 +95,6 @@ git
 curl
 vlc
 sed
-qt-at-spi
 wget
 jmtpfs
 nano

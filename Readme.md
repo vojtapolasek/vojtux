@@ -1,45 +1,66 @@
 # What is it about?
 
-This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Vojtux. It is based on first name of the main contributor; Vojtech.
+This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users.
+This distribution is called Vojtux.
+The name is based on first name of the main contributor; Vojtech.
 
-The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
+The repo currently contains Kickstart files to create a live media image with accessible environment.
+This image can be later used to install the system on a device.
+The repo contains kickstart files to build the live image with English language.
+It also contains  files which are used to build RPM packages which are not part of Fedora and they are used in this distro.
+Resulting RPM packages are present in the [Vojtux Copr repository](https://copr.fedorainfracloud.org/coprs/tyrylu/vojtux-apps/).
 
-The live media is currently based on Fedora 38.
+The live media is currently based on Fedora 41.
 
 ## Building live media ISO
 
 *Warning!* The Czech kickstart file is outdated!
 
 This repository is currently transitioning from the state where customizations were present in the kickstart file to a state where most of customizations will be packaged as RPMs.
-
 This is currently implemented for the English kickstart file, Czech kickstart file is not maintained right now.
-
 In future, it will get updated or deleted entirely.
 
-
-The kickstart file is inspired by the Fedora Mate spin. The Mate environment is chosen because it is lightweight and its accessibility is prety good.
+The kickstart file is inspired by the Fedora Mate spin.
+The Mate environment is chosen because it is lightweight and its accessibility is prety good.
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Building of this image requires Fedora. It is strongly recommended to use Fedora version matching the one you are going to build. So if you are going to build a live media based on Fedora 38, it is strongly recommended to do it from Fedora 38 environment.
+Building of this image requires Fedora.
+It is strongly recommended to use Fedora version matching the one you are going to build.
+So if you are going to build a live media based on Fedora 41, it is strongly recommended to do it from Fedora 41 environment.
 
 So how to build it?
 
-1. sudo dnf install lorax-lmc-novirt
+1. Install prerequisites.
+
+    ```bash
+    sudo dnf install lorax-lmc-novirt
+    ```
 
 2. clone this repo
 
+    ```bash
+    git clone https://github.com/vojtapolasek/vojtux
+    cd vojtux
+    ```
+
 3. create a directory structure to store cache and tmp files (optional)
 
-    - mkdir -p live/tmp
+    ```bash
+    mkdir -p live/tmp
+    ```
 
-4. ksflatten -c <input_kickstart_file.ks> -o <output_kickstart_file.ks>
+4. Create the final kickstart file, blending several kickstarts together.
 
-    - choose ks/vojtux_cs.ks or ks/vojtux_en.ks as an input file, based on your language choice
+    ```bash
+    ksflatten -c ks/vojtux_en.ks -o vojtux.ks
+    ```
 
-    - this makes sure that all includes will be handled correctly
+5. Build the image
 
-5. sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_38.iso --project vojtux --releasever 38 --ks <output_kickstart_file.ks> --tmp live/tmp
+    ```bash
+    sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_41.iso --project vojtux --releasever 41 --ks <output_kickstart_file.ks> --tmp live/tmp
+    ```
 
     - --make-iso creates ISO image. Note that you can create multiple things with livemedia-creator.
 
@@ -49,17 +70,19 @@ So how to build it?
 
     - --anaconda-arg="--noselinux" disables selinux during the installation, it was causing problems.
 
-    - --iso-name vojtux_38.iso provides name for the resulting ISO image
+    - --iso-name vojtux_41.iso provides name for the resulting ISO image
 
     - --project vojtux project name, this is used as image label and it is visible in the boot menu
 
-    - --releasever 38 this is also visible in the boot menu
+    - --releasever 41 this is also visible in the boot menu
 
-    - --ks <output_kickstart_file.ks> use the kickstart file created in previous steps
+    - --ks vojtux.ks use the kickstart file created in previous steps
 
     - --tmp live/tmp optional argument if you want to use your own defined tmp directory
 
 ## Docker build
+
+**Note: currently not maintained, will be updated soon.**
 
 There is a simple build.sh script included to show the sequence that I used to build the image.
 
@@ -78,19 +101,14 @@ Your `vojtux_38.iso` should be listed as above.
 
 ## What is actually done?
 
-The result will be stored in the tmp directory in a folder with randomly generated name. In this folder there will be a file called according to the --iso-name parameter. The live image is based on Fedora 38 Mate spin.
+The result will be stored in the tmp directory in a folder with randomly generated name.
+In this folder there will be a file called according to the --iso-name parameter.
 
 Following additional changes are applied:
 
 - added RPM Fusion free and nonfree package repositories
 
-- added custom repository with Festival Czech voices and one specific for this distro so that we can push updates
-
-- in case of Czech version:
-
-    - system locale is set to Czech, keyboard to Czech qwertz, Czech and Slovak language packs are downloaded
-
-    - the time zone is set to Europe/Prague
+- added vojtux-apps repository specific for Vojtux distro so that it is easier to push updates
 
 - Orca screenreader starts at login screen and also after login for current and also newly created users
 
@@ -98,7 +116,7 @@ Following additional changes are applied:
 
 - QT accessibility is enabled
 
-- accessibility of applications run with sudo is enabled
+- accessibility of applications launched with sudo is enabled
 
 - Grub tune is added, although it does not work in every case
 
@@ -112,11 +130,9 @@ Following additional changes are applied:
 
 - file associations are modified so that audio files open in VLC
 
-- Festival is enabled with Czech voice, however it behaves strangely on physical hardware
-
 - /etc/systemd/system.conf is modified to speed up shutdown
 
-- Selinux policiy is set to permissive
+- Selinux policy is set to permissive
 
 - Slick greeter is replaced with Lightdm GTK greeter because of problems with Orca not starting after login
 
@@ -126,7 +142,7 @@ Following additional changes are applied:
 
     - gimagereader QT version
 
-    - pidgin with support for Facebook and Skype Web
+    - pidgin with support for Facebook
 
     - Xsane
 
@@ -145,8 +161,6 @@ Following additional changes are applied:
     - Git, Curl, Wget, Sed
 
     - VLC player
-
-    - Qt-at-spi
 
     - Tmux to enhance working with consoles
 
@@ -196,5 +210,5 @@ Following additional changes are applied:
 
 - Alt-Super-l start the LIOS software
 
-- ALT-Super-m - vypnutí / zapnutí monitoru
+- Alt-Super-m - vypnutí / zapnutí monitoru
 
