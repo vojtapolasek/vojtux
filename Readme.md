@@ -1,10 +1,16 @@
 # What is it about?
 
-This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users. This distribution is called Vojtux. It is based on first name of the main contributor; Vojtech.
+This repository contains resources concerning unofficial Linux distribution aimed at visually impaired users.
+This distribution is called Vojtux.
+The name is based on first name of the main contributor; Vojtech.
 
-The repo currently contains Kickstart files to create a live media image with accessible environment. This image can be later used to install the system on a device. It contains kickstart files to build the distro with English or Czech language selected.
+The repo currently contains Kickstart files to create a live media image with accessible environment.
+This image can be later used to install the system on a device.
+The repo contains kickstart files to build the live image with English language.
+It also contains  files which are used to build RPM packages which are not part of Fedora and they are used in this distro.
+Resulting RPM packages are present in the [Vojtux Copr repository](https://copr.fedorainfracloud.org/coprs/tyrylu/vojtux-apps/).
 
-The live media is currently based on Fedora 38.
+The live media is currently based on Fedora 41.
 
 ## Building live media ISO
 
@@ -21,7 +27,9 @@ The kickstart file is inspired by the Fedora Mate spin. The Mate environment is 
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Building of this image requires Fedora. It is strongly recommended to use Fedora version matching the one you are going to build. So if you are going to build a live media based on Fedora 38, it is strongly recommended to do it from Fedora 38 environment.
+Building of this image requires Fedora.
+It is strongly recommended to use Fedora version matching the one you are going to build.
+So if you are going to build a live media based on Fedora 41, it is strongly recommended to do it from Fedora 41 environment.
 
 So how to build it?
 
@@ -39,7 +47,9 @@ So how to build it?
 
     - this makes sure that all includes will be handled correctly
 
-5. sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_38.iso --project vojtux --releasever 38 --ks <output_kickstart_file.ks> --tmp live/tmp
+    ```bash
+    sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_41.iso --project vojtux --releasever 41 --ks <output_kickstart_file.ks> --tmp live/tmp
+    ```
 
     - --make-iso creates ISO image. Note that you can create multiple things with livemedia-creator.
 
@@ -49,11 +59,11 @@ So how to build it?
 
     - --anaconda-arg="--noselinux" disables selinux during the installation, it was causing problems.
 
-    - --iso-name vojtux_38.iso provides name for the resulting ISO image
+    - --iso-name vojtux_41.iso provides name for the resulting ISO image
 
     - --project vojtux project name, this is used as image label and it is visible in the boot menu
 
-    - --releasever 38 this is also visible in the boot menu
+    - --releasever 41 this is also visible in the boot menu
 
     - --ks <output_kickstart_file.ks> use the kickstart file created in previous steps
 
