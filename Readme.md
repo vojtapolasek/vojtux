@@ -212,3 +212,22 @@ Following additional changes are applied:
 
 - Alt-Super-m - vypnutí / zapnutí monitoru
 
+## Contributing
+
+Contributions are definitely welcomed. I can imagine following ways of contribution:
+
+- testing functionality and accessibility the live image, you can see [TESTING.md](list of tests) for inspiration
+
+- testing functionality and accessibility of Vojtux after being installed
+
+- creating new issues reporting problems or suggesting new features
+
+- announcing accessibility-related bugs to authors of the relevant component
+
+- contributing spec files for new relevant packages which could be shipped in the [vojtux-apps](https://copr.fedorainfracloud.org/coprs/tyrylu/vojtux-apps/) repo
+
+- contributing changes to documentation
+
+- contributing changes to kickstart files
+
+- spreading the word about the distribution
