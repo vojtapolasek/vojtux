@@ -32,8 +32,3 @@ name='Home folder'
 action='orca -r'
 binding='<Alt><Mod4>o'
 name='Restart Orca'
-
-[org/mate/desktop/keybindings/custom7]
-action='lios'
-binding='<Alt><Mod4>l'
-name='Linux Intelligent OCR Software'
