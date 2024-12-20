@@ -1,6 +1,6 @@
 Name:     vojtux-settings
 Version:  1
-Release:  2
+Release:  3%{?dist}
 Summary:  Settings for Vojtux
 License:  Public Domain
 
@@ -24,7 +24,7 @@ install  %{SOURCE3} %{buildroot}%{_sysconfdir}/dconf/db/distro.d/03-keybindings
 %post
 dconf update
 
-%postrm
+%postun
 dconf update
 
 %files
@@ -33,6 +33,11 @@ dconf update
 %{_sysconfdir}/dconf/db/distro.d/03-keybindings
 
 %changelog
+* Fri Dec 20 2024 Vojtech Polasek <vpolasek@redhat.com> - 1-3
+- change entry names not to occupy names reserved for user-created keyboard shortcuts
+- remove lios keyboard shortcut
+- update keybindings related to audio volume to use wpctl
+
 * Mon Sep 18 2023 Vojtech Polasek <vpolasek@redhat.com> - 1-2
 - update dconf database in the %post phase
 - install files into distro.d directory as we are a package
