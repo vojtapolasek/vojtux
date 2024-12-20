@@ -36,6 +36,7 @@ dconf update
 * Fri Dec 20 2024 Vojtech Polasek <vpolasek@redhat.com> - 1-3
 - change entry names not to occupy names reserved for user-created keyboard shortcuts
 - remove lios keyboard shortcut
+- update keybindings related to audio volume to use wpctl
 
 * Mon Sep 18 2023 Vojtech Polasek <vpolasek@redhat.com> - 1-2
 - update dconf database in the %post phase

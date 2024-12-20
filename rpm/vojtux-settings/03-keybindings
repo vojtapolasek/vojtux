@@ -9,17 +9,17 @@ binding='<Primary><Alt>t'
 name='Launch terminal'
 
 [org/mate/desktop/keybindings/vojtux-volume-up]
-action='sh -c "amixer set Master 5%%+ && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
+action='sh -c "wpctl  set-volume @DEFAULT_AUDIO_SINK@ 5%+ && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
 binding='<Alt><Mod4>Up'
 name='Volume up'
 
 [org/mate/desktop/keybindings/vojtux-volume-down]
-action='sh -c "amixer set Master 5%%- && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
+action='sh -c "wpctl  set-volume @DEFAULT_AUDIO_SINK@ 5%- && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
 binding='<Alt><Mod4>Down'
 name='Volume down'
 
 [org/mate/desktop/keybindings/vojtux-volumemute]
-action='sh -c "amixer set Master toggle && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
+action='sh -c "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"'
 binding='<Alt><Mod4>Left'
 name='Toggle mute'
 
