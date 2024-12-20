@@ -1,4 +1,4 @@
-[org/mate/desktop/keybindings/customlios]
+[org/mate/desktop/keybindings/vojtux-lios]
 action='lios'
 binding='<Alt><Mod4>l'
 name='Linux Intelligent OCR Software'
