@@ -3,7 +3,7 @@
 
 Name:           lios
 Version:        2.5
-Release:        20241206.1.gitb1fe5e29968a695e%{?dist}
+Release:        20241220.1.gitb1fe5e29968a695e%{?dist}
 Summary:        Linux-Intelligent-Ocr-Solution
 License:        GPL-3.0+
 SOURCE0:        10-keybindings-lios
@@ -55,6 +55,9 @@ dconf update
 dconf update
 
 %changelog
+* Fri Dec 20 2024 Vojtech Polasek <vpolasek@redhat.com> 20241220.1.gitb1fe5e29968a695e
+- change entry name for the shortcut to be aligned with other shortcuts provided by vojtux
+
 * Fri Dec 06 2024 Vojtech Polasek <vpolasek@redhat.com> 20241206.1.gitb1fe5e29968a695e
 - aligning spec file with standards
 
