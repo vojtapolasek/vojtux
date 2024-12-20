@@ -118,6 +118,7 @@ toggle-monitor
 
 # settings and shortcuts
 vojtux-settings
+sox
 # OCR desktop
 ocrdesktop
 
