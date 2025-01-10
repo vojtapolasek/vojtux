@@ -51,15 +51,9 @@ Ensure that the desktop can be accessed with a screen reader.
 
 ### Setup:
 
-- Get the Vojtux live image.
-
-- Prepare a VM or a physical system with sound output enabled.
+-Boot into desktop environment of the Vojtux live image.
 
 ### Steps:
-
-- Configure the system so that its primary boot device is the one with Vojtux image.
-
--When the boot screen appears, choose "start vojtux xy", where xy is the Vojtux version, or wait until the timeout runs out and the system starts booting.
 
 -Wait until you hear "screenreader on".
 
