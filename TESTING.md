@@ -111,8 +111,6 @@ Ensure that the sound theme is correctly loaded.
 
 - Boot into desktop environment of the Vojtux live image.
 
-- Ensure that the left most virtual desktop is shown.
-
 ### Steps:
 
 - Press ctrl+alt+d or click on the desktop to focus the desktop.
