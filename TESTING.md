@@ -167,6 +167,8 @@ Ensure that graphical applications which are being run under sudo are accessible
 
 - Boot into desktop environment of the Vojtux live image.
 
+### Steps:
+
 - Press ALT+F1 to open the application menu.
 
 - Launch "Gparted" located in "System tools" folder.
@@ -188,6 +190,8 @@ Ensure that applications utilizing QT toolkit are accessible.
 ### Setup:
 
 - Boot into desktop environment of the Vojtux live image.
+
+### Steps:
 
 - Press ALT+F1 to open application menu.
 
@@ -213,6 +217,8 @@ Ensure that Orca screen reader can be restarted with a keyboard shortcut.
 
 - Boot into desktop environment of the Vojtux live image.
 
+### Steps:
+
 - Focus the desktop by pressing CTRL+ALT+D.
 
 - Press ALT+SUPER+O.
@@ -230,6 +236,8 @@ Ensure that system volume can be changed with an alternative shortcut.
 ### Setup:
 
 - Boot into desktop environment of the Vojtux live image.
+
+### Steps:
 
 - Focus the desktop by pressing CTRL+ALT+D.
 
@@ -250,6 +258,8 @@ Ensure that system volume can be muted with an alternative shortcut.
 ### Setup:
 
 - Boot into desktop environment of the Vojtux live image.
+
+### Steps:
 
 - Focus the desktop by pressing CTRL+ALT+D.
 
@@ -281,6 +291,8 @@ Ensure that Firefox can be launched with a shortcut.
 
 - Focus the desktop.
 
+### Steps:
+
 - Press ALT+SUPER+F.
 
 ### Expected results:
@@ -298,6 +310,8 @@ Ensure that screen reader can be toggled system vide.
 - Boot into desktop environment of the Vojtux live image.
 
 - Focus the desktop.
+
+### Steps:
 
 - Press ALT+SUPER+S.
 
@@ -325,6 +339,8 @@ Ensure that LIOS can be started with a keyboard shortcut.
 
 - Focus the desktop.
 
+### Steps:
+
 - Press ALT+SUPER+L.
 
 ### Expected results:
@@ -347,6 +363,8 @@ Ensure that monitor can be toggled with a shortcut.
 
 - Focus the desktop.
 
+### Steps:
+
 - Press ALT+SUPER+M.
 
 - After a while, press ALT+SUPER+M again.
@@ -367,6 +385,8 @@ Ensure that all items in the top panel have meaningful accessible descriptions.
 ### Setup:
 
 - Boot into desktop environment of the Vojtux live image.
+
+### Steps:
 
 - Focus the top panel by presing CTRL+ALT+TAB until it is focused.
 
