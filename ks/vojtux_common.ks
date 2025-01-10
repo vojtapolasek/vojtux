@@ -126,6 +126,9 @@ a11y-sound-theme
 
 # remote support
 tmate
+
+# pandoc for document conversion and also used during testing
+pandoc
 %end
 
 %post
