@@ -116,8 +116,6 @@ Following additional changes are applied:
 
 - QT accessibility is enabled
 
-- accessibility of applications launched with sudo is enabled
-
 - Grub tune is added, although it does not work in every case
 
 - LIOS OCR software is installed
