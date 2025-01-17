@@ -399,3 +399,72 @@ Ensure that all items in the top panel have meaningful accessible descriptions.
 - Each item should be announced by Orca, no matter if moving forward or backward among items.
 
 - Each item should be announced with a meaningful name, i.e. providing information so that the user can deduce its purpose. Bad example is announcing only "menu", "icon".
+
+## TC 16
+
+### Description:
+
+Ensure that information spoken by Orca is correctly presented on braille devices.
+
+### Setup:
+
+- In case you have a physical braille device:
+
+    - Connect a braille display to the VM.
+
+    - Boot into desktop environment of the Vojtux live image.
+
+- In case you don't have physical braille device:
+
+    - Boot into desktop environment of the Vojtux live image.
+
+    - Open a terminal
+
+    - Run the command `brltty -b xw -A auth=none -e`; a small window mimicking a braille display should appear.
+
+        - Note that this window cannot be reached by pressing common keyboard combo ALT+TAB.
+        Therefore, it cannot be read by screen reader users.
+        To close it, you have to use the mouse or to kill the appropriate brltty process, it will probably have the highest process ID from all brltty processes running.
+
+### Steps:
+
+- Press key combination ctrl+alt+d.
+
+- Keep pressing down arrow while moving over items.
+
+### Expected results:
+
+- After pressing the ctrl+alt+d, the display should show "Icon View Layered Pane".
+
+-After pressing down arrows, the display (virtual or physical) should read the following based on the focused icon:
+
+    - "Computer icon"
+
+    - "Liveuser's icon"
+
+    - "Install to hard Drive desktop entry"
+
+    - "Trash icon"
+
+## TC 17
+
+### Description:
+
+Ensure that brltty displays information displayed on text virtual consoles.
+
+### Setup:
+
+- Connect a braille display to the VM.
+
+- Boot into desktop environment of the Vojtux live image.
+
+### Steps:
+
+- Press CTRL+ALT+F2.
+
+    - Note: Press CTRL+ALT+F1 to return to the graphical console.
+
+### Expected results:
+
+- The braille display should show "liveuser-localhost login:"
+
