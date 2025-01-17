@@ -399,3 +399,58 @@ Ensure that all items in the top panel have meaningful accessible descriptions.
 - Each item should be announced by Orca, no matter if moving forward or backward among items.
 
 - Each item should be announced with a meaningful name, i.e. providing information so that the user can deduce its purpose. Bad example is announcing only "menu", "icon".
+
+## TC 16
+
+### Description:
+
+Ensure that information spoken by Orca is correctly presented on braille devices.
+
+### Setup:
+
+- Connect a braille display to the VM.
+
+- Boot into desktop environment of the Vojtux live image.
+
+### Steps:
+
+- Press key combination ctrl+alt+d.
+
+- Keep pressing down arrow while moving over items.
+
+### Expected results:
+
+- After pressing the ctrl+alt+d, the display should show "Icon View Layered Pane".
+
+-After pressing down arrows, the display should read the following based on the focused icon:
+
+    - "Computer icon"
+
+    - "Liveuser's icon"
+
+    - "Install to hard Drive desktop entry"
+
+    - "Trash icon"
+
+## TC 16
+
+### Description:
+
+Ensure that brltty displays information displayed on text virtual consoles.
+
+### Setup:
+
+- Connect a braille display to the VM.
+
+- Boot into desktop environment of the Vojtux live image.
+
+### Steps:
+
+- Press CTRL+ALT+F2.
+
+    - Note: Press CTRL+ALT+F1 to return to the graphical console.
+
+### Expected results:
+
+- The braille display should show "liveuser-localhost login:"
+
