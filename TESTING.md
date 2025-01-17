@@ -468,3 +468,22 @@ Ensure that brltty displays information displayed on text virtual consoles.
 
 - The braille display should show "liveuser-localhost login:"
 
+## TC 18
+
+### Description:
+
+Ensure that Ocrdesktop software can be launched with a keyboard shortcut.
+
+### Setup:
+
+- Boot into desktop environment of the Vojtux live image and focus the desktop.
+
+### Steps:
+
+- Press CTRL+SUPER+O.
+
+### Expected results:
+
+- There should appear a window with title "Ocrdesktop".
+
+- The window will contain partial representation of the text on the screen in an area with a cursor. Exact contents will vary each time, so check manually that text in the text box more or less exists on the screen.
