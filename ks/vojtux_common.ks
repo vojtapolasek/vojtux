@@ -104,6 +104,7 @@ vojtux-settings
 sox
 # OCR desktop
 ocrdesktop
+ocrmypdf
 
 # a11y sound theme
 a11y-sound-theme
