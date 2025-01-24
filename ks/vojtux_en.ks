@@ -22,8 +22,6 @@ dconf update
 #apply Vojtux customizations
 git clone https://github.com/vojtapolasek/Vojtux.git
 cd vojtux/downloads
-mkdir -p /etc/skel/.local/share/orca
-cp -r orca/* /etc/skel/.local/share/orca/
 mkdir -p /etc/skel/.config
 cp mimeapps.list /etc/skel/.config/
 cp .tmux.conf /etc/skel/
