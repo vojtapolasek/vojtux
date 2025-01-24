@@ -127,6 +127,12 @@ a11y-sound-theme
 
 # remote support
 tmate
+
+# pandoc for document conversion and also used during testing
+pandoc
+
+# brltty-xw for testing braille output without a physical device
+brltty-xw
 %end
 
 %post
