@@ -1,5 +1,5 @@
 Name:           vojtux-docs-en
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
 Summary:        documentation files for Vojtux distribution - English version
 BuildArch:        noarch
@@ -30,5 +30,8 @@ pandoc -s --self-contained -t html -o docs/en/handout.html docs/en/handout.md
 %doc docs/en/*
 
 %changelog
+* Fri Jan 24 2025 Vojtech Polasek <vpolasek@redhat.com>
+- rebuild, Orca keyboard shortcuts are removed
+
 * Tue Jun 07 2022 Vojtech Polasek <vpolasek@redhat.com>
 - initial version
