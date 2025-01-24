@@ -12,8 +12,6 @@ services --enabled="chronyd,brltty"
 part / --size 10240 --fstype ext4
 
 %packages
--nfs-utils
--NetworkManager-openvpn-gnome
 @mate
 @desktop-accessibility
 compiz
@@ -35,18 +33,11 @@ fusion-icon
 caja-actions
 mate-disk-usage-analyzer
 
-# blacklist applications which breaks mate-desktop
--audacious
-
 # office
 @libreoffice
 
 # dsl tools
 rp-pppoe
-
-# FIXME; apparently the glibc maintainers dislike this, but it got put into the
-# desktop image at some point.  We won't touch this one for now.
-nss-mdns
 
 # Drop things for size
 -@3d-printing
@@ -56,17 +47,13 @@ nss-mdns
 -gnome-software
 -gnome-user-docs
 
--@mate-applications
 -mate-icon-theme-faenza
 
 # Help and art can be big, too
 -gnome-user-docs
 -evolution-help
 
-#customizations for Agora
-#removing inaccessible packages
--filezilla
--exaile
+#customizations for Vojtux
 
 #additional software for Agora
 pidgin
