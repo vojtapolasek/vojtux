@@ -136,8 +136,6 @@ Following additional changes are applied:
 
 - extra packages are preinstalled
 
-    - gimagereader QT version
-
     - pidgin with support for Facebook
 
     - Xsane
@@ -148,7 +146,7 @@ Following additional changes are applied:
 
     - Soundconverter
 
-    - Tesseract OCR engine with English, Czech and Slovak data
+    - Tesseract OCR engine with English data
 
     - Ifuse for support of Apple storage
 
@@ -162,22 +160,13 @@ Following additional changes are applied:
 
     - Chromium
 
-- Following packages were removed:
-
-    - Exaile
-
-    - Hexchat
-
-    - Filezilla
-
-    - Gnote
+    - ocrmypdf (command line version only)
 
 - there is a special script which ensures that the sound at the login screen is not muted and is at 50% of volume
 
 - a script for toggling physical monitor is added, functionality not tested
 
 - a sound theme is added, [source](https://github.com/coffeeking/Linux-a11y-sound-theme)
-
 
 ## Added shortcuts
 
