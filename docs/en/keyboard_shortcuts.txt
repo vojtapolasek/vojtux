@@ -21,12 +21,6 @@ SUPER+ALT+left arrow     Mute volume
 ##Assistive technology
 SUPER+ALT+s    Turn on / turn off the screen reader
 SUPER+ALT+o    Restart the screen reader
-orca+up arrow    Increase speaking rate
-orca+down arrow      Decrease speaking rate
-orca+left arrow     Increase pitch
-orca+right arrow    Decrease pitch
-orca+Home      Increase speaking volume
-orca+End       Decrease speaking volume
 
 ##System
 CTRL+ALT+T    Open terminal

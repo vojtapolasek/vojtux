@@ -112,8 +112,6 @@ Following additional changes are applied:
 
 - Orca screenreader starts at login screen and also after login for current and also newly created users
 
-- Orca configuration is slightly modified, see below
-
 - QT accessibility is enabled
 
 - Grub tune is added, although it does not work in every case
@@ -180,19 +178,6 @@ Following additional changes are applied:
 
 - a sound theme is added, [source](https://github.com/coffeeking/Linux-a11y-sound-theme)
 
-## Orca modifications
-
-- added keyboard shortcuts for modifying speech speed (Orca+up/down)
-
-- added keyboard shortcut for modifying of speech pitch (Orca+left/right)
-
-- added keyboard shortcut for modifying speech volume (Orca+home/end)
-
-- added keyboard shortcuts for copying parts of flat review to clipboard (Orca+c, Orca+shift+c)
-
-- added shortcuts for reading of last seen notifications (Orca+n...)
-
-- disabled showing end-of-line characters on the braille display
 
 ## Added shortcuts
 
