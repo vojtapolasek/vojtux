@@ -55,7 +55,7 @@ rp-pppoe
 
 #customizations for Vojtux
 
-#additional software for Agora
+#additional software for Vojtux
 pidgin
 purple-facebook
 xsane
@@ -80,7 +80,7 @@ soundconverter
 ifuse
 git
 curl
-vlc
+@vlc
 sed
 wget
 jmtpfs
@@ -96,11 +96,7 @@ timidity++
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
 #ocr
-g++
-python3-devel
-tesseract-devel
 lios
-
 toggle-monitor
 
 # settings and shortcuts
