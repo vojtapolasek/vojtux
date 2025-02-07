@@ -420,7 +420,11 @@ Ensure that information spoken by Orca is correctly presented on braille devices
 
     - Open a terminal
 
+    - stop the running brltty service by running `systemctl stop brltty.service`
+
     - Run the command `brltty -b xw -A auth=none -e`; a small window mimicking a braille display should appear.
+
+    - close the terminal window by pressing ALT+F4.
 
         - Note that this window cannot be reached by pressing common keyboard combo ALT+TAB.
         Therefore, it cannot be read by screen reader users.
@@ -428,7 +432,7 @@ Ensure that information spoken by Orca is correctly presented on braille devices
 
 ### Steps:
 
-- Press key combination ctrl+alt+d.
+- Focus the desktop.
 
 - Keep pressing down arrow while moving over items.
 
