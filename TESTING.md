@@ -491,3 +491,7 @@ Ensure that Ocrdesktop software can be launched with a keyboard shortcut.
 - There should appear a window with title "Ocrdesktop".
 
 - The window will contain partial representation of the text on the screen in an area with a cursor. Exact contents will vary each time, so check manually that text in the text box more or less exists on the screen.
+
+## Testing of video
+
+https://raw.githubusercontent.com/vojtapolasek/vojtux/add_tc_videos/media/test_scenarios/tc01.mp4
