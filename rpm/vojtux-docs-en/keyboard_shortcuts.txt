@@ -31,5 +31,4 @@ ALT+Ctrl+F2, then ALT+Ctrl+Delete    Reboot the system no matter what
 ##Application Shortcuts
 ALT+SUPER+F     The Firefox web browser
 ALT+SUPER+L     Linux-Intelligent-OCR-Solution
-SUPER+O         Performs an OCR recognition of the current window and uses the Czech language
-CTRL+SUPER+O    Performs an OCR recognition of the current window and uses the English language
+CTRL+SUPER+O    Performs an OCR recognition of the current window
