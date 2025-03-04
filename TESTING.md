@@ -3,6 +3,9 @@
 This file contains test cases which should verify that Vojtux distribution live image is behaving as expected.
 Currently, I do not have any automation around it, that's why I am writing here exact steps how to manually test some Vojtux features.
 
+In most cases, there are videos attached which demonstrate how the test result should look like.
+Please unmute the sound in the Github video player, it is usually crucial to understand how the test result should look like.
+
 ## IMPORTANT: a note about Orca behavior for TC >= 2
 
 Please note that Orca is configured to announce all key presses including CTRL, ALT and SHIFT key by default.
@@ -16,6 +19,9 @@ Please ignore these orca announcements when testing or disable this behavior as 
 2. Switch to the "Echo" tab
 
 3. Disable announcements of keys which annoy you, probably "Modifier keys" and possibly "Action keys"
+
+https://github.com/user-attachments/assets/23325662-249c-48ab-8922-8ec864827ac0
+
 
 ## TC 1
 
@@ -42,6 +48,10 @@ The live image has speech working after boot.
 ### Expected results:
 
 - "Screen Reader on" is announced with Espeak voice and it can be heard from speakers
+
+### Video
+
+https://github.com/user-attachments/assets/3ec1bc80-361b-4fea-810e-41f154bbf76f
 
 ## TC 2
 
@@ -75,6 +85,11 @@ Ensure that the desktop can be accessed with a screen reader.
 
     - Install to hard drive desktop entry
 
+### Video
+
+https://github.com/user-attachments/assets/3c388698-c0f5-48b0-a573-2fe389561e8f
+
+
 ## TC 3
 
 ### Description:
@@ -101,6 +116,10 @@ Ensure that the Orca key is configured correctly
 
 - After pressing Escape you should hear "exitting learn mode"
 
+### Video
+
+https://github.com/user-attachments/assets/a28bb50c-fc15-4344-82ae-395e9fc6c124
+
 ## TC 4
 
 ### Description:
@@ -124,6 +143,10 @@ Ensure that the sound theme is correctly loaded.
 - Orca should announce "Workspace 2"
 
 - You should be switched to the second desktop (workspace)
+
+### Video
+
+https://github.com/user-attachments/assets/3d587236-3d75-4b73-a5f4-924e7d1c5274
 
 ## TC 5
 
@@ -181,6 +204,10 @@ Ensure that graphical applications which are being run under sudo are accessible
 
 - Orca should announce controls (such as "New... button" when using TAB to move around the interface.
 
+### Video
+
+https://github.com/user-attachments/assets/5e1c6e04-d79d-4d73-a064-3a4e452fcd21
+
 ## TC 7
 
 ### Description:
@@ -207,6 +234,10 @@ Ensure that applications utilizing QT toolkit are accessible.
 
 - When pressing TAB key, two elements are announced; one checkbox and one button.
 
+### Video
+
+https://github.com/user-attachments/assets/db73bb98-77db-453b-855f-7d1c58b7b096
+
 ## TC 8
 
 ### Description:
@@ -226,6 +257,10 @@ Ensure that Orca screen reader can be restarted with a keyboard shortcut.
 ### Expected results:
 
 - Orca will announce last focused item, in this case probably "Desktop, computer icon", followed by "Screen reader on".
+
+### Video
+
+https://github.com/user-attachments/assets/4cf19624-09a1-4903-ae67-2881c445e596
 
 ## TC 9
 
@@ -248,6 +283,10 @@ Ensure that system volume can be changed with an alternative shortcut.
 - The volume should decrease and increase.
 
 - A sound should play when the volume is changed.
+
+### Video
+
+https://github.com/user-attachments/assets/45afcd6b-1380-4472-828c-6dcd46838284
 
 ## TC 10
 
@@ -279,6 +318,10 @@ Ensure that system volume can be muted with an alternative shortcut.
 
 - After pressing ALT+SUPER+LEFT for the second time, a popping sound should be produced.
 
+### Video
+
+https://github.com/user-attachments/assets/b5f5fe23-19cc-4c4e-bfb6-b3ebb92e408b
+
 ## TC 11
 
 ### Description:
@@ -298,6 +341,10 @@ Ensure that Firefox can be launched with a shortcut.
 ### Expected results:
 
 - The firefox browser is launched.
+
+### Video
+
+https://github.com/user-attachments/assets/0821d7e9-9cb6-472d-9ed7-dbc36496b9b8
 
 ## TC 12
 
@@ -327,6 +374,10 @@ Ensure that screen reader can be toggled system vide.
 
 - After pressing ALT+SUPER+S for the second time, Orca should announce "Screen reader on".
 
+### Video
+
+https://github.com/user-attachments/assets/9e4c1da2-d4b4-4b55-a23f-1ea140205b62
+
 ## TC 13
 
 ### Description:
@@ -345,17 +396,19 @@ Ensure that LIOS can be started with a keyboard shortcut.
 
 ### Expected results:
 
-- Press ALT+SUPER+L.
-
-### Expected results:
-
 - The Linux Intelligent OCR Software application should launch.
+
+### Video
+
+https://github.com/user-attachments/assets/e7068a96-beee-4122-ad72-5b2ad9d27dbe
 
 ## TC 14
 
 ### Description:
 
 Ensure that monitor can be toggled with a shortcut.
+
+Note that there is no video because currently there is an issue with this functionality (https://github.com/vojtapolasek/vojtux/issues/81)
 
 ### Setup:
 
@@ -375,12 +428,13 @@ Ensure that monitor can be toggled with a shortcut.
 
 - After pressing ALT+SUPER+M for the second time, the monitor should turn on again. You should hear "Monitor on".
 
-
 ## TC 15
 
 ### Description:
 
 Ensure that all items in the top panel have meaningful accessible descriptions.
+
+Note that there is no video because currently there is an issue with this functionality (https://github.com/vojtapolasek/vojtux/issues/82)
 
 ### Setup:
 
@@ -450,11 +504,17 @@ Ensure that information spoken by Orca is correctly presented on braille devices
 
     - "Trash icon"
 
+### Video
+
+https://github.com/user-attachments/assets/fec898d1-215b-46b9-a73d-e165078a3a86
+
 ## TC 17
 
 ### Description:
 
 Ensure that brltty displays information displayed on text virtual consoles.
+
+Note that there is no video because a physical braile display is needed.
 
 ### Setup:
 
@@ -491,3 +551,8 @@ Ensure that Ocrdesktop software can be launched with a keyboard shortcut.
 - There should appear a window with title "Ocrdesktop".
 
 - The window will contain partial representation of the text on the screen in an area with a cursor. Exact contents will vary each time, so check manually that text in the text box more or less exists on the screen.
+
+### Video
+
+
+https://github.com/user-attachments/assets/cbf33dcc-395f-421c-9763-795febfc5183
