@@ -20,7 +20,12 @@ Please ignore these orca announcements when testing or disable this behavior as 
 
 3. Disable announcements of keys which annoy you, probably "Modifier keys" and possibly "Action keys"
 
-https://github.com/user-attachments/assets/23325662-249c-48ab-8922-8ec864827ac0
+
+### Video
+
+
+https://github.com/user-attachments/assets/cdd898ef-a190-4dc1-9e8c-7e166973964f
+
 
 
 ## TC 1
