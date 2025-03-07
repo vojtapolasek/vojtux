@@ -179,16 +179,6 @@ dnf copr enable -y tyrylu/vojtux-apps
 
 echo "Updating dconf databases..."
 dconf update
-# enabling accessibility
-cat > /etc/profile.d/qtaccessibility.sh <<EOM
-#enable general accessibility according to https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/
-export GTK_MODULES=gail:atk-bridge
-export OOO_FORCE_DESKTOP=gnome
-export GNOME_ACCESSIBILITY=1
-# enables QT5 accessibility system-vide
-export QT_ACCESSIBILITY=1
-export QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
-EOM
 
 #configure speech dispatcher
 sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
