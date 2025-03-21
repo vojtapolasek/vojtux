@@ -182,8 +182,7 @@ dconf update
 
 #configure speech dispatcher
 sed -i 's/#AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/AddModule "espeak-ng"                "sd_espeak-ng" "espeak-ng.conf"/' /etc/speech-dispatcher/speechd.conf
-# prevent long delay when shutting down
-echo "DefaultTimeoutStopSec=10s" >> /etc/systemd/system.conf
+
 #setup lightdm
 # create a wrapper script which makes sure that sound is unmuted and at 50% on login screen
 cat > /usr/local/bin/orca-login-wrapper <<EOM
