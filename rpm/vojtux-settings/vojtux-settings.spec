@@ -1,6 +1,6 @@
 Name:     vojtux-settings
 Version:  1
-Release:  3%{?dist}
+Release:  4%{?dist}
 Summary:  Settings for Vojtux
 License:  Public Domain
 
@@ -33,13 +33,16 @@ dconf update
 %{_sysconfdir}/dconf/db/distro.d/03-keybindings
 
 %changelog
+* Fri Apr 04 2025 vojtapolasek <krecoun@gmail.com> - 1-4
+- remove most of Mate panel settings overrides, overriding only minimal set of settings
+
 * Fri Dec 20 2024 Vojtech Polasek <vpolasek@redhat.com> - 1-3
 - change entry names not to occupy names reserved for user-created keyboard shortcuts
 - remove lios keyboard shortcut
 - update keybindings related to audio volume to use wpctl
 
 * Mon Sep 18 2023 Vojtech Polasek <vpolasek@redhat.com> - 1-2
-- update dconf database in the %post phase
+- update dconf database in the post phase
 - install files into distro.d directory as we are a package
 - update dconf database after package removal
 
