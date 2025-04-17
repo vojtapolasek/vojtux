@@ -177,6 +177,19 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-*-primary
 # import Vojtux-apps key
 dnf copr enable -y tyrylu/vojtux-apps
 
+echo "Preparing Mate panel configuration override..."
+cat > /etc/dconf/db/local.d/00-panel-live-user <<- EOM
+[org/mate/panel/general]
+object-id-list=['menu-bar', 'terminal', 'web-browser', 'email-client', 'volume-control', 'notification-area', 'show-desktop', 'window-list', 'advanced-mate-menu']
+toplevel-id-list=['top']
+
+[org/mate/panel/objects/advanced-mate-menu]
+applet-iid='MateMenuAppletFactory::MateMenuApplet'
+object-type='applet'
+panel-right-stick=false
+position=-1
+toplevel-id='top'
+EOM
 echo "Updating dconf databases..."
 dconf update
 

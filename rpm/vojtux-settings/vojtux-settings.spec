@@ -1,6 +1,6 @@
 Name:     vojtux-settings
 Version:  1
-Release:  4%{?dist}
+Release:  5%{?dist}
 Summary:  Settings for Vojtux
 License:  Public Domain
 
@@ -33,6 +33,9 @@ dconf update
 %{_sysconfdir}/dconf/db/distro.d/03-keybindings
 
 %changelog
+* Thu Apr 17 2025 vojtapolasek <krecoun@gmail.com> - 1-5
+- remove mate-menu configuration completely, it is impossible to package this. It will be preconfigured only at the live media.
+
 * Fri Apr 04 2025 vojtapolasek <krecoun@gmail.com> - 1-4
 - remove most of Mate panel settings overrides, overriding only minimal set of settings
 
