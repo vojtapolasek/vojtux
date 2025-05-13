@@ -11,6 +11,7 @@ from dogtail.rawinput import (  # pylint: disable=import-error
     click,
     pressKey,
 )
+from dogtail.tree import root
 
 def hold_key(key_name):
     code = keyNameToKeyCode(key_name)
