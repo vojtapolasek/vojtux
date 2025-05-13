@@ -1,0 +1,19 @@
+summary: Test Suite for Vojtux image
+discover:
+    how: fmf
+prepare:
+  - how: install
+    package:
+      - git
+  - how: shell
+    script: |
+        echo "hello from prepare"
+        echo "clone vojtux repo and checkout the right branch"
+        git clone $TESTING_FARM_GIT_URL vojtux
+        git -C vojtux fetch $TESTING_FARM_GIT_URL $TESTING_FARM_GIT_REF
+        git -C vojtux checkout FETCH_HEAD
+        echo "check that right branch is checked out"
+        git -C vojtux log -2 HEAD
+        echo "build vojtux image"
+execute:
+    how: tmt

@@ -1,0 +1,7 @@
+/TC1:
+    summary: Test Case 1 description
+    test: ./runtest.sh
+
+/TC2:
+    summary: Test Case 2 description
+    test: ./runtest.sh
