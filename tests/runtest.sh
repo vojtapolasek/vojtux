@@ -3,7 +3,6 @@
 set -x
 
 RUN_START=$(date +%s)
-mkdir /tmp/artifacts
 TEST_REPORT_FILE="/tmp/artifacts/report_$TEST.html"
 
 
