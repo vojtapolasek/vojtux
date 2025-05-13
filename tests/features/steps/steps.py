@@ -4,6 +4,7 @@ Main file where the python code is located for execution via behave.
 """
 
 import subprocess
+import re
 
 from time import sleep
 from behave import step  # pylint: disable=no-name-in-module
