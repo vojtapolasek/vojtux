@@ -3,14 +3,11 @@
 Main file where the python code is located for execution via behave.
 """
 
+import subprocess
+
 from time import sleep
 from behave import step  # pylint: disable=no-name-in-module
-from dogtail.rawinput import (  # pylint: disable=import-error
-    keyCombo,
-    typeText,
-    click,
-    pressKey,
-)
+from dogtail.rawinput import pressKey, typeText, keyCombo, keyNameToKeyCode, registry, release, press as pressbutton, point
 from dogtail.tree import root
 
 def hold_key(key_name):
