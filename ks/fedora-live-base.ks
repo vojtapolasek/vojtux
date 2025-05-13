@@ -14,7 +14,7 @@ firewall --enabled --service=mdns
 xconfig --startxonboot
 zerombr
 clearpart --all
-services --enabled=NetworkManager,ModemManager --disabled=sshd
+services --enabled=NetworkManager,ModemManager
 network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
 shutdown
