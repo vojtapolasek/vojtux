@@ -7,7 +7,7 @@ selinux --disabled
 group --name brlapi
 
 # System services
-services --enabled="chronyd,brltty,sshd"
+services --enabled="chronyd,brltty"
 
 part / --size 10240 --fstype ext4
 
