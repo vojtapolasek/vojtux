@@ -12,8 +12,6 @@ from dogtail.rawinput import (  # pylint: disable=import-error
     pressKey,
 )
 
-LOGGING = Logging()
-
 def hold_key(key_name):
     code = keyNameToKeyCode(key_name)
     registry.generateKeyboardEvent(code, None, KEY_PRESS)
@@ -82,3 +80,15 @@ def exec_in_terminal(context, command) -> None:  # pylint: disable=unused-argume
     pressKey("Enter")
 
 
+@step(u'"{process}" process is running')
+@step(u'"{process}" process is {n} running')
+def process_notrunning(context, process, n=None):
+    running = isProcessRunning(process)
+    if n == 'not':
+        assert running is False, "Process still running!"
+    else:
+        assert running is True, "Process is not running!"
+
+@step('"{app}" application should start')
+def app_is_running(context, app):
+    root.application(app)
