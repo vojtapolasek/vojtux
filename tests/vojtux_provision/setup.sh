@@ -17,3 +17,10 @@ virsh net-define tests/vojtux_provision/vojtux_net.xml
 virsh define tests/vojtux_provision/vojtux.xml
 virsh net-start default
 virsh start Vojtux
+VOJTUX_IP_ADDR=$(virsh -q domifaddr Vojtux | sed -rn 's/.+ +([^ ]+)\/[0-9]+$/\1/p')
+while [[ ! $VOJTUX_IP_ADDR ]]; do
+  sleep 10
+  VOJTUX_IP_ADDR=$(virsh -q domifaddr Vojtux | sed -rn 's/.+ +([^ ]+)\/[0-9]+$/\1/p')
+done
+echo "The IP address of the Vojtux VM is $VOJTUX_IP_ADDR"
+echo "$VOJTUX_IP_ADDR    vojtux" >> /etc/hosts
