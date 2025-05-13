@@ -21,7 +21,7 @@ if [ ! -e /tmp/automation_setup_done ]; then
   touch /tmp/automation_setup_done
 fi
 
-sudo -u test dogtail-run-headless-next "behave -t $1 -k -f html-pretty -o $TEST_REPORT_FILE -f plain"; rc=$?
+sudo -u test dogtail-run-headless-next --dm lightdm "behave -t $1 -k -f html-pretty -o $TEST_REPORT_FILE -f plain"; rc=$?
 
 # Mark result FAIL or PASS depending on the test result.
 RESULT="FAIL"
