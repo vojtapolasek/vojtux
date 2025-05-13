@@ -16,14 +16,7 @@ def before_all(context) -> None:
     """
 
     try:
-        context.sandbox = TestSandbox("marco", context=context)
-        context.sandbox.attach_faf = False
-
-        context.firefox = context.sandbox.get_application(
-            name="firefox",
-            a11y_app_name="Firefox",
-        )
-        #context.terminal.exit_shortcut = "<Ctrl><Shift><Q>"
+        pass
 
     except Exception as error:  # pylint: disable=broad-except
         print(f"Environment error: before_all: {error}")
@@ -40,7 +33,8 @@ def before_scenario(context, scenario) -> None:
 
     try:
 
-        context.sandbox.before_scenario(context, scenario)
+        pass
+
     except Exception as error:  # pylint: disable=broad-except
         print(f"Environment error: before_scenario: {error}")
         traceback.print_exc(file=sys.stdout)
@@ -59,7 +53,7 @@ def after_scenario(context, scenario) -> None:
     """
 
     try:
-        context.sandbox.after_scenario(context, scenario)
+        pass
     except Exception as error:  # pylint: disable=broad-except
         print(f"Environment error: after_scenario: {error}")
         traceback.print_exc(file=sys.stdout)
@@ -68,11 +62,3 @@ def after_scenario(context, scenario) -> None:
         embed_caption = "Failed cleanup in After Scenario"
         context.embed("text", traceback.format_exc(), embed_caption)
 
-
-def clean_up_dconf() -> None:
-    """
-    Clean up functions.
-    """
-
-    run("dconf reset -f /org/gnome/terminal/legacy/")
-    run("dconf reset /org/gtk/Settings/Debug/enable-inspector-keybinding")
