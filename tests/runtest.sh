@@ -25,6 +25,8 @@ if [ ! -e /tmp/automation_setup_done ]; then
   echo "Setting test password to 'redhat'"
   echo "redhat" | passwd test --stdin
 
+  echo 'test ALL=(ALL)   NOPASSWD: ALL' >> /etc/sudoers
+
   echo "Copy behave.ini to enable pretty-html-formatter"
   cp behave.ini /home/test/behave.ini
   chown test:test /home/test/behave.ini
@@ -38,6 +40,9 @@ if [ ! -e /tmp/automation_setup_done ]; then
   python3 -m pip install behave
   echo "Installing behave-html-pretty-formatter"
   python3 -m pip install behave-html-pretty-formatter
+
+   echo "Enable a11y in for user test"
+  sudo -u test dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility true
 
   # Temporary until light supporting version is released in dogtail! (likely 1.0.6)
   wget https://gitlab.com/dogtail/dogtail/-/raw/headless-lightdm/scripts/dogtail-run-headless-next -O ./dogtail-run-headless-next
