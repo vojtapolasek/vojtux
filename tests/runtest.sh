@@ -40,8 +40,8 @@ if [ ! -e /tmp/automation_setup_done ]; then
   python3 -m pip install behave-html-pretty-formatter
 
   # Temporary until light supporting version is released in dogtail! (likely 1.0.6)
-  wget https://gitlab.com/dogtail/dogtail/-/raw/headless-lightdm/scripts/dogtail-run-headless-next?ref_type=heads
-  cp ./dogtail-run-headless-next /usr/local/bin/dogtail-run-headless-next
+  wget https://gitlab.com/dogtail/dogtail/-/raw/headless-lightdm/scripts/dogtail-run-headless-next -O ./dogtail-run-headless-next
+  cp -f ./dogtail-run-headless-next /usr/local/bin/dogtail-run-headless-next
   chmod +x /usr/local/bin/dogtail-run-headless-next
   # some grace time 
   sleep 5
