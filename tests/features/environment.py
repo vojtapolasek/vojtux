@@ -6,8 +6,7 @@ This file provides setup for machine environment for our testing pipeline.
 
 import sys
 import traceback
-from qecore.sandbox import TestSandbox
-from qecore.utility import run
+import time
 
 
 def before_all(context) -> None:
@@ -16,7 +15,7 @@ def before_all(context) -> None:
     """
 
     try:
-        pass
+        time.sleep(7) # give some time for the session and everything to load!
 
     except Exception as error:  # pylint: disable=broad-except
         print(f"Environment error: before_all: {error}")
@@ -32,7 +31,6 @@ def before_scenario(context, scenario) -> None:
     """
 
     try:
-
         pass
 
     except Exception as error:  # pylint: disable=broad-except
@@ -53,7 +51,10 @@ def after_scenario(context, scenario) -> None:
     """
 
     try:
-        pass
+        # when we proceed recordings of video/audio.... some safe time
+        # will be usefull for everything to buffer our and get saved before
+        # we kill the session by systemctl lightdm stop...
+        time.sleep(4)
     except Exception as error:  # pylint: disable=broad-except
         print(f"Environment error: after_scenario: {error}")
         traceback.print_exc(file=sys.stdout)
