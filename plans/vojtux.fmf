@@ -1,0 +1,13 @@
+summary: Test Suite for Vojtux image
+discover:
+    how: fmf
+prepare:
+  - how: install
+    package:
+      - git
+  - how: shell
+    script: |
+        tests/vojtux_provision/setup.sh
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" . liveuser@vojtux:/home/liveuser/vojtux
+execute:
+    how: tmt
