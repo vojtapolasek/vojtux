@@ -43,11 +43,6 @@ if [ ! -e /tmp/automation_setup_done ]; then
 
    echo "Enable a11y in for user test"
   sudo -u test dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility true
-
-  # Temporary until light supporting version is released in dogtail! (likely 1.0.6)
-  wget https://gitlab.com/dogtail/dogtail/-/raw/headless-lightdm/scripts/dogtail-run-headless-next -O ./dogtail-run-headless-next
-  cp -f ./dogtail-run-headless-next /usr/local/bin/dogtail-run-headless-next
-  chmod +x /usr/local/bin/dogtail-run-headless-next
   # some grace time 
   sleep 5
   # Make the setup only once.
