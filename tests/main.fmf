@@ -1,7 +1,7 @@
 /TC1:
-    summary: Test Case 1 description
-    test: ssh -o StrictHostKeyChecking=no liveuser@vojtux "cd /home/liveuser/vojtux/tests && sudo ./runtest.sh TC1"
+    summary: TC11 - Start Firefox via special shortcut
+    test: ssh -o StrictHostKeyChecking=no liveuser@vojtux "cd /home/liveuser/vojtux/tests && sudo ./runtest.sh TC11"
 
-/TC2:
-    summary: Test Case 2 description
-    test: ssh -o StrictHostKeyChecking=no liveuser@vojtux "cd /home/liveuser/vojtux/tests && sudo ./runtest.sh TC2"
+#/TC2:
+#    summary: Test Case 2 description
+#    test: ssh -o StrictHostKeyChecking=no liveuser@vojtux "cd /home/liveuser/vojtux/tests && sudo ./runtest.sh TC2"

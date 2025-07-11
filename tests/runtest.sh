@@ -17,7 +17,6 @@ if [ ! -e /tmp/automation_setup_done ]; then
 
   echo "Creating a 'test' user"
   useradd test
-  usermod -a -G liveuser test
 
   # just in case we ever deal with image mode :)
   chown test:test /home/test
@@ -51,27 +50,7 @@ if [ ! -e /tmp/automation_setup_done ]; then
   touch /tmp/automation_setup_done
 fi
 
-# Check if test user can actually access the directory
-sudo -u test ls -la /home/liveuser/vojtux/tests/features/
-
-# Check directory permissions on the full path
-ls -ld /home/liveuser/
-ls -ld /home/liveuser/vojtux/
-ls -ld /home/liveuser/vojtux/tests/
-ls -ld /home/liveuser/vojtux/tests/features/
-
-# Verify test user's groups
-sudo -u test groups
-
-# Check if test user can read the steps directory specifically
-sudo -u test ls -la /home/liveuser/vojtux/tests/features/steps/
-
-# Make sure parent directories have execute permission for group
-chmod g+x /home/liveuser/vojtux/tests/features/
-
-ls -l /home/liveuser/vojtux/tests/features/*
-ls -l /home/liveuser/vojtux/tests/features/steps/*
-
+sudo chmod 755 /home/liveuser/
 
 # Run the test we are asked to run!
 sudo -u test dogtail-run-headless-next --dm lightdm "behave -t $1 -k -f html-pretty -o $TEST_REPORT_FILE -f plain"; rc=$?
