@@ -8,6 +8,7 @@ prepare:
   - how: shell
     script: |
         tests/vojtux_provision/setup.sh
+        chmod -R 755 tests/features
         rsync -avz -e "ssh -o StrictHostKeyChecking=no" . liveuser@vojtux:/home/liveuser/vojtux
 execute:
     how: tmt
