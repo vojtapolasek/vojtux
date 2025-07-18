@@ -13,12 +13,6 @@ vojtux-docs-en
 %end
 
 %post
-cat > /etc/dconf/db/local.d/03-keybindings <<- EOM
-
-EOM
-
-dconf update
-
 #apply Vojtux customizations
 git clone https://github.com/vojtapolasek/Vojtux.git
 cd vojtux/downloads
