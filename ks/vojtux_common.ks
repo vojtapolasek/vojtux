@@ -1,5 +1,6 @@
 %include fedora-live-base.ks
 %include repos.ks
+%include fedora-mate-common.ks
 
 selinux --disabled
 
@@ -12,47 +13,6 @@ services --enabled="chronyd,brltty"
 part / --size 10240 --fstype ext4
 
 %packages
-@mate
-@desktop-accessibility
-compiz
-compiz-plugins-main
-compiz-plugins-extra
-compiz-manager
-compizconfig-python
-compiz-plugins-experimental
-libcompizconfig
-compiz-plugins-main
-ccsm
-simple-ccsm
-emerald-themes
-emerald
-fusion-icon
-@networkmanager-submodules
-
-# some apps from mate-applications
-caja-actions
-mate-disk-usage-analyzer
-
-# office
-@libreoffice
-
-# dsl tools
-rp-pppoe
-
-# Drop things for size
--@3d-printing
--fedora-icon-theme
--gnome-icon-theme
--gnome-icon-theme-symbolic
--gnome-software
--gnome-user-docs
-
--mate-icon-theme-faenza
-
-# Help and art can be big, too
--gnome-user-docs
--evolution-help
-
 #customizations for Vojtux
 
 #additional software for Vojtux
