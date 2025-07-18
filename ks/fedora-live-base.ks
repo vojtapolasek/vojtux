@@ -19,8 +19,6 @@ network --bootproto=dhcp --device=link --activate
 rootpw --lock --iscrypted locked
 shutdown
 
-%include fedora-repo.ks
-
 %packages
 # Explicitly specified here:
 # <notting> walters: because otherwise dependency loops cause yum issues.
