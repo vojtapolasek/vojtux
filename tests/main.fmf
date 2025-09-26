@@ -1,5 +1,6 @@
 /TC1:
     summary: TC11 - Start Firefox via special shortcut
+    duration: 2h
     test: ssh -o StrictHostKeyChecking=no liveuser@vojtux "cd /home/liveuser/vojtux/tests && sudo ./runtest.sh TC11"
 
 #/TC2:
