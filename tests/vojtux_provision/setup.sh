@@ -10,7 +10,7 @@ services --enabled "sshd"
 echo "PermitEmptyPasswords yes" >> /etc/ssh/sshd_config
 %end
 EOM
-livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --ks vojtux.ks --tmp tmp/ --iso-name vojtux.iso --project vojtux
+livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --ks vojtux.ks --tmp tmp/ --iso-name vojtux.iso --project vojtux --timeout 30
 vojtux_iso_path=$(find . -name vojtux.iso)
 mv $vojtux_iso_path /var/lib/libvirt/images/vojtux.iso
 virsh net-define tests/vojtux_provision/vojtux_net.xml
