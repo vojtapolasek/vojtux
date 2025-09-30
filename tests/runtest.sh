@@ -46,6 +46,7 @@ if [ ! -e /tmp/automation_setup_done ]; then
   sudo -u test dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility true
   # some grace time 
   sleep 5
+  systemctl daemon-reload
   # Make the setup only once.
   touch /tmp/automation_setup_done
 fi
