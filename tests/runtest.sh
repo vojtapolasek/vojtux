@@ -46,14 +46,16 @@ if [ ! -e /tmp/automation_setup_done ]; then
   sudo -u test dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility true
   # some grace time 
   sleep 5
+  systemctl daemon-reload
   # Make the setup only once.
   touch /tmp/automation_setup_done
 fi
 
 sudo chmod 755 /home/liveuser/
-
+  systemctl start lightdm.service
+  sleep 5
 # Run the test we are asked to run!
-sudo -u test dogtail-run-headless-next --dm lightdm "behave -t $1 -k -f html-pretty -o $TEST_REPORT_FILE -f plain"; rc=$?
+sudo -u test dogtail-run-headless-next --dm lightdm "behave -t $1 -f html-pretty -o $TEST_REPORT_FILE -f plain"; rc=$?
 
 # Mark result FAIL or PASS depending on the test result.
 RESULT="FAIL"
