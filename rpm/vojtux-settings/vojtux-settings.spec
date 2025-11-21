@@ -1,6 +1,6 @@
 Name:     vojtux-settings
 Version:  1
-Release:  5%{?dist}
+Release:  6%{?dist}
 Summary:  Settings for Vojtux
 License:  Public Domain
 
@@ -33,6 +33,9 @@ dconf update
 %{_sysconfdir}/dconf/db/distro.d/03-keybindings
 
 %changelog
+* Fri Nov 21 2025 vojtapolasek <krecoun@gmail.com> - 1-6
+- do not install a shortcut for starting a screen reader because in Fedora 43 it is by default
+
 * Thu Apr 17 2025 vojtapolasek <krecoun@gmail.com> - 1-5
 - remove mate-menu configuration completely, it is impossible to package this. It will be preconfigured only at the live media.
 

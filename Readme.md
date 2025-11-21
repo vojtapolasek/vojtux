@@ -178,8 +178,6 @@ Following additional changes are applied:
 
 - Alt-Super-f - Firefox
 
-- Alt-Super-s toggle screenreader through Mate
-
 - Alt-Super-l start the LIOS software
 
 - Alt-Super-m - vypnutí / zapnutí monitoru

@@ -1,7 +1,3 @@
 #preventing sound previews in Caja
 [org/mate/caja/preferences]
 preview-sound='never'
-
-#shortcut for stopping and starting screenreader
-[org/mate/settings-daemon/plugins/media-keys]
-screenreader='<Alt><Mod4>s'
