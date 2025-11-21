@@ -356,6 +356,8 @@ https://github.com/user-attachments/assets/0821d7e9-9cb6-472d-9ed7-dbc36496b9b8
 ### Description:
 
 Ensure that screen reader can be toggled system vide.
+Note that this is a regression test.
+This was previously handled by Vojtux, but since Fedora 43, this is built into Mate.
 
 ### Setup:
 
