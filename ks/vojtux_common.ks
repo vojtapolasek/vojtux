@@ -33,7 +33,6 @@ libsane-hpaio
 xorg-x11-server-Xvfb
 xorg-x11-drv-dummy
 #more software
-exfat-utils
 audacity
 soundconverter
 ifuse

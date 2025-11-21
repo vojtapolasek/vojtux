@@ -27,7 +27,6 @@ kernel-modules
 kernel-modules-extra
 
 # The point of a live image is to install
-anaconda
 anaconda-install-env-deps
 anaconda-live
 @anaconda-tools
