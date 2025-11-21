@@ -17,7 +17,6 @@ part / --size 10240 --fstype ext4
 
 #additional software for Vojtux
 pidgin
-purple-facebook
 xsane
 chromium
 mate-menu

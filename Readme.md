@@ -10,7 +10,7 @@ The repo contains kickstart files to build the live image with English language.
 It also contains  files which are used to build RPM packages which are not part of Fedora and they are used in this distro.
 Resulting RPM packages are present in the [Vojtux Copr repository](https://copr.fedorainfracloud.org/coprs/tyrylu/vojtux-apps/).
 
-The live media is currently based on Fedora 42.
+The live media is currently based on Fedora 43.
 
 ## Building live media ISO
 
@@ -27,7 +27,7 @@ Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/l
 
 Building of this image requires Fedora.
 It is strongly recommended to use Fedora version matching the one you are going to build.
-So if you are going to build a live media based on Fedora 42, it is strongly recommended to do it from Fedora 42 environment.
+So if you are going to build a live media based on Fedora 43, it is strongly recommended to do it from Fedora 43 environment.
 
 So how to build it?
 
@@ -59,7 +59,7 @@ So how to build it?
 5. Build the image
 
     ```bash
-    sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_42.iso --project vojtux --releasever 42 --ks <output_kickstart_file.ks> --tmp live/tmp
+    sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_43.iso --project vojtux --releasever 43 --ks <output_kickstart_file.ks> --tmp live/tmp
     ```
 
     - --make-iso creates ISO image. Note that you can create multiple things with livemedia-creator.
@@ -70,11 +70,11 @@ So how to build it?
 
     - --anaconda-arg="--noselinux" disables selinux during the installation, it was causing problems.
 
-    - --iso-name vojtux_42.iso provides name for the resulting ISO image
+    - --iso-name vojtux_43.iso provides name for the resulting ISO image
 
     - --project vojtux project name, this is used as image label and it is visible in the boot menu
 
-    - --releasever 42 this is also visible in the boot menu
+    - --releasever 43 this is also visible in the boot menu
 
     - --ks vojtux.ks use the kickstart file created in previous steps
 
