@@ -37,11 +37,9 @@ nss-mdns
 -fedora-icon-theme
 -gnome-icon-theme
 -gnome-icon-theme-symbolic
--gnome-logs
 -gnome-software
 -gnome-user-docs
 
--@mate-applications
 
 # Help and art can be big, too
 -gnome-user-docs
