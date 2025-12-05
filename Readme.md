@@ -12,6 +12,51 @@ Resulting RPM packages are present in the [Vojtux Copr repository](https://copr.
 
 The live media is currently based on Fedora 43.
 
+## Principles of Vojtux
+
+The ultimate vision of Vojtux is "NO VOJTUX NEEDED!" because Fedora will be fully accessible.
+
+We are not there yet, but I think we are relatively close.
+That is where Vojtux comes and tries to fill the gap.
+Here I describe principles which I see as crucial for this project to become maintainable and usable.
+
+### Stay as close to the original distro as possible
+
+Vojtux provides only basic enhancements to the original distribution (Fedora Mate Spin at the moment).
+No redesigns, no special overlays, only minimal custom desktop configuration.
+The goal is to minimize maintenance costs of the project.
+
+### Do not fix broken things unless it is trivial
+
+Linux desktop accessibility is not perfect, let's face it.
+Every desktop environment has its problems, smaller or bigger.
+Vojtux is not here to fix them all.
+The approach is to delegate most fixes to the upstream project.
+The logic behind this decision is simple; if Vojtux fixes it, it becomes the "maintainer" of the fix.
+And I believe there is a limit of number of fixes which can be maintained in such a distro.
+Contrary, when reported upstream, then everyone will benefit from the fix and hopefully it will contribute to accessibility knowledge of developers.
+
+### Distribute modifications in form of packages
+
+The goal is to distribute majority of Vojtux customizations as separate packages (RPMin this case).
+That means that each customization should have clear boundaries and it should be reusable by any other distribution.
+
+## Downloading the prebuilt image
+
+Vojtux releases can be found [here](https://github.com/vojtapolasek/vojtux/releases).
+Github does not allow to publish binary files larger tha 2GiB.
+The Vojtux live image is bigger, therefore I host it on my own hosting.
+There is always a checksum attached.
+You can verify if the image matches the checksum by downloading both files into one directory and running the following command from the terminal while being in the same directory:
+
+```bash
+sha256 -c <file_name_endinging_with.sha256>
+```
+
+## Known issues
+
+Known issues are listed [here](https://github.com/vojtapolasek/vojtux/issues?q=state%3Aopen%20label%3A%22Known%20issue%22).
+
 ## Building live media ISO
 
 *Warning!* The Czech kickstart file is outdated!
@@ -136,8 +181,6 @@ Following additional changes are applied:
 
 - extra packages are preinstalled
 
-    - pidgin with support for Facebook
-
     - Xsane
 
     - various firmware and software for broader hardware support including wireless cards, printers, scanners, graphic cards
@@ -164,7 +207,7 @@ Following additional changes are applied:
 
 - there is a special script which ensures that the sound at the login screen is not muted and is at 50% of volume
 
-- a script for toggling physical monitor is added, functionality not tested
+- a script for toggling physical monitor is added
 
 - a sound theme is added, [source](https://github.com/coffeeking/Linux-a11y-sound-theme)
 
