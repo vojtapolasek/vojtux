@@ -1,0 +1,23 @@
+schema: spec-driven
+context: |
+  Project: Vojtux - unofficial Fedora (MATE, currently F43) based Linux distribution
+  for visually impaired users. Live image built from kickstart via livemedia-creator;
+  customizations shipped as RPMs in Copr tyrylu/vojtux-apps.
+
+  Principles every change MUST respect:
+  1. Stay as close to the original distro as possible - minimal custom configuration,
+     no overlays or redesigns.
+  2. Do not fix broken upstream things unless trivial - report upstream instead of
+     adopting maintenance of fixes.
+  3. Distribute modifications as separate, reusable RPM packages with clear boundaries.
+
+  Spec conventions:
+  - English; requirements use SHALL; every requirement has at least one WHEN/THEN scenario.
+  - One capability per user-visible feature with `feature-` prefix; infrastructure
+    capabilities: acceptance-testing, live-image-build.
+  - Each requirement ends with a "Delivered by ..." pointer (package or kickstart
+    section) and a "Verified by: TCnn | none" note referencing TESTING.md / automation.
+  - Specs state actual current behavior, never Readme aspirations; divergences go to
+    a Needs-resolution list in the proposing change.
+  - Vision: "NO VOJTUX NEEDED" - features should be removable individually as Fedora
+    becomes accessible; prefer changes that keep that exit path clean.
