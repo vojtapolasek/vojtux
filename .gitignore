@@ -1,0 +1,6 @@
+# Artifacts written into the repo working tree by the container build
+/output.ks
+/program.log
+/livemedia.log
+/anaconda/
+/containerbuild/output/
