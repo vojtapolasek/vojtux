@@ -36,6 +36,14 @@ mkdir -p "$OUTPUT"
 
 IMAGE=vojtux-build:${RELEASE}
 
+# Kickstart to build, relative to the repo root. CI overrides this with
+# ks/vojtux_en_ci.ks; developers get the default product kickstart.
+KICKSTART=${KICKSTART:-ks/vojtux_en.ks}
+if [ ! -f "$REPO_DIR/$KICKSTART" ]; then
+  echo "Kickstart $KICKSTART not found (KICKSTART is relative to the repo root)" >&2
+  exit 1
+fi
+
 "$RUNTIME" build \
   --build-arg RELEASEVER="$RELEASE" \
   -t "$IMAGE" \
@@ -43,15 +51,15 @@ IMAGE=vojtux-build:${RELEASE}
   .
 
 # Privileged for the loop devices and mounts needed by livemedia-creator --no-virt.
-run_flags=(--rm --privileged)
+# /dev must be bind-mounted for both runtimes: with --privileged alone, podman
+# gives the container /dev/loop-control but no /dev/loopN nodes (they cannot be
+# created inside the container without host udev), so losetup fails.
+run_flags=(--rm --privileged -v /dev:/dev)
 vol_label=""
 if [ "$RUNTIME" = "podman" ]; then
   # SELinux: let the privileged container work on the bind mounts
   run_flags+=(--security-opt label=disable)
   vol_label=":Z"
-else
-  # docker: expose /dev so that loop device nodes are usable
-  run_flags+=(-v /dev:/dev)
 fi
 
 tty_flags=()
@@ -61,6 +69,7 @@ fi
 
 "$RUNTIME" run "${tty_flags[@]}" "${run_flags[@]}" \
   -e RELEASEVER="$RELEASE" \
+  -e input_kickstart_file="$KICKSTART" \
   -v "$REPO_DIR:/target${vol_label}" \
   -v "$OUTPUT:/output${vol_label}" \
   "$IMAGE"
