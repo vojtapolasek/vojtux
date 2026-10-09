@@ -53,6 +53,9 @@ You can verify if the image matches the checksum by downloading both files into 
 sha256 -c <file_name_endinging_with.sha256>
 ```
 
+To boot from the downloaded image, you have to write it to an USB drive first.
+The [handout](rpm/vojtux-docs-en/handout.md#writing-the-image-to-a-usb-drive) describes how to do this on Windows, Linux and macOS using Rufus, Balena Etcher, the `dd` command or Ventoy.
+
 ## Known issues
 
 Known issues are listed [here](https://github.com/vojtapolasek/vojtux/issues?q=state%3Aopen%20label%3A%22Known%20issue%22).
