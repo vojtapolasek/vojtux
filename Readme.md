@@ -70,79 +70,54 @@ The Mate environment is chosen because it is lightweight and its accessibility i
 
 Kickstart documentation can be found at <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html>.
 
-Building of this image requires Fedora.
-It is strongly recommended to use Fedora version matching the one you are going to build.
-So if you are going to build a live media based on Fedora 43, it is strongly recommended to do it from Fedora 43 environment.
+### Prerequisites
 
-So how to build it?
+A host with a container runtime able to run one privileged container: **podman** (preferred, Fedora native) or **docker**.
+The host's own Fedora release does not need to match the target release and no build packages (lorax, anaconda) are needed on the host.
 
-1. Install prerequisites.
+```bash
+sudo dnf install podman
+```
 
-    ```bash
-    sudo dnf install lorax-lmc-novirt
-    ```
+The target release is defined in the [RELEASE](RELEASE) file at the repository root.
+The container base image tag, `--releasever` and the ISO name are all derived from it.
 
-2. clone this repo
+### Containerized build (primary)
 
-    ```bash
-    git clone https://github.com/vojtapolasek/vojtux
-    cd vojtux
-    ```
+Clone this repo and run the build script from its root:
 
-3. create a directory structure to store cache and tmp files (optional)
+```bash
+git clone https://github.com/vojtapolasek/vojtux
+cd vojtux
+containerbuild/build.sh
+```
 
-    ```bash
-    mkdir -p live/tmp
-    ```
+The script reads `RELEASE`, builds the toolchain container image `vojtux-build:<release>` from `containerbuild/Containerfile` (based on `registry.fedoraproject.org/fedora:<release>`, so the build toolchain always matches the target release), and runs `ksflatten` and `livemedia-creator --make-iso --no-virt` inside a privileged container (required for loop devices and mounts).
 
-4. Create the final kickstart file, blending several kickstarts together.
+The resulting ISO is written to `containerbuild/output/vojtux_<release>.iso`.
+Set `OUTPUT_DIR=/some/dir` to write it elsewhere.
 
-    ```bash
-    ksflatten -c ks/vojtux_en.ks -o vojtux.ks
-    ```
+To use docker instead of podman:
 
-5. Build the image
+```bash
+CONTAINER_TOOL=docker containerbuild/build.sh
+```
 
-    ```bash
-    sudo livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --iso-name vojtux_43.iso --project vojtux --releasever 43 --ks <output_kickstart_file.ks> --tmp live/tmp
-    ```
+**Note:** CI exercises only the podman runtime; the docker invocation mirrors the previously documented docker build but is not automatically tested. If you hit a docker-specific problem, please report it.
 
-    - --make-iso creates ISO image. Note that you can create multiple things with livemedia-creator.
+If you want to check that `ks/repos.ks` is in sync with `RELEASE` (relevant when rebasing to a new Fedora release), run:
 
-    - --no-virt uses local Anaconda to perform the installation without spinning up virtual machine. This is probably not mandatory, but I chose this approach because I am actually building the image within virtual machine running Fedora.
+```bash
+containerbuild/check-release.sh
+```
 
-    - --iso-only - after the process finishes, delete all artifacts except for the resulting ISO image. You may omit this if you need to inspect intermediate artifacts.
+### Host-local build (alternative, not the maintained contract)
 
-    - --anaconda-arg="--noselinux" disables selinux during the installation, it was causing problems.
-
-    - --iso-name vojtux_43.iso provides name for the resulting ISO image
-
-    - --project vojtux project name, this is used as image label and it is visible in the boot menu
-
-    - --releasever 43 this is also visible in the boot menu
-
-    - --ks vojtux.ks use the kickstart file created in previous steps
-
-    - --tmp live/tmp optional argument if you want to use your own defined tmp directory
+Building directly on the host is still possible, but the host must run Fedora matching the target release (the toolchain has to match the target release) and provide `lorax-lmc-novirt`: install it with `sudo dnf install lorax-lmc-novirt`, flatten the kickstart with `ksflatten -c ks/vojtux_en.ks -o vojtux.ks` and run `sudo livemedia-creator --make-iso --no-virt --iso-only --anaconda-arg="--noselinux" --iso-name vojtux_$(cat RELEASE).iso --project vojtux --releasever $(cat RELEASE) --ks vojtux.ks --tmp live/tmp`. Prefer the containerized build above.
 
 ## Docker build
 
-**Note: currently not maintained, will be updated soon.**
-
-There is a simple build.sh script included to show the sequence that I used to build the image.
-
-```
-./dockerbuild/build.sh
-```
-
-Which should end in something like:
-
-```
-sudo find ./dockerbuild/output -name vojtux_38.iso
-./dockerbuild/output/vojtux_38.iso
-```
-
-Your `vojtux_38.iso` should be listed as above.
+**Removed.** The `dockerbuild/` directory was superseded by `containerbuild/`, which supports docker through runtime selection (`CONTAINER_TOOL=docker containerbuild/build.sh`). See [Building live media ISO](#building-live-media-iso).
 
 ## What is actually done?
 

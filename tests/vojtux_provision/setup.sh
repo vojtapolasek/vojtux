@@ -1,24 +1,36 @@
 #!/bin/bash
 
-dnf -y install libvirt-daemon-kvm nano pykickstart lorax-lmc-novirt
-systemctl start libvirtd.service
-ksflatten -c ks/vojtux_en.ks -o vojtux.ks
-cat >> vojtux.ks << EOM
-services --enabled "sshd"
+dnf -y install libvirt-daemon-kvm nano podman rsync xorriso cpio xz
 
-%post
-echo "PermitEmptyPasswords yes" >> /etc/ssh/sshd_config
-%end
-EOM
-livemedia-creator --make-iso --no-virt --iso-only  --anaconda-arg="--noselinux" --ks vojtux.ks --tmp tmp/ --iso-name vojtux.iso --project vojtux --timeout 30
-vojtux_iso_path=$(find . -name vojtux.iso)
-mv $vojtux_iso_path /var/lib/libvirt/images/vojtux.iso
+systemctl start libvirtd.service
+
+# Build the ISO through the same containerized path developers use: a
+# privileged podman container whose base image is pinned by the RELEASE file,
+# so the executor release does not need to match the target release.
+# The CI-only kickstart additionally enables sshd for the test flow.
+build_dir=$(mktemp -d)
+OUTPUT_DIR=$build_dir CONTAINER_TOOL=podman KICKSTART=ks/vojtux_en_ci.ks containerbuild/build.sh
+vojtux_iso_path=$(find "$build_dir" -name "vojtux_$(tr -d '[:space:]' < RELEASE).iso" | head -1)
+if [ -z "$vojtux_iso_path" ] || [ ! -s "$vojtux_iso_path" ]; then
+  echo "containerbuild/build.sh did not produce a bootable ISO" >&2
+  exit 1
+fi
+tests/vojtux_provision/fix_iso.sh "$vojtux_iso_path"
+mv "$vojtux_iso_path" /var/lib/libvirt/images/vojtux.iso
+rm -rf "$build_dir"
+
 virsh net-define tests/vojtux_provision/vojtux_net.xml
 virsh define tests/vojtux_provision/vojtux.xml
 virsh net-start default
 virsh start Vojtux
 VOJTUX_IP_ADDR=$(virsh -q domifaddr Vojtux | sed -rn 's/.+ +([^ ]+)\/[0-9]+$/\1/p')
+wait_tries=0
 while [[ ! $VOJTUX_IP_ADDR ]]; do
+  wait_tries=$((wait_tries + 1))
+  if [ $wait_tries -ge 60 ]; then
+    echo "Timed out (10 min) waiting for the Vojtux VM IP address" >&2
+    exit 1
+  fi
   sleep 10
   VOJTUX_IP_ADDR=$(virsh -q domifaddr Vojtux | sed -rn 's/.+ +([^ ]+)\/[0-9]+$/\1/p')
 done

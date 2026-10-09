@@ -1,0 +1,83 @@
+#!/bin/bash
+# Replacement for dogtail's dogtail-run-headless-next.
+#
+# No released dogtail works against the Vojtux live image: 1.0.0 rejects
+# "--dm lightdm" and 2.x's dogtail-headless only knows GNOME sessions.
+# This runner implements the same contract for the lightdm + MATE autologin
+# of the live image: wait for the autologin session, extract its display and
+# session bus environment, and execute the given command inside it.
+#
+# Usage: dogtail-run-headless-next [--dm NAME] COMMAND_STRING
+set -uo pipefail
+
+SESSION_USER=${VOJTUX_SESSION_USER:-liveuser}
+WAIT_TRIES=${VOJTUX_SESSION_WAIT_TRIES:-60}
+
+while [ $# -gt 0 ]; do
+  case $1 in
+    --dm)
+      DM=${2:-}
+      [ -n "$DM" ] || { echo "--dm requires a value" >&2; exit 2; }
+      shift 2
+      ;;
+    --user)
+      SESSION_USER=${2:-}
+      shift 2
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      echo "unknown option: $1" >&2
+      exit 2
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [ -n "${DM:-}" ] && [ "$DM" != "lightdm" ]; then
+  echo "I do not recognize the display manager: $DM" >&2
+  exit 2
+fi
+
+CMD=$*
+if [ -z "$CMD" ]; then
+  echo "usage: $0 [--dm NAME] [--user NAME] COMMAND_STRING" >&2
+  exit 2
+fi
+
+# Wait for the autologin graphical session of SESSION_USER to appear.
+SESSION_PID=""
+for _ in $(seq 1 "$WAIT_TRIES"); do
+  SESSION_PID=$(pgrep -u "$SESSION_USER" -x mate-session | head -1 || true)
+  [ -n "$SESSION_PID" ] && break
+  sleep 5
+done
+if [ -z "$SESSION_PID" ]; then
+  echo "no graphical session (mate-session) running as $SESSION_USER" >&2
+  exit 1
+fi
+
+# Extract the session environment from the running session.
+ENV_ARGS=()
+while IFS= read -r -d '' line; do
+  case $line in
+    DISPLAY=*|XAUTHORITY=*|DBUS_SESSION_BUS_ADDRESS=*|XDG_RUNTIME_DIR=*|XDG_SESSION_*)
+      ENV_ARGS+=("$line")
+      ;;
+  esac
+done < "/proc/$SESSION_PID/environ"
+
+if ! printf '%s\n' "${ENV_ARGS[@]}" | grep -q '^DISPLAY='; then
+  echo "could not extract DISPLAY from session $SESSION_PID" >&2
+  exit 1
+fi
+
+# Enable accessibility for the session before running the suite.
+runuser -u "$SESSION_USER" -- env "${ENV_ARGS[@]}" \
+  gsettings set org.gnome.desktop.interface toolkit-accessibility true 2>/dev/null || true
+
+runuser -u "$SESSION_USER" -- env "${ENV_ARGS[@]}" bash -c "$CMD"

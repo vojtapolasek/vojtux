@@ -36,7 +36,12 @@ if [ ! -e /tmp/automation_setup_done ]; then
   dnf -y install python3-pip
 
   echo "Installing dogtail"
-  python3 -m pip install dogtail
+  # Pinned: 2.x dropped the rawinput.registry API used by features/steps and
+  # replaced dogtail-run-headless-next with a GNOME-only dogtail-headless.
+  # 1.0.8 is the latest 1.x: it keeps rawinput.registry and its native
+  # dogtail-run-headless-next supports --dm lightdm with MATE autologin
+  # (since 1.0.6), so no vendored runner is needed.
+  python3 -m pip install dogtail==1.0.8
   echo "Installing behave"
   python3 -m pip install behave
   echo "Installing behave-html-pretty-formatter"
@@ -55,6 +60,8 @@ sudo chmod 755 /home/liveuser/
   systemctl start lightdm.service
   sleep 5
 # Run the test we are asked to run!
+# Run as the 'test' user: the native dogtail-run-headless-next sets the
+# lightdm autologin user from $USER and extracts the session environment.
 sudo -u test dogtail-run-headless-next --dm lightdm "behave -t $1 -f html-pretty -o $TEST_REPORT_FILE -f plain"; rc=$?
 
 # Mark result FAIL or PASS depending on the test result.
