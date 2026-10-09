@@ -22,7 +22,11 @@ cp .tmux.conf /etc/skel/
 cd /opt/
 rm -rf vojtux
 
-# setup symlink to documentation
+# setup symlinks to documentation: in the home directory and also on
+# the desktop, so that new users see the documentation right after login
 ln -s /usr/share/doc/vojtux-docs-en /etc/skel/documentation
 ln -s /usr/share/doc/vojtux-docs-en /home/liveuser/documentation
+mkdir -p /etc/skel/Desktop /home/liveuser/Desktop
+ln -s /usr/share/doc/vojtux-docs-en /etc/skel/Desktop/documentation
+ln -s /usr/share/doc/vojtux-docs-en /home/liveuser/Desktop/documentation
 %end
