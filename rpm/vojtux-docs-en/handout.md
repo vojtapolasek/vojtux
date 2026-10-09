@@ -62,6 +62,73 @@ We used this method for example at Agora workshop in Autumn 2018.
 Later we started using premade images for USB drives.
 After two years of this experiment, we switched back to live images.
 
+### Writing the image to a USB drive
+
+Before you can start Linux from an USB drive, you have to write the downloaded live image onto the drive.
+You will need an USB drive that is large enough for the image; a drive with a capacity of at least 8 GB should be fine.
+Writing the image deletes everything stored on the drive, so copy any important data elsewhere first.
+Afterwards the drive contains only the live image and it cannot be used for storing other files, unless you format it again or use the Ventoy method described at the end of this section.
+
+First download the live image and verify its checksum, so that you know the file is complete and undamaged.
+The project readme describes where to download the image and how to verify the checksum.
+
+Whichever method you use, be careful to select the correct target drive.
+Writing the image to a wrong drive, for example to the drive containing your current operating system, would destroy the data stored there.
+
+**Writing the image on Windows with Rufus**
+
+Rufus is a small free program for writing images to USB drives and it works well with a screen reader.
+
+1. Download Rufus from [rufus.ie](https://rufus.ie) and start it. It does not need to be installed.
+2. Connect the USB drive. Rufus usually selects it automatically; check the **Device** field to make sure the correct drive is chosen.
+3. Press the **SELECT** button and choose the downloaded Vojtux image file.
+4. Press **START**. If Rufus asks whether to write in ISO image mode or DD image mode, choose the DD image mode.
+5. Wait until Rufus reports that it is ready, then close Rufus and safely remove the drive.
+
+**Writing the image with Balena Etcher (Windows, Linux and macOS)**
+
+Etcher works in the same way on all three systems and the whole process has only a few steps.
+
+1. Download Etcher from [etcher.balena.io](https://etcher.balena.io), install it and start it.
+2. Choose **Flash from file** and select the downloaded Vojtux image.
+3. Choose **Select target** and select your USB drive.
+4. Choose **Flash** and wait until Etcher finishes writing and validating the drive.
+5. Safely remove the drive.
+
+**Writing the image on Linux**
+
+On Fedora you can use the Fedora Media Writer application: choose the option to write a custom image, select the Vojtux image file and your USB drive, and confirm.
+On any Linux system you can also write the image in a terminal with the `dd` command.
+This method is fully accessible, but be extra careful: `dd` writes exactly where you tell it and it does not ask for confirmation.
+
+1. Connect the USB drive and find out its device name by running the `lsblk` command. The drive is a whole device such as `/dev/sdb`, not a partition such as `/dev/sdb1`.
+2. If the system mounted the drive automatically, unmount it first, for example with the eject button in your file manager. The device name does not change.
+3. Run the following command, replacing the image file name and the device name with yours:
+
+    `sudo dd if=vojtux_43.iso of=/dev/sdX bs=4M status=progress conv=fsync`
+
+4. Wait until the command finishes and the prompt returns. This can take several minutes; the command reports its progress while writing.
+5. Safely remove the drive.
+
+**Writing the image on macOS**
+
+On a Mac you can use Etcher as described above, or the Terminal application:
+
+1. Connect the USB drive and run `diskutil list` to find its identifier, for example `/dev/disk4`.
+2. Run `diskutil unmountDisk /dev/disk4`, using your identifier.
+3. Run `sudo dd if=vojtux_43.iso of=/dev/rdisk4 bs=4m`. Note the `r` in front of the device name; writing to the raw device is faster.
+4. When the command finishes, run `diskutil eject /dev/disk4` and remove the drive.
+
+**Alternative: Ventoy**
+
+Ventoy takes a different approach.
+You install it onto an USB drive once using the tool from [ventoy.net](https://www.ventoy.net), and then you simply copy image files onto the drive as regular files; no writing tool is needed for each image.
+The drive can hold several images at once and it can still be used for other files.
+When the computer starts from a Ventoy drive, a menu appears and you choose which image to start.
+Note that this menu cannot be used with a screen reader, so the first start may require a sighted helper, just like the boot process described in the next section.
+
+When the image is written, continue with the next section and start Linux from the drive.
+
 ### running Linux from the USB drive
 
 Now we are getting to the process of actually launching Linux.
