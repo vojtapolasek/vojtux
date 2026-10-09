@@ -1,19 +1,21 @@
 #!/bin/bash
 
-dnf -y install libvirt-daemon-kvm nano podman
+dnf -y install libvirt-daemon-kvm nano podman rsync xorriso cpio xz
 
 systemctl start libvirtd.service
 
 # Build the ISO through the same containerized path developers use: a
 # privileged podman container whose base image is pinned by the RELEASE file,
 # so the executor release does not need to match the target release.
+# The CI-only kickstart additionally enables sshd for the test flow.
 build_dir=$(mktemp -d)
-OUTPUT_DIR=$build_dir CONTAINER_TOOL=podman containerbuild/build.sh
+OUTPUT_DIR=$build_dir CONTAINER_TOOL=podman KICKSTART=ks/vojtux_en_ci.ks containerbuild/build.sh
 vojtux_iso_path=$(find "$build_dir" -name "vojtux_$(tr -d '[:space:]' < RELEASE).iso" | head -1)
 if [ -z "$vojtux_iso_path" ] || [ ! -s "$vojtux_iso_path" ]; then
   echo "containerbuild/build.sh did not produce a bootable ISO" >&2
   exit 1
 fi
+tests/vojtux_provision/fix_iso.sh "$vojtux_iso_path"
 mv "$vojtux_iso_path" /var/lib/libvirt/images/vojtux.iso
 rm -rf "$build_dir"
 
