@@ -9,4 +9,4 @@
 
 - [x] 2.1 Validate the change artifacts; verify `openspec validate bump-packit-target-to-fedora-44 --strict` passes
 - [x] 2.2 Confirm the Vojtux base is untouched by this change; verify `grep -n "43" ks/repos.ks` still shows Fedora 43 repositories and the Readme still states Fedora 43 as the base
-- [ ] 2.3 Trigger the packit pull-request job (open/push a PR) and confirm the Testing Farm run is scheduled on a Fedora 44 executor; verify the run metadata names `fedora-44` and the tmt plan still provisions the Vojtux VM
+- [x] 2.3 Trigger the packit pull-request job (open/push a PR) and confirm the Testing Farm run is scheduled on a Fedora 44 executor; verify the run metadata names `fedora-44` and the tmt plan still provisions the Vojtux VM — PR #115 (head `04ac160`): check run `testing-farm:fedora-44-x86_64` completed with conclusion `success` (https://artifacts.dev.testing-farm.io/3befd8cc-9529-407a-a2cd-da8905e7b555); TF results.xml shows plan `/plans/vojtux`, test `/tests/TC1` pass
