@@ -2,8 +2,9 @@ jobs:
 - job: tests
   trigger: pull_request
   targets:
-  - fedora-42
+  - fedora-44
   skip_build: true
+  manual_trigger: true
   tf_extra_params:
     environments:
       - hardware:
